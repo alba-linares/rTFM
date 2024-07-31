@@ -15,6 +15,7 @@ Puntos: cambio de uso del suelo
 
 DUDAS:
 ¿Hay alguna forma de saltar de elemento de selección, uno a la vez? Para reclasificar
+
 Reclasificar visualmente: Cultivos herbaceos distinto de arroz, Agrícola residencial
 Incluir 5 Instalaciones de conduccion de agua en 6 Otras infraestructuras tecnicas
 9 Zona de extraccion o vertido y 10 Escombreras y vertederos
@@ -30,7 +31,29 @@ Quizás englobar pastizales, matorral y formación arbolada como vegetación nat
 31 Suelo desnudo
 = Areas con fuertes procesos erosivos?
 
-Para cambiar los cultivos herbaceos distintos de arroz, ¿lo hago según ortofoto actual o catastro? Hay casos en los que pone cultivo hortícola de regadío en el catastro y en la ortofoto sale una formación natural
+Para cambiar los cultivos herbaceos distintos de arroz, ¿lo hago según ortofoto actual o catastro? Hay casos en los que pone cultivo hortícola de regadío en el catastro y en la ortofoto sale una formación natural. 
+Cultivos herbaceos distintos de arroz son bastantes, ¿hago todos o solo basta con hacer en los que hay punto? Son 266 polígonos.
 
 Para analizar los cambios en los hábitats, al no haber cartografía pasada, se puede comparar el % de formación natural 1984 vs 2022 según usos del suelo
 
+
+Reclasificar Embalse Margen
+Index
+Incluir puntos también dentro del humedal
+Min 50, proporcional
+NDWI LSWI
+https://sigpac.mapa.es/fega/visor/
+Buscar capas para reclasificar COD 23 herbaceos distinto de arroz
+
+"_COD_NUEVO" = 23
+
+GEE también con solo buffer
+
+Escribir lo máx posible metodología
+
+intro pag aprox 2
+Mirar biblio para humedales tutores y cotutores
+
+10/septiembre 12h
+
+REPARAR ORDENADOR

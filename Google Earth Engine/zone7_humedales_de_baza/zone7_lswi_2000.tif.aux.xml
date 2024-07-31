@@ -1,0 +1,12 @@
+<PAMDataset>
+  <PAMRasterBand band="1">
+    <Description>LSWI</Description>
+    <Metadata>
+      <MDI key="STATISTICS_MAXIMUM">0.1049590408802</MDI>
+      <MDI key="STATISTICS_MEAN">0.034689960082559</MDI>
+      <MDI key="STATISTICS_MINIMUM">-0.037807855755091</MDI>
+      <MDI key="STATISTICS_STDDEV">0.026996702628108</MDI>
+      <MDI key="STATISTICS_VALID_PERCENT">27.54</MDI>
+    </Metadata>
+  </PAMRasterBand>
+</PAMDataset>
