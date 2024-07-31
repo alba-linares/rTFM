@@ -1,0 +1,36 @@
+¿QUÉ HE HECHO?:
+GEE:
+He cambiado la colección a una análoga porque esta estaba obsoleta.
+Exportado todas las capas de LSWI, valores y TAU ya solo con el humedal y ya son TIF que se ven. ¿Debería hacerlo también solo con el buffer? 
+He añadido la vista satélite al GEE
+He generado los puntos: 50 para humedales de menos de 50 ha y 100 para el resto, da porcentajes redondos y me parece que es un nº decente.
+
+
+
+¿QUÉ HACER ESTE AGOSTO?
+Reclasificar visualmente
+Analizar datos con R con el script de ejemplo, ¿algún análisis más?
+Puntos: cambio de uso del suelo
+
+
+DUDAS:
+¿Hay alguna forma de saltar de elemento de selección, uno a la vez? Para reclasificar
+Reclasificar visualmente: Cultivos herbaceos distinto de arroz, Agrícola residencial
+Incluir 5 Instalaciones de conduccion de agua en 6 Otras infraestructuras tecnicas
+9 Zona de extraccion o vertido y 10 Escombreras y vertederos
+15 Ramblas y 16 rios y cauces + 17 Vegetacion riparia
+23 Cultivos herbaceos distinto de arroz
+¿27 Formaciones con arbolado?
+
+Quizás englobar pastizales, matorral y formación arbolada como vegetación natural
+
+¿Englobar junto:
+33 Zonas sin vegetacion por roturacion
+32 Areas con fuertes procesos erosivos
+31 Suelo desnudo
+= Areas con fuertes procesos erosivos?
+
+Para cambiar los cultivos herbaceos distintos de arroz, ¿lo hago según ortofoto actual o catastro? Hay casos en los que pone cultivo hortícola de regadío en el catastro y en la ortofoto sale una formación natural
+
+Para analizar los cambios en los hábitats, al no haber cartografía pasada, se puede comparar el % de formación natural 1984 vs 2022 según usos del suelo
+
