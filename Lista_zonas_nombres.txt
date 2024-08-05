@@ -13,3 +13,19 @@ zone12_salinas_de_cabo_de_gata
 zone13_salar_de_los_canos
 zone14_salinas_de_cerrillos
 zone15_saladar_del_margen
+
+Albufera Honda
+Albufera Nueva
+Barranco del Agua
+Cañada de las Norias
+Cola del embalse del Negratín
+Charcones de Punta-Entinas
+Humedales de Baza
+Laguna de la Gravera
+Rambla Morales
+Ribera de la Algaida
+Río Antas
+Salinas de Cabo de Gata
+Salar de los Canos
+Salinas de Cerrillos
+Saladar del Margen
