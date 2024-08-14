@@ -1,7 +1,8 @@
 16	Cultivo herbaceo distinto de arroz
 pasará a
 
+15	Leñoso regadio 1
 17	Invernaderos
-181	Cultivos herbaceos
-182	Cultivos herbaceos
+181	Herbaceo secano 16
+182	Herbaceo regadio 17
 
