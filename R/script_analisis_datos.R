@@ -1,6 +1,5 @@
 library(readxl)
 datos <-read_excel("C:/Users/VE-UGR-0208/Desktop/TFM/rTFM/Resultados_puntos_analisis.xlsx", range = "A1:O2081")
-?ggplot
 summary(datos)
 
 pie(table(datos$COMPARACION))
@@ -36,9 +35,19 @@ View(frecuencia_clase_humedal)
 # Gráfico de barras apiladas para mostrar la proporción de cada uso del suelo por humedal
 ggplot(datos, aes(x = MUCVA__USO, fill = NOMBRE_HUM)) +
   geom_bar(position = "fill") +
-  labs(title = "Proporción de Usos del Suelo en 1984 y Actualidad por Humedal", 
-       x = "Uso del Suelo", 
+  labs(title = "Proporción de usos del suelo en 1984 por humedal", 
+       x = "Uso del suelo", 
        y = "Proporción") +
+  scale_fill_viridis_d(option = "H") + #B o H están bien, se distinguen los humedales
   theme_minimal() +
-  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1))
+  theme(axis.text.x = element_text(angle = 270, vjust = 0.5, hjust = 0))
 
+ggplot(datos, aes(x = SIOSE__USO, fill = NOMBRE_HUM)) +
+  geom_bar(position = "fill") +
+  labs(title = "Proporción de usos del suelo en la actualidad por humedal", 
+   x = "Uso del suelo", 
+   y = "Proporción") +
+  scale_fill_viridis_d(option = "H") + #B o H están bien, se distinguen los humedales
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 270, vjust = 0.5, hjust=0))
+  
