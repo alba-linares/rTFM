@@ -50,4 +50,10 @@ ggplot(datos, aes(x = SIOSE__USO, fill = NOMBRE_HUM)) +
   scale_fill_viridis_d(option = "H") + #B o H están bien, se distinguen los humedales
   theme_minimal() +
   theme(axis.text.x = element_text(angle = 270, vjust = 0.5, hjust=0))
-  
+
+
+result <- df %>%
+  group_by(datos$MUCVA__USO) %>%
+  summarise(Total_Area = sum(datos$))
+
+print(result)  
