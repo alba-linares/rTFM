@@ -1,13 +1,19 @@
+# Cargar las librerías
 library(readxl)
-datos <-read_excel("C:/Users/VE-UGR-0208/Desktop/TFM/rTFM/Resultados_puntos_analisis.xlsx", range = "A1:O2081")
-summary(datos)
+library(dplyr)
+library(ggplot2)
 
+# Leer los archivos
+datos <-read_excel("C:/Users/VE-UGR-0208/Desktop/TFM/rTFM/Resultados_puntos_analisis.xlsx", range = "A1:O2081")
+head(datos)
+df_area_usos84 <-read_excel("C:/Users/VE-UGR-0208/Desktop/TFM/rTFM/Resultados_puntos_analisis.xlsx", sheet = 2)
+df_area_usos20 <-read_excel("C:/Users/VE-UGR-0208/Desktop/TFM/rTFM/Resultados_puntos_analisis.xlsx", sheet = 3)
+
+
+# Análisis exploratorio de los datos: gráficas #################################
 pie(table(datos$COMPARACION))
 pie(table(datos$MUCVA__USO)) #Usos 1984
 pie(table(datos$SIOSE__USO)) #Usos 2023
-
-
-library(ggplot2)
 
 # Gráfico de barras apiladas
 ggplot(datos, aes(x = datos$MUCVA__USO, fill = COMPARACION)) +
@@ -16,11 +22,9 @@ ggplot(datos, aes(x = datos$MUCVA__USO, fill = COMPARACION)) +
   theme_minimal() +
   theme(axis.text.x = element_text(angle = 270, vjust = 0.5, hjust=0))
 
-library(dplyr)
+
 # Contar las frecuencias de cada clase de uso del suelo por humedal
 tabla_frecuencia <- table(datos$NOMBRE_HUM, datos$MUCVA__USO)
-
-library(dplyr)
 
 # Contar la frecuencia de cada clase por humedal
 frecuencia_clase_humedal <- datos %>%
@@ -29,7 +33,6 @@ frecuencia_clase_humedal <- datos %>%
 
 # Ver los resultados
 View(frecuencia_clase_humedal)
-
 
 ################################################################################
 # Gráfico de barras apiladas para mostrar la proporción de cada uso del suelo por humedal RELATIVO
@@ -74,10 +77,6 @@ ggplot(datos, aes(x = SIOSE__USO, fill = NOMBRE_HUM)) +
 
 ################################################################################
 
-library(dplyr)
-df_area_usos84 <-read_excel("C:/Users/VE-UGR-0208/Desktop/TFM/rTFM/Resultados_puntos_analisis.xlsx", sheet = 2)
-df_area_usos20 <-read_excel("C:/Users/VE-UGR-0208/Desktop/TFM/rTFM/Resultados_puntos_analisis.xlsx", sheet = 3)
-
 result_area84 <- df_area_usos84 %>%
   group_by(df_area_usos84$`_USOS_DEFI`) %>%
   summarise(Total_Area = sum(AREA_POLIG))
@@ -85,3 +84,67 @@ result_area84 <- df_area_usos84 %>%
 result_area20 <- df_area_usos20 %>%
   group_by(`_USOS_DEFI`) %>%
   summarise(Total_Area = sum(AREA_POLIG))
+
+################################################################################
+# Filtrar datos dentro y fuera de humedales
+dentro_humedales <- datos %>% filter(ZONA == "Humedal")
+fuera_humedales <- datos %>% filter(ZONA != "Humedal")
+
+# Filtrar humedales costeros e interiores
+humedales_costeros <- dentro_humedales %>% filter(GRUPO_TIPO == "Costeros")
+humedales_interior <- dentro_humedales %>% filter(GRUPO_TIPO != "Costeros")
+
+# Contar los registros en cada grupo
+count_humedales <- datos %>%
+  group_by(ZONA, GRUPO_TIPO) %>%
+  summarize(n = n())
+
+print(count_humedales)
+
+# Gráfico de barras para comparar las zonas
+ggplot(count_humedales, aes(x = GRUPO_TIPO, y = n, fill = ZONA)) +
+  geom_bar(stat = "identity", position = "dodge") +
+  labs(title = "Comparación de Zonas y Tipos de Humedales",
+       x = "Tipo de Humedal", y = "Número de Registros") +
+  theme_minimal()
+
+###############################################################################
+# Agrupar por ZONA y COMPARACION, y contar las ocurrencias
+comparacion_resumen <- datos %>%
+  group_by(ZONA, COMPARACION) %>%
+  summarize(count = n()) %>%
+  ungroup()
+
+print(comparacion_resumen)
+
+# Calcular proporciones
+comparacion_proporciones <- comparacion_resumen %>%
+  group_by(ZONA) %>%
+  mutate(proporcion = count / sum(count))
+
+print(comparacion_proporciones)
+
+# Gráfico de barras apiladas
+ggplot(comparacion_proporciones, aes(x = ZONA, y = proporcion, fill = COMPARACION)) +
+  geom_bar(stat = "identity") +
+  labs(title = "Comparación de Cambios de Uso del Suelo Dentro y Fuera de Humedales",
+       x = "Zona (Dentro/Fuera del Humedal)", y = "Proporción") +
+  scale_y_continuous(labels = scales::percent_format()) +
+  theme_minimal()
+
+# Para evaluar los cambios específicos de uso del suelo ########################
+# Crear una columna que muestre el cambio de uso del suelo
+data <- datos %>%
+  mutate(cambio_uso = paste(MUCVA__USO, "a", SIOSE__USO))
+
+# Ver los primeros registros para confirmar
+head(data)
+
+# Agrupar por zona y tipo de cambio de uso del suelo, y contar las ocurrencias
+cambio_uso_resumen <- data %>%
+  group_by(ZONA, cambio_uso) %>%
+  summarize(count = n()) %>%
+  ungroup()
+
+# Ver los resultados
+print(cambio_uso_resumen)
