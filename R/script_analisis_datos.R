@@ -51,9 +51,14 @@ ggplot(datos, aes(x = SIOSE__USO, fill = NOMBRE_HUM)) +
   theme_minimal() +
   theme(axis.text.x = element_text(angle = 270, vjust = 0.5, hjust=0))
 
+library(dplyr)
+df_area_usos84 <-read_excel("C:/Users/VE-UGR-0208/Desktop/TFM/rTFM/Resultados_puntos_analisis.xlsx", sheet = 2)
+df_area_usos20 <-read_excel("C:/Users/VE-UGR-0208/Desktop/TFM/rTFM/Resultados_puntos_analisis.xlsx", sheet = 3)
 
-result <- df %>%
-  group_by(datos$MUCVA__USO) %>%
-  summarise(Total_Area = sum(datos$))
+result_area84 <- df_area_usos84 %>%
+  group_by(df_area_usos84$`_USOS_DEFI`) %>%
+  summarise(Total_Area = sum(Shape_Area))
 
-print(result)  
+result_area20 <- df_area_usos20 %>%
+  group_by(`_USOS_DEFI`) %>%
+  summarise(Total_Area = sum(AREA_POLIG))
