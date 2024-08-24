@@ -6,7 +6,8 @@ library(tidyr)
 
 # Leer los archivos
 datos <-read_excel("C:/Users/VE-UGR-0208/Desktop/TFM/rTFM/Resultados_puntos_analisis.xlsx", range = "A1:O2081")
-head(datos)
+View(datos)
+
 df_area_usos84 <-read_excel("C:/Users/VE-UGR-0208/Desktop/TFM/rTFM/Resultados_puntos_analisis.xlsx", sheet = 2)
 df_area_usos20 <-read_excel("C:/Users/VE-UGR-0208/Desktop/TFM/rTFM/Resultados_puntos_analisis.xlsx", sheet = 3)
 
