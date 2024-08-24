@@ -1,0 +1,12 @@
+<PAMDataset>
+  <PAMRasterBand band="1">
+    <Description>tau</Description>
+    <Metadata>
+      <MDI key="STATISTICS_MAXIMUM">0.38339920948617</MDI>
+      <MDI key="STATISTICS_MEAN">-0.093231608297331</MDI>
+      <MDI key="STATISTICS_MINIMUM">-0.42292490118577</MDI>
+      <MDI key="STATISTICS_STDDEV">0.13415783294354</MDI>
+      <MDI key="STATISTICS_VALID_PERCENT">13.81</MDI>
+    </Metadata>
+  </PAMRasterBand>
+</PAMDataset>
