@@ -261,7 +261,11 @@ cambio_uso_buf_hum_simplificado <- cambio_uso_buf_hum %>%
                       theme_minimal()
 
 
-#
+################################################################################
+# Crear una columna que muestre el cambio de uso del suelo
+data <- datos %>%
+  mutate(cambio_uso = paste(MUCVA__USO, "a", SIOSE__USO))
+
 cambio_uso_cost_int <- data %>%
   group_by(GRUPO_TIPO, cambio_uso) %>%
   summarize(count = n()) %>%
