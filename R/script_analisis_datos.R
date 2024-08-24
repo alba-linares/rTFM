@@ -2,6 +2,7 @@
 library(readxl)
 library(dplyr)
 library(ggplot2)
+library(tidyr)
 
 # Leer los archivos
 datos <-read_excel("C:/Users/VE-UGR-0208/Desktop/TFM/rTFM/Resultados_puntos_analisis.xlsx", range = "A1:O2081")
@@ -171,7 +172,26 @@ ggplot(cambio_uso_resumen, aes(x = cambio_uso, y = count, fill = ZONA)) +
   theme_minimal() +
   theme(axis.text.x = element_text(angle = 45, hjust = 1))
 
-# Gráfico de barras horizontales
+# Resumen descriptivo
+cambio_uso_resumen %>%
+  arrange(desc(count))
+
+# Crear tabla de contingencia
+tabla_contingencia <- table(data$ZONA, data$cambio_uso)
+
+# Realizar prueba de Chi-cuadrado
+chi_test <- chisq.test(tabla_contingencia)
+print(chi_test)
+
+# Transformar la tabla de formato largo a formato ancho
+tabla_ancha <- as.data.frame(tabla_contingencia) %>%
+  pivot_wider(names_from = Var1, values_from = Freq)
+
+# Ver el resultado
+print(tabla_ancha)
+
+
+# Gráfico de barras horizontales #############################################
 ggplot(cambio_uso_resumen, aes(x = count, y = reorder(cambio_uso, count))) +
   geom_bar(stat = "identity", fill = "steelblue") +
   labs(title = "Cambios de Uso del Suelo",
@@ -258,4 +278,3 @@ ggplot(cambio_uso_resumen_simplificado, aes(x = count, y = reorder(cambio_uso, c
   labs(title = "Cambios de Uso del Suelo (DISTINTO, Agrupados)",
        x = "Número de Cambios", y = "Cambio de Uso del Suelo") +
   theme_minimal()
-
