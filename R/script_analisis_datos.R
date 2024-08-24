@@ -137,19 +137,19 @@ print(cambio_uso_resumen)
 
 
 # Gráfico de barras apiladas por tipo de cambio
-ggplot(cambio_uso_resumen, aes(x = ZONA, y = count, fill = cambio_uso)) +
-  geom_bar(stat = "identity") +
-  labs(title = "Cambios de Uso del Suelo Dentro y Fuera de Humedales",
-       x = "Zona (Dentro/Fuera del Humedal)", y = "Número de Cambios") +
-  theme_minimal()
-
+                    ggplot(cambio_uso_resumen, aes(x = ZONA, y = count, fill = cambio_uso)) +
+                      geom_bar(stat = "identity") +
+                      labs(title = "Cambios de Uso del Suelo Dentro y Fuera de Humedales",
+                           x = "Zona (Dentro/Fuera del Humedal)", y = "Número de Cambios") +
+                      theme_minimal()
+                    
 # Gráfico de barras agrupadas
-ggplot(cambio_uso_resumen, aes(x = cambio_uso, y = count, fill = ZONA)) +
-  geom_bar(stat = "identity", position = "dodge") +
-  labs(title = "Cambios Específicos de Uso del Suelo por Zona",
-       x = "Cambio de Uso del Suelo", y = "Número de Cambios") +
-  theme_minimal() +
-  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+                    ggplot(cambio_uso_resumen, aes(x = cambio_uso, y = count, fill = ZONA)) +
+                      geom_bar(stat = "identity", position = "dodge") +
+                      labs(title = "Cambios Específicos de Uso del Suelo por Zona",
+                           x = "Cambio de Uso del Suelo", y = "Número de Cambios") +
+                      theme_minimal() +
+                      theme(axis.text.x = element_text(angle = 45, hjust = 1))
 
 # Resumen descriptivo
 cambio_uso_resumen %>%
@@ -170,23 +170,23 @@ tabla_ancha <- as.data.frame(tabla_contingencia) %>%
 print(tabla_ancha)
 
 
-# Gráfico de barras horizontales #############################################
-ggplot(cambio_uso_resumen, aes(x = count, y = reorder(cambio_uso, count))) +
-  geom_bar(stat = "identity", fill = "steelblue") +
-  labs(title = "Cambios de Uso del Suelo",
-       x = "Número de Cambios", y = "Cambio de Uso del Suelo") +
-  theme_minimal()
-
+# Gráfico de barras horizontales ###############################################
+                    ggplot(cambio_uso_resumen, aes(x = count, y = reorder(cambio_uso, count))) +
+                      geom_bar(stat = "identity", fill = "steelblue") +
+                      labs(title = "Cambios de Uso del Suelo",
+                           x = "Número de Cambios", y = "Cambio de Uso del Suelo") +
+                      theme_minimal()
+                    
 # Filtrar para mostrar solo las 10 categorías más comunes
-top_cambios <- cambio_uso_resumen %>%
-  top_n(10, count)
-
+                    top_cambios <- cambio_uso_resumen %>%
+                      top_n(10, count)
+                    
 # Gráfico de barras horizontales con las 10 categorías más comunes
-ggplot(top_cambios, aes(x = count, y = reorder(cambio_uso, count))) +
-  geom_bar(stat = "identity", fill = "steelblue") +
-  labs(title = "Top 10 Cambios de Uso del Suelo",
-       x = "Número de Cambios", y = "Cambio de Uso del Suelo") +
-  theme_minimal()
+                    ggplot(top_cambios, aes(x = count, y = reorder(cambio_uso, count))) +
+                      geom_bar(stat = "identity", fill = "steelblue") +
+                      labs(title = "Top 10 Cambios de Uso del Suelo",
+                           x = "Número de Cambios", y = "Cambio de Uso del Suelo") +
+                      theme_minimal()
 
 # Definir un umbral para agrupar categorías menos frecuentes
 umbral <- 5
@@ -200,15 +200,15 @@ cambio_uso_resumen_simplificado <- cambio_uso_resumen %>%
   arrange(count)
 
 # Gráfico de barras horizontales con categorías simplificadas
-ggplot(cambio_uso_resumen_simplificado, aes(x = count, y = reorder(cambio_uso, count))) +
-  geom_bar(stat = "identity", fill = "steelblue") +
-  labs(title = "Cambios de Uso del Suelo (Agrupados)",
-       x = "Número de Cambios", y = "Cambio de Uso del Suelo") +
-  theme_minimal()
+                    ggplot(cambio_uso_resumen_simplificado, aes(x = count, y = reorder(cambio_uso, count))) +
+                      geom_bar(stat = "identity", fill = "steelblue") +
+                      labs(title = "Cambios de Uso del Suelo (Agrupados)",
+                           x = "Número de Cambios", y = "Cambio de Uso del Suelo") +
+                      theme_minimal()
 
 
 # SOLO CAMBIOS (COMPARACION = DISTINTO) ########################################
-# Filtrar los datos para obtener solo los cambios distintos
+# Filtrar los datos para obtener solo los cambios distintos ####################
 data_distintos <- data %>%
   filter(COMPARACION == "DISTINTO")
 # Crear una columna que muestre el cambio de uso del suelo
@@ -223,22 +223,22 @@ cambio_uso_resumen <- data_distintos %>%
 # Ver los resultados
 print(cambio_uso_resumen)
 # Gráfico de barras horizontales para cambios distintos
-ggplot(cambio_uso_resumen, aes(x = count, y = reorder(cambio_uso, count))) +
-  geom_bar(stat = "identity", fill = "steelblue") +
-  labs(title = "Cambios de Uso del Suelo (DISTINTO)",
-       x = "Número de Cambios", y = "Cambio de Uso del Suelo") +
-  theme_minimal()
+                    ggplot(cambio_uso_resumen, aes(x = count, y = reorder(cambio_uso, count))) +
+                      geom_bar(stat = "identity", fill = "steelblue") +
+                      labs(title = "Cambios de Uso del Suelo (DISTINTO)",
+                           x = "Número de Cambios", y = "Cambio de Uso del Suelo") +
+                      theme_minimal()
 
 # Mostrar solo las 10 categorías más comunes
 top_cambios <- cambio_uso_resumen %>%
   top_n(10, count)
 
 # Gráfico de barras horizontales con las 10 categorías más comunes
-ggplot(top_cambios, aes(x = count, y = reorder(cambio_uso, count))) +
-  geom_bar(stat = "identity", fill = "steelblue") +
-  labs(title = "Top 10 Cambios de Uso del Suelo (DISTINTO)",
-       x = "Número de Cambios", y = "Cambio de Uso del Suelo") +
-  theme_minimal()
+                    ggplot(top_cambios, aes(x = count, y = reorder(cambio_uso, count))) +
+                      geom_bar(stat = "identity", fill = "steelblue") +
+                      labs(title = "Top 10 Cambios de Uso del Suelo (DISTINTO)",
+                           x = "Número de Cambios", y = "Cambio de Uso del Suelo") +
+                      theme_minimal()
 
 # Definir un umbral para agrupar categorías menos frecuentes
 umbral <- 5
@@ -252,11 +252,11 @@ cambio_uso_resumen_simplificado <- cambio_uso_resumen %>%
   arrange(count)
 
 # Gráfico de barras horizontales con categorías simplificadas
-ggplot(cambio_uso_resumen_simplificado, aes(x = count, y = reorder(cambio_uso, count))) +
-  geom_bar(stat = "identity", fill = "steelblue") +
-  labs(title = "Cambios de Uso del Suelo (DISTINTO, Agrupados)",
-       x = "Número de Cambios", y = "Cambio de Uso del Suelo") +
-  theme_minimal()
+                    ggplot(cambio_uso_resumen_simplificado, aes(x = count, y = reorder(cambio_uso, count))) +
+                      geom_bar(stat = "identity", fill = "steelblue") +
+                      labs(title = "Cambios de Uso del Suelo (DISTINTO, Agrupados)",
+                           x = "Número de Cambios", y = "Cambio de Uso del Suelo") +
+                      theme_minimal()
 
 
 
@@ -290,9 +290,9 @@ count_humedales <- datos %>%
 print(count_humedales)
 
 # Gráfico de barras para comparar las zonas
-ggplot(count_humedales, aes(x = GRUPO_TIPO, y = n, fill = ZONA)) +
-  geom_bar(stat = "identity", position = "dodge") +
-  labs(title = "Comparación de Zonas y Tipos de Humedales",
-       x = "Tipo de Humedal", y = "Número de Registros") +
-  theme_minimal()
+                    ggplot(count_humedales, aes(x = GRUPO_TIPO, y = n, fill = ZONA)) +
+                      geom_bar(stat = "identity", position = "dodge") +
+                      labs(title = "Comparación de Zonas y Tipos de Humedales",
+                           x = "Tipo de Humedal", y = "Número de Registros") +
+                      theme_minimal()
 
