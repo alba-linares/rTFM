@@ -111,3 +111,42 @@ print(all_stats)
 
 as.data.frame(stats_list) %>%
   pivot_longer(names_to = Var1, values_to = Freq)
+
+
+#GRÁFICO LSWI HUMEDALES ########################################################
+library(ggplot2)
+
+# Tendencia del LSWI en el tiempo separado por humedal
+ggplot(datos, aes(x = year, y = lswi, color = wetland_name)) +
+  geom_line() +
+  geom_smooth(method = "lm", se = FALSE) +
+  labs(title = "Tendencia del LSWI en el tiempo por Humedal",
+       x = "Año", y = "LSWI") +
+  facet_wrap(~ wetland_name, scales = "free_y") + 
+  theme_minimal()
+
+# GRÁFICO CON R^2 AJUSTADO #####################################################
+library(ggplot2)
+library(dplyr)
+#library(broom) # Necesario para la función glance()
+
+# Calcular el R^2 ajustado para cada humedal y unir con los datos originales
+datos_con_r2 <- datos %>%
+  group_by(wetland_name) %>%
+  do(modelo = lm(lswi ~ year, data = .)) %>%
+  mutate(adj_r2 = summary(modelo)$adj.r.squared) %>%
+  ungroup() %>%
+  left_join(datos, by = "wetland_name")
+
+# Gráfico con R^2 ajustado
+ggplot(datos_con_r2, aes(x = year, y = lswi, color = wetland_name)) +
+  geom_line() +
+  geom_smooth(method = "lm", se = FALSE) +
+  labs(title = "Tendencia del LSWI en el tiempo por Humedal",
+       x = "Año", y = "LSWI") +
+  facet_wrap(~ wetland_name, scales = "free_y") + 
+  theme_minimal() +
+  geom_text(data = datos_con_r2 %>% distinct(wetland_name, adj_r2), 
+            aes(x = Inf, y = Inf, label = paste("R² adj: ", round(adj_r2, 3))),
+            hjust = 1.1, vjust = 1.1, inherit.aes = FALSE, size = 3)
+
