@@ -270,6 +270,23 @@ datos_con_r2 <- datos %>%
   summarise(adj_r2 = summary(lm(lswi ~ year, data = .))$adj.r.squared) %>%
   ungroup()
 
+nombre_humedales_correctos <- c(
+  "albufera_honda" = "Albufera Honda",
+  "albufera_nueva" = "Albufera Nueva",
+  "barranco_del_agua" = "Barranco del Agua",
+  "canada_de_las_norias" = "Cañada de las Norias",
+  "cola_del_embalse_del_negratin" = "Cola del embalse del Negratín",
+  "charcones_de_punta_entinas" = "Charcones de Punta-Entinas",
+  "humedales_de_baza" = "Humedales de Baza",
+  "laguna_de_la_gravera" = "Laguna de la Gravera",
+  "rambla_morales" =  "Rambla Morales",
+  "ribera_de_la_algaida" = "Ribera de la Algaida",
+  "rio_antas" = "Río Antas",
+  "salinas_de_cabo_de_gata" = "Salinas de Cabo de Gata",
+  "salar_de_los_canos" = "Salar de los Canos",
+  "salinas_de_cerrillos" = "Salinas de Cerrillos",
+  "saladar_del_margen" = "Saladar del Margen")
+  
 # Crear el gráfico con líneas separadas por "wetland_or_buffer"
 ggplot(datos, aes(x = year, y = lswi, color = wetland_or_buffer)) +
   geom_line() +
@@ -277,10 +294,12 @@ ggplot(datos, aes(x = year, y = lswi, color = wetland_or_buffer)) +
   scale_color_manual(values = c("wetland" = "blue", "buffer" = "orange")) +
   labs(title = "Tendencia del LSWI en el tiempo por Humedal",
        x = "Año", y = "LSWI", color = "Tipo de Área") +
-  facet_wrap(~ wetland_name, scales = "free_y") + 
+  facet_wrap(~ wetland_name, scales = "free_y", labeller = labeller(wetland_name = nombre_humedales_correctos) 
+) + 
   coord_cartesian(ylim = c(-0.05, 0.12)) +
   theme_minimal() +
-  geom_hline(yintercept = 0, color = "black", linetype = 2) 
+  geom_hline(yintercept = 0, color = "black", linetype = 2) +
+  theme(plot.title = element_text(hjust=0.5))
   #geom_text(data = datos_con_r2, 
     #         aes(x = Inf, y = Inf, label = paste("R² adj: ", round(adj_r2, 3))),
     #        hjust = 1.1, vjust = 1.1, inherit.aes = FALSE, size = 3)
