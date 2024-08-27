@@ -1,9 +1,41 @@
+#vignette("ggplot2-specs")
+
 #library
 library(funtimes)
 library(Kendall)
 
 # Data
-data<-read.delim('D:/Escritorio/MASTER/TFM/rTFM/R/LSWI_zones/lswi_zone15.csv', sep=",", dec = ".")
+data<-read.delim("C:/Users/VE-UGR-0208/Desktop/TFM/rTFM/Google Earth Engine/zones_buffer/lswi_zone01b.csv", sep=",", dec = ".")
+data<-read.delim("C:/Users/VE-UGR-0208/Desktop/TFM/rTFM/Google Earth Engine/zones_buffer/lswi_zone02b.csv", sep=",", dec = ".")
+data<-read.delim("C:/Users/VE-UGR-0208/Desktop/TFM/rTFM/Google Earth Engine/zones_buffer/lswi_zone03b.csv", sep=",", dec = ".")
+data<-read.delim("C:/Users/VE-UGR-0208/Desktop/TFM/rTFM/Google Earth Engine/zones_buffer/lswi_zone04b.csv", sep=",", dec = ".")
+data<-read.delim("C:/Users/VE-UGR-0208/Desktop/TFM/rTFM/Google Earth Engine/zones_buffer/lswi_zone05b.csv", sep=",", dec = ".")
+data<-read.delim("C:/Users/VE-UGR-0208/Desktop/TFM/rTFM/Google Earth Engine/zones_buffer/lswi_zone06b.csv", sep=",", dec = ".")
+data<-read.delim("C:/Users/VE-UGR-0208/Desktop/TFM/rTFM/Google Earth Engine/zones_buffer/lswi_zone07b.csv", sep=",", dec = ".")
+data<-read.delim("C:/Users/VE-UGR-0208/Desktop/TFM/rTFM/Google Earth Engine/zones_buffer/lswi_zone08b.csv", sep=",", dec = ".")
+data<-read.delim("C:/Users/VE-UGR-0208/Desktop/TFM/rTFM/Google Earth Engine/zones_buffer/lswi_zone09b.csv", sep=",", dec = ".")
+data<-read.delim("C:/Users/VE-UGR-0208/Desktop/TFM/rTFM/Google Earth Engine/zones_buffer/lswi_zone10b.csv", sep=",", dec = ".")
+data<-read.delim("C:/Users/VE-UGR-0208/Desktop/TFM/rTFM/Google Earth Engine/zones_buffer/lswi_zone11b.csv", sep=",", dec = ".")
+data<-read.delim("C:/Users/VE-UGR-0208/Desktop/TFM/rTFM/Google Earth Engine/zones_buffer/lswi_zone12b.csv", sep=",", dec = ".")
+data<-read.delim("C:/Users/VE-UGR-0208/Desktop/TFM/rTFM/Google Earth Engine/zones_buffer/lswi_zone13b.csv", sep=",", dec = ".")
+data<-read.delim("C:/Users/VE-UGR-0208/Desktop/TFM/rTFM/Google Earth Engine/zones_buffer/lswi_zone14b.csv", sep=",", dec = ".")
+data<-read.delim("C:/Users/VE-UGR-0208/Desktop/TFM/rTFM/Google Earth Engine/zones_buffer/lswi_zone15b.csv", sep=",", dec = ".")
+
+data<-read.delim("C:/Users/VE-UGR-0208/Desktop/TFM/rTFM/Google Earth Engine/zones_humedal/lswi_zone01.csv", sep=",", dec = ".")
+data<-read.delim("C:/Users/VE-UGR-0208/Desktop/TFM/rTFM/Google Earth Engine/zones_humedal/lswi_zone02.csv", sep=",", dec = ".")
+data<-read.delim("C:/Users/VE-UGR-0208/Desktop/TFM/rTFM/Google Earth Engine/zones_humedal/lswi_zone03.csv", sep=",", dec = ".")
+data<-read.delim("C:/Users/VE-UGR-0208/Desktop/TFM/rTFM/Google Earth Engine/zones_humedal/lswi_zone04.csv", sep=",", dec = ".")
+data<-read.delim("C:/Users/VE-UGR-0208/Desktop/TFM/rTFM/Google Earth Engine/zones_humedal/lswi_zone05.csv", sep=",", dec = ".")
+data<-read.delim("C:/Users/VE-UGR-0208/Desktop/TFM/rTFM/Google Earth Engine/zones_humedal/lswi_zone06.csv", sep=",", dec = ".")
+data<-read.delim("C:/Users/VE-UGR-0208/Desktop/TFM/rTFM/Google Earth Engine/zones_humedal/lswi_zone07.csv", sep=",", dec = ".")
+data<-read.delim("C:/Users/VE-UGR-0208/Desktop/TFM/rTFM/Google Earth Engine/zones_humedal/lswi_zone08.csv", sep=",", dec = ".")
+data<-read.delim("C:/Users/VE-UGR-0208/Desktop/TFM/rTFM/Google Earth Engine/zones_humedal/lswi_zone09.csv", sep=",", dec = ".")
+data<-read.delim("C:/Users/VE-UGR-0208/Desktop/TFM/rTFM/Google Earth Engine/zones_humedal/lswi_zone10.csv", sep=",", dec = ".")
+data<-read.delim("C:/Users/VE-UGR-0208/Desktop/TFM/rTFM/Google Earth Engine/zones_humedal/lswi_zone11.csv", sep=",", dec = ".")
+data<-read.delim("C:/Users/VE-UGR-0208/Desktop/TFM/rTFM/Google Earth Engine/zones_humedal/lswi_zone12.csv", sep=",", dec = ".")
+data<-read.delim("C:/Users/VE-UGR-0208/Desktop/TFM/rTFM/Google Earth Engine/zones_humedal/lswi_zone13.csv", sep=",", dec = ".")
+data<-read.delim("C:/Users/VE-UGR-0208/Desktop/TFM/rTFM/Google Earth Engine/zones_humedal/lswi_zone14.csv", sep=",", dec = ".")
+data<-read.delim("C:/Users/VE-UGR-0208/Desktop/TFM/rTFM/Google Earth Engine/zones_humedal/lswi_zone15.csv", sep=",", dec = ".")
 
 #Option A #library(funtimes)
 notrend_test(data$LSWI)
@@ -15,7 +47,6 @@ summary(lm(data$LSWI~data$Year))
 
 #Option B# Sólo quería probar otra forma pero da el mismo resultado #library(Kendall)
 MannKendall(data$LSWI)
-
 
 #################
 #Examples test
@@ -36,6 +67,85 @@ MannKendall(data$LSWI)
 # data(PrecipGL)
 # plot(PrecipGL)
 # MannKendall(PrecipGL)
+
+
+
+
+
+# Crear un data frame vacío con las columnas necesarias
+results_df <- data.frame(
+  Dataset = character(),
+  Test = character(),
+  p_value = numeric(),
+  Intercept = numeric(),
+  Slope = numeric(),
+  R_squared = numeric(),
+  Adjusted_R_squared = numeric(),
+  Tau = numeric(),
+  stringsAsFactors = FALSE
+)
+
+# Nombre del dataset actual
+dataset_name <- "01b"
+
+# 1. Ejecutar los análisis
+nt_test <- notrend_test(data$LSWI)
+mk_test <- notrend_test(data$LSWI, test='MK')
+lm_model <- lm(data$LSWI ~ data$Year)
+summary_lm <- summary(lm_model)
+mk_test_2 <- MannKendall(data$LSWI)
+
+# 2. Extraer los valores relevantes
+p_value_nt_test <- nt_test$p.value
+p_value_mk_test <- mk_test$p.value
+tau_mk_test <- mk_test$tau
+
+intercept_lm <- summary_lm$coefficients[1, "Estimate"]
+slope_lm <- summary_lm$coefficients[2, "Estimate"]
+p_value_slope <- summary_lm$coefficients[2, "Pr(>|t|)"]
+r_squared <- summary_lm$r.squared
+adj_r_squared <- summary_lm$adj.r.squared
+
+tau_mk_test_2 <- mk_test_2$tau
+p_value_mk_test_2 <- mk_test_2$sl
+
+# 3. Crear un data frame temporal con los resultados para el dataset actual
+
+temp_df <- data.frame(
+  Dataset = rep(dataset_name, 4), # 4 filas, una para cada análisis
+  Test = c("notrend_test", "MK test (notrend_test)", "Linear Model", "MannKendall"),
+  p_value = c(p_value_nt_test, p_value_mk_test, p_value_slope, p_value_mk_test_2),
+  Intercept = c(NA, NA, intercept_lm, NA),
+  Slope = c(NA, NA, slope_lm, NA),
+  R_squared = c(NA, NA, r_squared, NA),
+  Adjusted_R_squared = c(NA, NA, adj_r_squared, NA),
+  Tau = c(NA, tau_mk_test, NA, tau_mk_test_2),
+  stringsAsFactors = FALSE
+)
+
+# 4. Agregar los resultados al data frame vacío
+results_df <- rbind(results_df, temp_df)
+# Ahora `results_df` contiene los resultados del primer análisis.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -125,11 +235,15 @@ ggplot(datos, aes(x = year, y = lswi, color = wetland_name)) +
   facet_wrap(~ wetland_name, scales = "free_y") + 
   theme_minimal()
 
+
+
+
 # GRÁFICO CON R^2 AJUSTADO #####################################################
 library(ggplot2)
 library(dplyr)
 #library(broom) # Necesario para la función glance()
 
+datos <-read_excel("C:/Users/VE-UGR-0208/Desktop/TFM/rTFM/Google Earth Engine/LSWI_zones_hum_buf.xlsx")
 # Calcular el R^2 ajustado para cada humedal y unir con los datos originales
 datos_con_r2 <- datos %>%
   group_by(wetland_name) %>%
@@ -150,3 +264,32 @@ ggplot(datos_con_r2, aes(x = year, y = lswi, color = wetland_name)) +
             aes(x = Inf, y = Inf, label = paste("R² adj: ", round(adj_r2, 3))),
             hjust = 1.1, vjust = 1.1, inherit.aes = FALSE, size = 3)
 
+# GRAFICO CON LINEAS DE BUFFER Y DE HUMEDAL SEPARADAS
+datos_con_r2 <- datos %>%
+  group_by(wetland_name, wetland_or_buffer) %>%
+  summarise(adj_r2 = summary(lm(lswi ~ year, data = .))$adj.r.squared) %>%
+  ungroup()
+
+# Crear el gráfico con líneas separadas por "wetland_or_buffer"
+ggplot(datos, aes(x = year, y = lswi, color = wetland_or_buffer)) +
+  geom_line() +
+  geom_smooth(method = "lm", se = FALSE) +
+  scale_color_manual(values = c("wetland" = "blue", "buffer" = "orange")) +
+  labs(title = "Tendencia del LSWI en el tiempo por Humedal",
+       x = "Año", y = "LSWI", color = "Tipo de Área") +
+  facet_wrap(~ wetland_name, scales = "free_y") + 
+  coord_cartesian(ylim = c(-0.05, 0.12)) +
+  theme_minimal() +
+  geom_hline(yintercept = 0, color = "black", linetype = 2) 
+  #geom_text(data = datos_con_r2, 
+    #         aes(x = Inf, y = Inf, label = paste("R² adj: ", round(adj_r2, 3))),
+    #        hjust = 1.1, vjust = 1.1, inherit.aes = FALSE, size = 3)
+
+
+
+# Explicación del código: ######################################################
+#aes(x = year, y = lswi, color = wetland_name): Establece el año en el eje x y el LSWI en el eje y, y colorea las líneas según el nombre del humedal.
+#geom_line(): Dibuja las líneas de LSWI a lo largo del tiempo.
+#geom_smooth(method = "lm", se = FALSE): Añade una línea de tendencia (regresión lineal) para cada humedal sin mostrar el intervalo de confianza (al usar se = FALSE).
+#facet_wrap(~ wetland_name, scales = "free_y"): Crea un gráfico separado para cada humedal. scales = "free_y" permite que cada gráfico tenga su propio rango en el eje y, adaptado a los valores de LSWI de cada humedal.
+#theme_minimal(): Aplica un tema minimalista al gráfico para mejorar la claridad visual.
