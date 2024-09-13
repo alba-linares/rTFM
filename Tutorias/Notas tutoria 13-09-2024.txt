@@ -1,0 +1,14 @@
+Tutoría 13-09-2024
+¿Qué he hecho?
+He reclasificado todos los usos de Cultivos herbáceos distinto de arroz según SIGPAC. Duda: lo dejo en cultivos herbáceos o lo distingo de secano-regadío, porque en el MUCVA no se puede diferenciar.
+
+He recalculado los puntos y les he dado valores. Para los que estaban en el mar, los he seleccionado y asignado manualmente la categoría Mares y océanos.
+
+Mann-Kendall -> Excel
+
+He sacado todas las capas de GEE de LSWI, tanto de humedal como de buffer
+
+Script R:
+- Evaluación de los cambios de uso del suelo y los he contado, 	                                    pero salen muchas categorías :( #######################################################
+- He intentado analizar los cambios de uso del suelo costerro vs interior
+- He empezado a analizar lswi (GRÁFICO)
