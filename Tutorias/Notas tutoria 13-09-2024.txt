@@ -9,6 +9,40 @@ Mann-Kendall -> Excel
 He sacado todas las capas de GEE de LSWI, tanto de humedal como de buffer
 
 Script R:
-- Evaluación de los cambios de uso del suelo y los he contado, 	                                    pero salen muchas categorías :( #######################################################
+- Evaluación de los cambios de uso del suelo y los he contado, 	                                    pero salen muchas categorías :(
 - He intentado analizar los cambios de uso del suelo costerro vs interior
 - He empezado a analizar lswi (GRÁFICO)
+
+
+NOTAS DE LA PROPIA TUTORÍA-------------------------------------------------------------------
+
+Revisar nombres
+Pendiente Mann-Kendall
+Matriz de cambios de usos del suelo
+Índices de cambios positivo/negativo
+
+Abreviar o códigos
+
+Separar buffer vs humedal
+Importante hacer por humedal
+Análisis 
+Cambios revertibles o no, positivos o negativos
+
+Hábitat: pedir tutoría a Eva
+
+Impacto 99-2021
+
+Quitar modelo lineal
+
+Añadir a Word los usos generales
+Hacerlo para usos generales y específicos
+Análisis
+
+SSEE opcional, mejor ir terminando cosas
+
+Concertar horas 
+(8-10 M J clases)
+X 9:30 Eva
+V 9:30-11:00 con Javi (llevar NDWI, incluir pendiente Mann-Kendall, ETC)
+
+MIRAR WORD TESIS QUE ME MANDA JAVI
