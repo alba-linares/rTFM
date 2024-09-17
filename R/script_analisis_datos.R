@@ -5,11 +5,11 @@ library(ggplot2)
 library(tidyr)
 
 # Leer los archivos
-datos <-read_excel("C:/Users/VE-UGR-0208/Desktop/TFM/rTFM/Resultados_puntos_analisis.xlsx", range = "A1:O2081")
+datos <-read_excel("D:/Escritorio/MASTER/TFM/rTFM/Resultados_puntos_analisis.xlsx", range = "A1:O2081")
 View(datos)
 
-df_area_usos84 <-read_excel("C:/Users/VE-UGR-0208/Desktop/TFM/rTFM/Resultados_puntos_analisis.xlsx", sheet = 2)
-df_area_usos20 <-read_excel("C:/Users/VE-UGR-0208/Desktop/TFM/rTFM/Resultados_puntos_analisis.xlsx", sheet = 3)
+df_area_usos84 <-read_excel("D:/Escritorio/MASTER/TFM/rTFM/Resultados_puntos_analisis.xlsx", sheet = 2)
+df_area_usos20 <-read_excel("D:/Escritorio/MASTER/TFM/rTFM/Resultados_puntos_analisis.xlsx", sheet = 3)
 
 ################################################################################
 # Análisis exploratorio de los datos: gráficas #################################
@@ -315,4 +315,17 @@ print(count_humedales)
                       labs(title = "Comparación de Zonas y Tipos de Humedales",
                            x = "Tipo de Humedal", y = "Número de Registros") +
                       theme_minimal()
+
+
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+
 
