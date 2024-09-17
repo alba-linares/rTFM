@@ -14,11 +14,12 @@ Script R:
 - He empezado a analizar lswi (GRÁFICO)
 
 
-NOTAS DE LA PROPIA TUTORÍA-------------------------------------------------------------------
+NOTAS DE LA PROPIA TUTORÍA
+----------------------------------------------------------
 
 Revisar nombres [Revisados, el problema era del Excel, no de los nombres en R]
 Pendiente Mann-Kendall [No encuentro cuál es la pendiente; tau es la correlación (positiva o negativa) (hay que tener en cuenta si la diferencia es significativa)]
-Matriz de cambios de usos del suelo
+Matriz de cambios de usos del suelo [Creadas]
 Índices de cambios positivo/negativo
 
 Abreviar o códigos
