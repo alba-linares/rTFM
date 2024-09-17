@@ -14,8 +14,8 @@ df_area_usos20 <-read_excel("D:/Escritorio/MASTER/TFM/rTFM/Resultados_puntos_ana
 ################################################################################
 # Matriz de doble entrada con los cambios
 # Crear una tabla de contingencia para los cambios de uso del suelo
-matriz_cambios <- table(datos$MUCVA1984_GENERAL, datos$SIOSE2020_GENERAL)
-
+matriz_cambios_general <- table(datos$MUCVA1984_GENERAL, datos$SIOSE2020_GENERAL)
+matriz_cambios <- table(datos$MUCVA1984, datos$SIOSE2020)
 
 # Ver la matriz
 print(matriz_cambios)
