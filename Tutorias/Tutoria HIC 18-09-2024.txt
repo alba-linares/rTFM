@@ -1,0 +1,9 @@
+Desde veg natural y zonas humedas a cambios a otros usos
+Asignar los 4 codigos de HIC
+ENP no incluye RN2000
+
+ENP
+CAMBIO
+TIPO CAMBIO (RESTA)
+4 COLUMNAS HIC
+¿HAY HÁBITAT ACTUALMENTE? O/1
