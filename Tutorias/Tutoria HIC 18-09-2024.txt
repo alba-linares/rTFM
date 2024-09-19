@@ -7,3 +7,9 @@ CAMBIO
 TIPO CAMBIO (RESTA)
 4 COLUMNAS HIC
 ¿HAY HÁBITAT ACTUALMENTE? O/1
+
+Ver cuántos puntos se han perdido (desde fecha cartografía HIC hasta SIOSE2020)
+Los que caen en Urbano e infraestructuras se han perdido definitivamente
+Es un dato directo
+
+Rehacer NDWI zone01h y zone02h por un error
