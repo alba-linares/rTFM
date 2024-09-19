@@ -12,4 +12,10 @@ Ver cuántos puntos se han perdido (desde fecha cartografía HIC hasta SIOSE2020
 Los que caen en Urbano e infraestructuras se han perdido definitivamente
 Es un dato directo
 
-Rehacer NDWI zone01h y zone02h por un error
+
+19-09-2024
+Rehacer NDWI zone01h y zone02h por un error (Comprobado, estaba bien)
+
+Media y mediana de LSWI en humedal: 0.049186385 y 0.047407782
+Media y mediana de NDWI en humedal:
+¿Hay algo mal en la fórmula? ¿Por qué sale en negativo?
