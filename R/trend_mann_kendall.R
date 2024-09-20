@@ -166,24 +166,6 @@ plot(r_zone06h)
 # Source: https://www.pmassicotte.com/posts/2022-04-28-changing-spatial-resolution-of-a-raster-with-terra/
 
 # Aggregate the raster using 8 pixels within the horizontal and the vertical directions
-r <- list(r_zone01h,r_zone02h, r_zone03h,
-          r_zone04h,r_zone05h,r_zone06h,
-          r_zone07h,r_zone08h,r_zone09h,
-          r_zone10h,r_zone11h,r_zone12h,
-          r_zone13h,r_zone14h,r_zone15h)
-
-
-r8 <- aggregate(r, fact = 8) # approx. higher than 200m resolution
-writeRaster(r8,'input_lswi_ts_scale8.tif',overwrite=T)
-
-
-
-
-
-
-
-
-
 # Lista de los objetos raster
 r_list <- list(r_zone01h,r_zone02h,r_zone03h,
                r_zone04h,r_zone05h,r_zone06h,
@@ -193,31 +175,87 @@ r_list <- list(r_zone01h,r_zone02h,r_zone03h,
 
 # Loop para agregar y escribir raster para cada zona
 setwd("D:/Escritorio/TFM/rTFM/R/resample_r8") # Para exportar los .tif a esta carpeta específica
+setwd("D:/Escritorio/TFM/rTFM/R/mk")
+mk_results <- list()
 for (i in 1:length(r_list)) {
   # Obtener el raster de la zona actual
   r <- r_list[[i]]
   
   # Agregar con un factor de 8 (mayor resolución aprox. 200m)
   r8 <- aggregate(r, fact = 8)
-  
+
+  ############################# EXPORTAR #######################################  
   # Escribir el raster resultante en un archivo TIFF
-  output_filename <- paste0("input_", zones[i], "_lswi_ts_scale8.tif")
-  writeRaster(r8, output_filename, overwrite = TRUE)
+  #setwd("D:/Escritorio/TFM/rTFM/R/resample_r8")
+  #output_filename <- paste0("input_", zones[i], "_lswi_ts_scale8.tif")
+  #writeRaster(r8, output_filename, overwrite = TRUE)
   
   # Imprimir mensaje de progreso
-  print(paste("Archivo guardado:", output_filename))
+  #print(paste("Archivo guardado:", output_filename))
+  
+  ################### SIGNIFICANCIA P-VALUE < 0.05 #############################
+  # Calcular las estadísticas de Mann-Kendall
+  mk <- raster.kendall(r8, method = "none")
+  
+  # Guardar el resultado en la lista con el nombre de la zona
+  mk_results[[zones[i]]] <- mk
+  
+  # Re-clasificar celdas con valores de p menores a 0.05 (significativo)
+  signif <- mk$`p-value` < 0.05
+  
+  # Graficar las celdas significativas y no significativas
+  plot(signif, main = paste("Celdas significativas -", zones[i]))
+  plot(!signif, main = paste("Celdas no significativas -", zones[i]))
+  
+  # Crear un nuevo raster que contenga los valores de pendiente originales
+  mk_slope <- mk$slope
+  
+  # Asignar valor NA a las celdas con p-valor mayor a 0.05 (no significativas)
+  mk_slope[!signif] <- NA
+  
+  # Graficar las pendientes significativas
+  plot(mk_slope, main = paste("Pendientes significativas -", zones[i]))
+  
+  # Guardar los archivos raster con y sin significancia
+  output_signif_filename <- paste0("output_", zones[i], "_mk_slope_scale8_signif.tif")
+  output_slope_filename <- paste0("output_", zones[i], "_mk_slope_scale8.tif")
+  
+  ############################# EXPORTAR #######################################
+  # Guardar solo los valores significativos
+  writeRaster(mk_slope, output_signif_filename, overwrite = TRUE)
+  
+  # Guardar todas las pendientes (sin NA)
+  writeRaster(mk$slope, output_slope_filename, overwrite = TRUE)
+  
+  # Imprimir mensaje de progreso
+  print(paste("Archivos guardados para:", zones[i]))
+  
 }
 setwd("D:/Escritorio/TFM/rTFM") # Vuelvo al setwd de antes
 
-mk <- raster.kendall(r8, method="none")
-
-plot(mk)
 
 
 
 
 
 
+
+# Reclass cells with slope values lower then 0.05 (TRUE) and the rest (FALSE)
+signif<-mk$`p-value`<0.05
+
+plot(signif)
+
+plot(!signif) 
+
+# New raster object containing original slope values
+mk_slope<-mk$slope
+
+# Assign NA value to all cells with p-value higher than the threshold (cells with signif == FALSE)
+mk_slope[!signif]<-NA
+
+plot(mk_slope)
+
+writeRaster(mk_slope,'output_mk_slope_scale8_signif.tif',overwrite=T)
 
 
 

@@ -7,3 +7,25 @@ Media y mediana de NDWI en humedal: -0.103248902 y -0.121976306
 
 20-09-2024
 Quiero hacer gitignore a .Rhistory
+
+Al correr este código me sale un error (In kendall(y) : The Kendall Tau should have at least 6 observations):
+for (i in 1:length(r_list)) {
+  # Obtener el raster de la zona actual
+  r <- r_list[[i]]
+  
+  # Agregar con un factor de 8 (mayor resolución aprox. 200m)
+  r8 <- aggregate(r, fact = 8)
+  
+  # Calcular las estadísticas de Mann-Kendall
+  mk <- raster.kendall(r8, method = "none")
+  
+  # Guardar el resultado en la lista con el nombre de la zona
+  mk_results[[zones[i]]] <- mk
+  
+  # Escribir el raster resultante en un archivo TIFF
+  output_filename <- paste0("input_", zones[i], "_lswi_ts_scale8.tif")
+  writeRaster(r8, output_filename, overwrite = TRUE)
+  
+  # Imprimir mensaje de progreso
+  print(paste("Archivo guardado:", output_filename))
+}
