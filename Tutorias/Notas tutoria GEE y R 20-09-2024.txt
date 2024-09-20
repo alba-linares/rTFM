@@ -1,0 +1,27 @@
+quitar codigo no usado
+
+enlace para los mapas
+
+intentar usar la pendiente del cambio Mann Kendall (NO LA DEL MODELO LINEAL)
+
+Se usa LSWI
+
+Probar Kendall espacial (en buffer es opcional) https://rawcdn.githack.com/javimarlop/ecoinformatica_ugr/fd77ba460e214366a7a922595040f4ce1bad711f/guidelines_workflow_GEE_R.html
+
+setwd y cambiar urls
+
+doi packages
+
+spdynmod
+Import Sciwheel
+citation() en R
+
+Bibtext a archivo.bib Importar referencias
+
+Hacer NDVI
+
+Buscar explicacion de los tau significativos
+
+% invernaderos en el buffer (cortar, calc area del uso)
+
+Viernes 9:30-11 Javi

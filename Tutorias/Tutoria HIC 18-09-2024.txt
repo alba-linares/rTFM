@@ -19,5 +19,3 @@ Rehacer NDWI zone01h y zone02h por un error (Comprobado, estaba bien)
 Media y mediana de LSWI en humedal: 0.049186385 y 0.047407782
 Media y mediana de NDWI en humedal: -0.103248902 y -0.121976306
 ¿Hay algo mal en la fórmula? ¿Por qué sale en negativo?
-
-Alba, recuerda convertir protection_yes_no (en NDWI_zones_hum_buf) a formulas->valores antes de usar el archivo
