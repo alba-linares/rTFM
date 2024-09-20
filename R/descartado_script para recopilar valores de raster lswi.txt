@@ -1,0 +1,160 @@
+########
+
+datalist<-list(read.delim("Google Earth Engine/zones_buffer_lswi/lswi_zone01b.csv", sep=",", dec = "."),
+            read.delim("Google Earth Engine/zones_buffer_lswi/lswi_zone02b.csv", sep=",", dec = "."),
+            read.delim("Google Earth Engine/zones_buffer_lswi/lswi_zone03b.csv", sep=",", dec = "."),
+            read.delim("Google Earth Engine/zones_buffer_lswi/lswi_zone04b.csv", sep=",", dec = "."),
+            read.delim("Google Earth Engine/zones_buffer_lswi/lswi_zone05b.csv", sep=",", dec = "."),
+            read.delim("Google Earth Engine/zones_buffer_lswi/lswi_zone06b.csv", sep=",", dec = "."),
+            read.delim("Google Earth Engine/zones_buffer_lswi/lswi_zone07b.csv", sep=",", dec = "."),
+            read.delim("Google Earth Engine/zones_buffer_lswi/lswi_zone08b.csv", sep=",", dec = "."),
+            read.delim("Google Earth Engine/zones_buffer_lswi/lswi_zone09b.csv", sep=",", dec = "."),
+            read.delim("Google Earth Engine/zones_buffer_lswi/lswi_zone10b.csv", sep=",", dec = "."),
+            read.delim("Google Earth Engine/zones_buffer_lswi/lswi_zone11b.csv", sep=",", dec = "."),
+            read.delim("Google Earth Engine/zones_buffer_lswi/lswi_zone12b.csv", sep=",", dec = "."),
+            read.delim("Google Earth Engine/zones_buffer_lswi/lswi_zone13b.csv", sep=",", dec = "."),
+            read.delim("Google Earth Engine/zones_buffer_lswi/lswi_zone14b.csv", sep=",", dec = "."),
+            read.delim("Google Earth Engine/zones_buffer_lswi/lswi_zone15b.csv", sep=",", dec = "."),
+            read.delim("Google Earth Engine/zones_humedal_lswi/lswi_zone01.csv", sep=",", dec = "."),
+            read.delim("Google Earth Engine/zones_humedal_lswi/lswi_zone02.csv", sep=",", dec = "."),
+            read.delim("Google Earth Engine/zones_humedal_lswi/lswi_zone03.csv", sep=",", dec = "."),
+            read.delim("Google Earth Engine/zones_humedal_lswi/lswi_zone04.csv", sep=",", dec = "."),
+            read.delim("Google Earth Engine/zones_humedal_lswi/lswi_zone05.csv", sep=",", dec = "."),
+            read.delim("Google Earth Engine/zones_humedal_lswi/lswi_zone06.csv", sep=",", dec = "."),
+            read.delim("Google Earth Engine/zones_humedal_lswi/lswi_zone07.csv", sep=",", dec = "."),
+            read.delim("Google Earth Engine/zones_humedal_lswi/lswi_zone08.csv", sep=",", dec = "."),
+            read.delim("Google Earth Engine/zones_humedal_lswi/lswi_zone09.csv", sep=",", dec = "."),
+            read.delim("Google Earth Engine/zones_humedal_lswi/lswi_zone10.csv", sep=",", dec = "."),
+            read.delim("Google Earth Engine/zones_humedal_lswi/lswi_zone11.csv", sep=",", dec = "."),
+            read.delim("Google Earth Engine/zones_humedal_lswi/lswi_zone12.csv", sep=",", dec = "."),
+            read.delim("Google Earth Engine/zones_humedal_lswi/lswi_zone13.csv", sep=",", dec = "."),
+            read.delim("Google Earth Engine/zones_humedal_lswi/lswi_zone14.csv", sep=",", dec = "."),
+            read.delim("Google Earth Engine/zones_humedal_lswi/lswi_zone15.csv", sep=",", dec = "."))
+
+# Inicializar las variables que almacenarán los resultados
+n <- 30  # Número de archivos que esperas procesar
+intercept_lm <- numeric(n)
+slope_lm <- numeric(n)
+p_value_slope <- numeric(n)
+r_squared <- numeric(n)
+adj_r_squared <- numeric(n)
+
+tau_mk_test_2 <- numeric(n)
+p_value_mk_test_2 <- numeric(n)
+
+
+for (i in 1:length(datalist)) {
+  data <- datalist[[i]]
+  
+  # Asegurarte de que LSWI es numérico y un vector
+  data$LSWI <- as.numeric(as.character(data$LSWI))
+  
+  if (any(is.na(data$LSWI))) {
+    data <- na.omit(data)
+  }
+  
+  # Realizar los análisis
+  if (is.vector(data$LSWI) && !is.matrix(data$LSWI)) {
+    nt_test <- notrend_test(data$LSWI)
+    mk_test <- notrend_test(data$LSWI, test='MK')
+    lm_model <- lm(LSWI ~ Year, data = data)
+    summary_lm <- summary(lm_model)
+    mk_test_2 <- MannKendall(data$LSWI)
+    
+    intercept_lm[i] <- summary_lm$coefficients[1, "Estimate"]
+    slope_lm[i] <- summary_lm$coefficients[2, "Estimate"]
+    p_value_slope[i] <- summary_lm$coefficients[2, "Pr(>|t|)"]
+    r_squared[i] <- summary_lm$r.squared
+    adj_r_squared[i] <- summary_lm$adj.r.squared
+    
+    tau_mk_test_2[i] <- mk_test_2$tau
+    p_value_mk_test_2[i] <- mk_test_2$sl
+  } else {
+    print(paste("Error en la iteración", i, ": LSWI no es un vector univariado."))
+  }
+}
+
+# Verificar los resultados
+results_df <- data.frame(
+  intercept_lm,
+  slope_lm,
+  p_value_slope,
+  r_squared,
+  adj_r_squared,
+  tau_mk_test_2,
+  p_value_mk_test_2
+)
+
+rownames(results_df)<-c(c(paste(rep("zone",15),sprintf("%02d", 1:15),"b",sep = "")),c(paste(rep("zone",15),sprintf("%02d", 1:15),sep = "")))
+results_df <- format(results_df, scientific = 5)
+print(results_df)
+
+setwd("R")
+write.table(results_df, file ="Mann-Kendall_lm_lswi_results.csv", append=TRUE, sep="\t", row.names = F, col.names=F)
+
+################################################################################
+
+install.packages(c("raster", "rgdal", "sp"))
+library(raster)
+library(rgdal)
+library(sp)
+
+# Leer un único archivo raster
+raster1 <- raster("Google Earth Engine/Mann-Kendall/zone01b_tau.tif")
+raster2 <- raster("Google Earth Engine/Mann-Kendall/zone02b_tau.tif")
+raster3 <- raster("Google Earth Engine/Mann-Kendall/zone03b_tau.tif")
+
+library(raster)
+
+# Definir el directorio donde se encuentran los archivos
+directory <- "Google Earth Engine/Mann-Kendall/"
+
+# Crear un vector para almacenar todos los nombres de archivos
+file_names <- c()
+
+# Rellenar el vector con los nombres de archivos desde zone01b_tau.tif a zone15b_tau.tif
+for (i in 1:15) {
+  file_names <- c(file_names, paste0(directory, "zone", sprintf("%02d", i), "b_tau.tif"))
+  file_names <- c(file_names, paste0(directory, "zone", sprintf("%01d", i), "_tau.tif"))
+}
+
+# Cargar todos los archivos raster en una lista
+raster_list <- lapply(file_names, raster)
+
+
+# Calcular estadísticas básicas para un único raster
+mean_value <- cellStats(raster1, stat='mean')
+median_value <- cellStats(raster1, stat='median')
+sd_value <- cellStats(raster1, stat='sd')
+
+# Crear una lista para almacenar las estadísticas
+stats_list <- list()
+
+# Calcular estadísticas para cada raster en la lista
+for (i in 1:length(raster_list)) {
+  raster_data <- raster_list[[i]]
+  
+  # Calcular estadísticas
+  mean_value <- cellStats(raster_data, stat='mean')
+  sd_value <- cellStats(raster_data, stat='sd')
+  min_value <- cellStats(raster_data, stat='min')
+  max_value <- cellStats(raster_data, stat='max')
+  
+  # Guardar estadísticas en una lista
+  stats_list[[i]] <- data.frame(
+    file_name = file_names[i],
+    mean = mean_value,
+    sd = sd_value,
+    min = min_value,
+    max = max_value
+  )
+}
+
+# Combinar todos los resultados en un solo data frame
+all_stats <- do.call(rbind, stats_list)
+
+# Ver las estadísticas
+print(all_stats)
+
+as.data.frame(stats_list) %>%
+  pivot_longer(names_to = Var1, values_to = Freq)
