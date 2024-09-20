@@ -2,7 +2,8 @@ library(readxl)
 library(lme4)
 library(ez)
 
-datos <-read_excel("C:/Users/VE-UGR-0208/Desktop/TFM/rTFM/Google Earth Engine/LSWI_zones_hum_buf.xlsx")
+setwd("D:/Escritorio/TFM/rTFM")
+datos <-read_excel("Google Earth Engine/LSWI_zones_hum_buf.xlsx")
 
 
 

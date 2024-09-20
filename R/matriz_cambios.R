@@ -5,11 +5,12 @@ library(ggplot2)
 library(tidyr)
 
 # Leer los archivos
-datos <-read_excel("D:/Escritorio/MASTER/TFM/rTFM/Resultados_puntos_analisis.xlsx", range = "A1:O2081")
+setwd("D:/Escritorio/TFM/rTFM")
+datos <-read_excel("Resultados_puntos_analisis.xlsx", range = "A1:O2081")
 head(datos)
 
-df_area_usos84 <-read_excel("D:/Escritorio/MASTER/TFM/rTFM/Resultados_puntos_analisis.xlsx", sheet = 2)
-df_area_usos20 <-read_excel("D:/Escritorio/MASTER/TFM/rTFM/Resultados_puntos_analisis.xlsx", sheet = 3)
+df_area_usos84 <-read_excel("Resultados_puntos_analisis.xlsx", sheet = 2)
+df_area_usos20 <-read_excel("Resultados_puntos_analisis.xlsx", sheet = 3)
 
 ################################################################################
 # Matriz de doble entrada con los cambios

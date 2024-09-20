@@ -4,38 +4,40 @@
 library(funtimes)
 library(Kendall)
 
-# Data
-data<-read.delim("D:/Escritorio/MASTER/TFM/rTFM/Google Earth Engine/zones_buffer/lswi_zone01b.csv", sep=",", dec = ".")
-data<-read.delim("D:/Escritorio/MASTER/TFM/rTFM/Google Earth Engine/zones_buffer/lswi_zone02b.csv", sep=",", dec = ".")
-data<-read.delim("D:/Escritorio/MASTER/TFM/rTFM/Google Earth Engine/zones_buffer/lswi_zone03b.csv", sep=",", dec = ".")
-data<-read.delim("D:/Escritorio/MASTER/TFM/rTFM/Google Earth Engine/zones_buffer/lswi_zone04b.csv", sep=",", dec = ".")
-data<-read.delim("D:/Escritorio/MASTER/TFM/rTFM/Google Earth Engine/zones_buffer/lswi_zone05b.csv", sep=",", dec = ".")
-data<-read.delim("D:/Escritorio/MASTER/TFM/rTFM/Google Earth Engine/zones_buffer/lswi_zone06b.csv", sep=",", dec = ".")
-data<-read.delim("D:/Escritorio/MASTER/TFM/rTFM/Google Earth Engine/zones_buffer/lswi_zone07b.csv", sep=",", dec = ".")
-data<-read.delim("D:/Escritorio/MASTER/TFM/rTFM/Google Earth Engine/zones_buffer/lswi_zone08b.csv", sep=",", dec = ".")
-data<-read.delim("D:/Escritorio/MASTER/TFM/rTFM/Google Earth Engine/zones_buffer/lswi_zone09b.csv", sep=",", dec = ".")
-data<-read.delim("D:/Escritorio/MASTER/TFM/rTFM/Google Earth Engine/zones_buffer/lswi_zone10b.csv", sep=",", dec = ".")
-data<-read.delim("D:/Escritorio/MASTER/TFM/rTFM/Google Earth Engine/zones_buffer/lswi_zone11b.csv", sep=",", dec = ".")
-data<-read.delim("D:/Escritorio/MASTER/TFM/rTFM/Google Earth Engine/zones_buffer/lswi_zone12b.csv", sep=",", dec = ".")
-data<-read.delim("D:/Escritorio/MASTER/TFM/rTFM/Google Earth Engine/zones_buffer/lswi_zone13b.csv", sep=",", dec = ".")
-data<-read.delim("D:/Escritorio/MASTER/TFM/rTFM/Google Earth Engine/zones_buffer/lswi_zone14b.csv", sep=",", dec = ".")
-data<-read.delim("D:/Escritorio/MASTER/TFM/rTFM/Google Earth Engine/zones_buffer/lswi_zone15b.csv", sep=",", dec = ".")
 
-data<-read.delim("D:/Escritorio/MASTER/TFM/rTFM/Google Earth Engine/zones_humedal/lswi_zone01.csv", sep=",", dec = ".")
-data<-read.delim("D:/Escritorio/MASTER/TFM/rTFM/Google Earth Engine/zones_humedal/lswi_zone02.csv", sep=",", dec = ".")
-data<-read.delim("D:/Escritorio/MASTER/TFM/rTFM/Google Earth Engine/zones_humedal/lswi_zone03.csv", sep=",", dec = ".")
-data<-read.delim("D:/Escritorio/MASTER/TFM/rTFM/Google Earth Engine/zones_humedal/lswi_zone04.csv", sep=",", dec = ".")
-data<-read.delim("D:/Escritorio/MASTER/TFM/rTFM/Google Earth Engine/zones_humedal/lswi_zone05.csv", sep=",", dec = ".")
-data<-read.delim("D:/Escritorio/MASTER/TFM/rTFM/Google Earth Engine/zones_humedal/lswi_zone06.csv", sep=",", dec = ".")
-data<-read.delim("D:/Escritorio/MASTER/TFM/rTFM/Google Earth Engine/zones_humedal/lswi_zone07.csv", sep=",", dec = ".")
-data<-read.delim("D:/Escritorio/MASTER/TFM/rTFM/Google Earth Engine/zones_humedal/lswi_zone08.csv", sep=",", dec = ".")
-data<-read.delim("D:/Escritorio/MASTER/TFM/rTFM/Google Earth Engine/zones_humedal/lswi_zone09.csv", sep=",", dec = ".")
-data<-read.delim("D:/Escritorio/MASTER/TFM/rTFM/Google Earth Engine/zones_humedal/lswi_zone10.csv", sep=",", dec = ".")
-data<-read.delim("D:/Escritorio/MASTER/TFM/rTFM/Google Earth Engine/zones_humedal/lswi_zone11.csv", sep=",", dec = ".")
-data<-read.delim("D:/Escritorio/MASTER/TFM/rTFM/Google Earth Engine/zones_humedal/lswi_zone12.csv", sep=",", dec = ".")
-data<-read.delim("D:/Escritorio/MASTER/TFM/rTFM/Google Earth Engine/zones_humedal/lswi_zone13.csv", sep=",", dec = ".")
-data<-read.delim("D:/Escritorio/MASTER/TFM/rTFM/Google Earth Engine/zones_humedal/lswi_zone14.csv", sep=",", dec = ".")
-data<-read.delim("D:/Escritorio/MASTER/TFM/rTFM/Google Earth Engine/zones_humedal/lswi_zone15.csv", sep=",", dec = ".")
+# Data
+setwd("D:/Escritorio/TFM/rTFM") # ¡Recuerda hacer setwd("D:/Escritorio/TFM/rTFM") en el portátil!
+data<-read.delim("Google Earth Engine/zones_buffer_lswi/lswi_zone01b.csv", sep=",", dec = ".")
+data<-read.delim("Google Earth Engine/zones_buffer_lswi/lswi_zone02b.csv", sep=",", dec = ".")
+data<-read.delim("Google Earth Engine/zones_buffer_lswi/lswi_zone03b.csv", sep=",", dec = ".")
+data<-read.delim("Google Earth Engine/zones_buffer_lswi/lswi_zone04b.csv", sep=",", dec = ".")
+data<-read.delim("Google Earth Engine/zones_buffer_lswi/lswi_zone05b.csv", sep=",", dec = ".")
+data<-read.delim("Google Earth Engine/zones_buffer_lswi/lswi_zone06b.csv", sep=",", dec = ".")
+data<-read.delim("Google Earth Engine/zones_buffer_lswi/lswi_zone07b.csv", sep=",", dec = ".")
+data<-read.delim("Google Earth Engine/zones_buffer_lswi/lswi_zone08b.csv", sep=",", dec = ".")
+data<-read.delim("Google Earth Engine/zones_buffer_lswi/lswi_zone09b.csv", sep=",", dec = ".")
+data<-read.delim("Google Earth Engine/zones_buffer_lswi/lswi_zone10b.csv", sep=",", dec = ".")
+data<-read.delim("Google Earth Engine/zones_buffer_lswi/lswi_zone11b.csv", sep=",", dec = ".")
+data<-read.delim("Google Earth Engine/zones_buffer_lswi/lswi_zone12b.csv", sep=",", dec = ".")
+data<-read.delim("Google Earth Engine/zones_buffer_lswi/lswi_zone13b.csv", sep=",", dec = ".")
+data<-read.delim("Google Earth Engine/zones_buffer_lswi/lswi_zone14b.csv", sep=",", dec = ".")
+data<-read.delim("Google Earth Engine/zones_buffer_lswi/lswi_zone15b.csv", sep=",", dec = ".")
+
+data<-read.delim("Google Earth Engine/zones_humedal_lswi/lswi_zone01.csv", sep=",", dec = ".")
+data<-read.delim("Google Earth Engine/zones_humedal_lswi/lswi_zone02.csv", sep=",", dec = ".")
+data<-read.delim("Google Earth Engine/zones_humedal_lswi/lswi_zone03.csv", sep=",", dec = ".")
+data<-read.delim("Google Earth Engine/zones_humedal_lswi/lswi_zone04.csv", sep=",", dec = ".")
+data<-read.delim("Google Earth Engine/zones_humedal_lswi/lswi_zone05.csv", sep=",", dec = ".")
+data<-read.delim("Google Earth Engine/zones_humedal_lswi/lswi_zone06.csv", sep=",", dec = ".")
+data<-read.delim("Google Earth Engine/zones_humedal_lswi/lswi_zone07.csv", sep=",", dec = ".")
+data<-read.delim("Google Earth Engine/zones_humedal_lswi/lswi_zone08.csv", sep=",", dec = ".")
+data<-read.delim("Google Earth Engine/zones_humedal_lswi/lswi_zone09.csv", sep=",", dec = ".")
+data<-read.delim("Google Earth Engine/zones_humedal_lswi/lswi_zone10.csv", sep=",", dec = ".")
+data<-read.delim("Google Earth Engine/zones_humedal_lswi/lswi_zone11.csv", sep=",", dec = ".")
+data<-read.delim("Google Earth Engine/zones_humedal_lswi/lswi_zone12.csv", sep=",", dec = ".")
+data<-read.delim("Google Earth Engine/zones_humedal_lswi/lswi_zone13.csv", sep=",", dec = ".")
+data<-read.delim("Google Earth Engine/zones_humedal_lswi/lswi_zone14.csv", sep=",", dec = ".")
+data<-read.delim("Google Earth Engine/zones_humedal_lswi/lswi_zone15.csv", sep=",", dec = ".")
 
 #Option A #library(funtimes)
 notrend_test(data$LSWI)
@@ -72,36 +74,36 @@ MannKendall(data$LSWI)
 
 ########
 
-datalist<-list(read.delim("D:/Escritorio/MASTER/TFM/rTFM/Google Earth Engine/zones_buffer/lswi_zone01b.csv", sep=",", dec = "."),
-            read.delim("D:/Escritorio/MASTER/TFM/rTFM/Google Earth Engine/zones_buffer/lswi_zone02b.csv", sep=",", dec = "."),
-            read.delim("D:/Escritorio/MASTER/TFM/rTFM/Google Earth Engine/zones_buffer/lswi_zone03b.csv", sep=",", dec = "."),
-            read.delim("D:/Escritorio/MASTER/TFM/rTFM/Google Earth Engine/zones_buffer/lswi_zone04b.csv", sep=",", dec = "."),
-            read.delim("D:/Escritorio/MASTER/TFM/rTFM/Google Earth Engine/zones_buffer/lswi_zone05b.csv", sep=",", dec = "."),
-            read.delim("D:/Escritorio/MASTER/TFM/rTFM/Google Earth Engine/zones_buffer/lswi_zone06b.csv", sep=",", dec = "."),
-            read.delim("D:/Escritorio/MASTER/TFM/rTFM/Google Earth Engine/zones_buffer/lswi_zone07b.csv", sep=",", dec = "."),
-            read.delim("D:/Escritorio/MASTER/TFM/rTFM/Google Earth Engine/zones_buffer/lswi_zone08b.csv", sep=",", dec = "."),
-            read.delim("D:/Escritorio/MASTER/TFM/rTFM/Google Earth Engine/zones_buffer/lswi_zone09b.csv", sep=",", dec = "."),
-            read.delim("D:/Escritorio/MASTER/TFM/rTFM/Google Earth Engine/zones_buffer/lswi_zone10b.csv", sep=",", dec = "."),
-            read.delim("D:/Escritorio/MASTER/TFM/rTFM/Google Earth Engine/zones_buffer/lswi_zone11b.csv", sep=",", dec = "."),
-            read.delim("D:/Escritorio/MASTER/TFM/rTFM/Google Earth Engine/zones_buffer/lswi_zone12b.csv", sep=",", dec = "."),
-            read.delim("D:/Escritorio/MASTER/TFM/rTFM/Google Earth Engine/zones_buffer/lswi_zone13b.csv", sep=",", dec = "."),
-            read.delim("D:/Escritorio/MASTER/TFM/rTFM/Google Earth Engine/zones_buffer/lswi_zone14b.csv", sep=",", dec = "."),
-            read.delim("D:/Escritorio/MASTER/TFM/rTFM/Google Earth Engine/zones_buffer/lswi_zone15b.csv", sep=",", dec = "."),
-            read.delim("D:/Escritorio/MASTER/TFM/rTFM/Google Earth Engine/zones_humedal/lswi_zone01.csv", sep=",", dec = "."),
-            read.delim("D:/Escritorio/MASTER/TFM/rTFM/Google Earth Engine/zones_humedal/lswi_zone02.csv", sep=",", dec = "."),
-            read.delim("D:/Escritorio/MASTER/TFM/rTFM/Google Earth Engine/zones_humedal/lswi_zone03.csv", sep=",", dec = "."),
-            read.delim("D:/Escritorio/MASTER/TFM/rTFM/Google Earth Engine/zones_humedal/lswi_zone04.csv", sep=",", dec = "."),
-            read.delim("D:/Escritorio/MASTER/TFM/rTFM/Google Earth Engine/zones_humedal/lswi_zone05.csv", sep=",", dec = "."),
-            read.delim("D:/Escritorio/MASTER/TFM/rTFM/Google Earth Engine/zones_humedal/lswi_zone06.csv", sep=",", dec = "."),
-            read.delim("D:/Escritorio/MASTER/TFM/rTFM/Google Earth Engine/zones_humedal/lswi_zone07.csv", sep=",", dec = "."),
-            read.delim("D:/Escritorio/MASTER/TFM/rTFM/Google Earth Engine/zones_humedal/lswi_zone08.csv", sep=",", dec = "."),
-            read.delim("D:/Escritorio/MASTER/TFM/rTFM/Google Earth Engine/zones_humedal/lswi_zone09.csv", sep=",", dec = "."),
-            read.delim("D:/Escritorio/MASTER/TFM/rTFM/Google Earth Engine/zones_humedal/lswi_zone10.csv", sep=",", dec = "."),
-            read.delim("D:/Escritorio/MASTER/TFM/rTFM/Google Earth Engine/zones_humedal/lswi_zone11.csv", sep=",", dec = "."),
-            read.delim("D:/Escritorio/MASTER/TFM/rTFM/Google Earth Engine/zones_humedal/lswi_zone12.csv", sep=",", dec = "."),
-            read.delim("D:/Escritorio/MASTER/TFM/rTFM/Google Earth Engine/zones_humedal/lswi_zone13.csv", sep=",", dec = "."),
-            read.delim("D:/Escritorio/MASTER/TFM/rTFM/Google Earth Engine/zones_humedal/lswi_zone14.csv", sep=",", dec = "."),
-            read.delim("D:/Escritorio/MASTER/TFM/rTFM/Google Earth Engine/zones_humedal/lswi_zone15.csv", sep=",", dec = "."))
+datalist<-list(read.delim("Google Earth Engine/zones_buffer_lswi/lswi_zone01b.csv", sep=",", dec = "."),
+            read.delim("Google Earth Engine/zones_buffer_lswi/lswi_zone02b.csv", sep=",", dec = "."),
+            read.delim("Google Earth Engine/zones_buffer_lswi/lswi_zone03b.csv", sep=",", dec = "."),
+            read.delim("Google Earth Engine/zones_buffer_lswi/lswi_zone04b.csv", sep=",", dec = "."),
+            read.delim("Google Earth Engine/zones_buffer_lswi/lswi_zone05b.csv", sep=",", dec = "."),
+            read.delim("Google Earth Engine/zones_buffer_lswi/lswi_zone06b.csv", sep=",", dec = "."),
+            read.delim("Google Earth Engine/zones_buffer_lswi/lswi_zone07b.csv", sep=",", dec = "."),
+            read.delim("Google Earth Engine/zones_buffer_lswi/lswi_zone08b.csv", sep=",", dec = "."),
+            read.delim("Google Earth Engine/zones_buffer_lswi/lswi_zone09b.csv", sep=",", dec = "."),
+            read.delim("Google Earth Engine/zones_buffer_lswi/lswi_zone10b.csv", sep=",", dec = "."),
+            read.delim("Google Earth Engine/zones_buffer_lswi/lswi_zone11b.csv", sep=",", dec = "."),
+            read.delim("Google Earth Engine/zones_buffer_lswi/lswi_zone12b.csv", sep=",", dec = "."),
+            read.delim("Google Earth Engine/zones_buffer_lswi/lswi_zone13b.csv", sep=",", dec = "."),
+            read.delim("Google Earth Engine/zones_buffer_lswi/lswi_zone14b.csv", sep=",", dec = "."),
+            read.delim("Google Earth Engine/zones_buffer_lswi/lswi_zone15b.csv", sep=",", dec = "."),
+            read.delim("Google Earth Engine/zones_humedal_lswi/lswi_zone01.csv", sep=",", dec = "."),
+            read.delim("Google Earth Engine/zones_humedal_lswi/lswi_zone02.csv", sep=",", dec = "."),
+            read.delim("Google Earth Engine/zones_humedal_lswi/lswi_zone03.csv", sep=",", dec = "."),
+            read.delim("Google Earth Engine/zones_humedal_lswi/lswi_zone04.csv", sep=",", dec = "."),
+            read.delim("Google Earth Engine/zones_humedal_lswi/lswi_zone05.csv", sep=",", dec = "."),
+            read.delim("Google Earth Engine/zones_humedal_lswi/lswi_zone06.csv", sep=",", dec = "."),
+            read.delim("Google Earth Engine/zones_humedal_lswi/lswi_zone07.csv", sep=",", dec = "."),
+            read.delim("Google Earth Engine/zones_humedal_lswi/lswi_zone08.csv", sep=",", dec = "."),
+            read.delim("Google Earth Engine/zones_humedal_lswi/lswi_zone09.csv", sep=",", dec = "."),
+            read.delim("Google Earth Engine/zones_humedal_lswi/lswi_zone10.csv", sep=",", dec = "."),
+            read.delim("Google Earth Engine/zones_humedal_lswi/lswi_zone11.csv", sep=",", dec = "."),
+            read.delim("Google Earth Engine/zones_humedal_lswi/lswi_zone12.csv", sep=",", dec = "."),
+            read.delim("Google Earth Engine/zones_humedal_lswi/lswi_zone13.csv", sep=",", dec = "."),
+            read.delim("Google Earth Engine/zones_humedal_lswi/lswi_zone14.csv", sep=",", dec = "."),
+            read.delim("Google Earth Engine/zones_humedal_lswi/lswi_zone15.csv", sep=",", dec = "."))
 
 # Inicializar las variables que almacenarán los resultados
 n <- 30  # Número de archivos que esperas procesar
@@ -161,7 +163,7 @@ rownames(results_df)<-c(c(paste(rep("zone",15),sprintf("%02d", 1:15),"b",sep = "
 results_df <- format(results_df, scientific = 5)
 print(results_df)
 
-setwd("D:/Escritorio/MASTER/TFM/rTFM/R")
+setwd("R")
 write.table(results_df, file ="Mann-Kendall_lm_lswi_results.csv", append=TRUE, sep="\t", row.names = F, col.names=F)
 
 ################################################################################
@@ -172,14 +174,14 @@ library(rgdal)
 library(sp)
 
 # Leer un único archivo raster
-raster1 <- raster("D:/Escritorio/MASTER/TFM/rTFM/Google Earth Engine/Mann-Kendall/zone01b_tau.tif")
-raster2 <- raster("D:/Escritorio/MASTER/TFM/rTFM/Google Earth Engine/Mann-Kendall/zone02b_tau.tif")
-raster3 <- raster("D:/Escritorio/MASTER/TFM/rTFM/Google Earth Engine/Mann-Kendall/zone03b_tau.tif")
+raster1 <- raster("Google Earth Engine/Mann-Kendall/zone01b_tau.tif")
+raster2 <- raster("Google Earth Engine/Mann-Kendall/zone02b_tau.tif")
+raster3 <- raster("Google Earth Engine/Mann-Kendall/zone03b_tau.tif")
 
 library(raster)
 
 # Definir el directorio donde se encuentran los archivos
-directory <- "D:/Escritorio/MASTER/TFM/rTFM/Google Earth Engine/Mann-Kendall/"
+directory <- "Google Earth Engine/Mann-Kendall/"
 
 # Crear un vector para almacenar todos los nombres de archivos
 file_names <- c()
@@ -265,7 +267,7 @@ library(dplyr)
 library(readxl)
 #library(broom) # Necesario para la función glance()
 
-datos <-read_excel("D:/Escritorio/MASTER/TFM/rTFM/Google Earth Engine/LSWI_zones_hum_buf.xlsx")
+datos <-read_excel("Google Earth Engine/LSWI_zones_hum_buf.xlsx")
 # Calcular el R^2 ajustado para cada humedal y unir con los datos originales
 datos_con_r2 <- datos %>%
   group_by(wetland_name) %>%
