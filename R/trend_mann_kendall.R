@@ -73,16 +73,150 @@ MannKendall(data$LSWI)
 ################################################################################
                           # Mann-Kendall espacial #
 ################################################################################
-# Install the required packages
+library(here)
 
-install.packages("zyp")
-install.packages("terra")
-install.packages("spatialEco")
+# Install the required packages
+# install.packages("zyp")
+# install.packages("terra")
+# install.packages("spatialEco")
 
 # Load required packages
 
 library(spatialEco)
 library(terra)
+
+# Create a multiband terra SpatRaster object with 10 layers
+
+# Definir años
+years <- 1999:2021
+
+# Definir la ruta base
+base_path <- "D:/Escritorio/TFM/rTFM/Google Earth Engine/zones_lswi/humedal/"
+
+# Definir subrutas para cada zona
+paths <- c(
+  "zone01h_albufera_honda/",
+  "zone02h_albufera_nueva/",
+  "zone03h_barranco_del_agua/",
+  "zone04h_canada_de_las_norias/",
+  "zone05h_cola_del_embalse_del_negratin/",
+  "zone06h_charcones_de_punta_entinas/",
+  "zone07h_humedales_de_baza/",
+  "zone08h_laguna_de_la_gravera/",
+  "zone09h_rambla_morales/",
+  "zone10h_ribera_de_la_algaida/",
+  "zone11h_rio_antas/",
+  "zone12h_salinas_de_cabo_de_gata/",
+  "zone13h_salar_de_los_canos/",
+  "zone14h_salinas_de_cerrillos/",
+  "zone15h_saladar_del_margen/"
+)
+
+# Nombres de las zonas (corrigiendo zone13h)
+zones <- c("zone01h","zone02h","zone03h",
+           "zone04h","zone05h","zone06h",
+           "zone07h","zone08h","zone09h",
+           "zone10h","zone11h","zone12h",
+           "zone13h","zone14h","zone15h")
+
+# Crear una lista para almacenar los datos de cada zona
+r_zones <- list()
+
+# Loop para cargar los archivos de cada zona sin cambiar el directorio de trabajo
+for (i in 1:length(paths)) {
+  # Cargar los archivos usando lapply, construyendo la ruta completa
+  r_zones[[zones[i]]] <- lapply(years, function(year) {
+    # Crear la ruta completa del archivo TIFF
+    file_path <- paste0(base_path, paths[i], zones[i], "_lswi_", year, ".tif")
+    
+    # Cargar el archivo .tif
+    rast(file_path)
+  })
+}
+
+# Ahora tienes todos los archivos cargados en r_zones
+
+
+# Ahora tienes una lista con los datos cargados para cada zona
+# r_zones[["zone01h"]] contiene los archivos de la primera zona
+# r_zones[["zone03h"]] contiene los archivos de la segunda zona
+
+
+# Y ahora paso a rast() cada elemento de esa lista:
+r_zone01h <- rast(r_zones$zone01h)
+r_zone02h <- rast(r_zones$zone02h)
+r_zone03h <- rast(r_zones$zone03h)
+r_zone04h <- rast(r_zones$zone04h)
+r_zone05h <- rast(r_zones$zone05h)
+r_zone06h <- rast(r_zones$zone06h)
+r_zone07h <- rast(r_zones$zone07h)
+r_zone08h <- rast(r_zones$zone08h)
+r_zone09h <- rast(r_zones$zone09h)
+r_zone10h <- rast(r_zones$zone10h)
+r_zone11h <- rast(r_zones$zone11h)
+r_zone12h <- rast(r_zones$zone12h)
+r_zone13h <- rast(r_zones$zone13h)
+r_zone14h <- rast(r_zones$zone14h)
+r_zone15h <- rast(r_zones$zone15h)
+
+# Por ejemplo, r_zone02h se ve así, como 15 gráficas, una para cada año, en ese humedal:
+plot(r_zone06h)
+
+
+# Source: https://www.pmassicotte.com/posts/2022-04-28-changing-spatial-resolution-of-a-raster-with-terra/
+
+# Aggregate the raster using 8 pixels within the horizontal and the vertical directions
+r <- list(r_zone01h,r_zone02h, r_zone03h,
+          r_zone04h,r_zone05h,r_zone06h,
+          r_zone07h,r_zone08h,r_zone09h,
+          r_zone10h,r_zone11h,r_zone12h,
+          r_zone13h,r_zone14h,r_zone15h)
+
+
+r8 <- aggregate(r, fact = 8) # approx. higher than 200m resolution
+writeRaster(r8,'input_lswi_ts_scale8.tif',overwrite=T)
+
+
+
+
+
+
+
+
+
+# Lista de los objetos raster
+r_list <- list(r_zone01h,r_zone02h,r_zone03h,
+               r_zone04h,r_zone05h,r_zone06h,
+               r_zone07h,r_zone08h,r_zone09h,
+               r_zone10h,r_zone11h,r_zone12h,
+               r_zone13h,r_zone14h,r_zone15h)
+
+# Loop para agregar y escribir raster para cada zona
+setwd("D:/Escritorio/TFM/rTFM/R/resample_r8") # Para exportar los .tif a esta carpeta específica
+for (i in 1:length(r_list)) {
+  # Obtener el raster de la zona actual
+  r <- r_list[[i]]
+  
+  # Agregar con un factor de 8 (mayor resolución aprox. 200m)
+  r8 <- aggregate(r, fact = 8)
+  
+  # Escribir el raster resultante en un archivo TIFF
+  output_filename <- paste0("input_", zones[i], "_lswi_ts_scale8.tif")
+  writeRaster(r8, output_filename, overwrite = TRUE)
+  
+  # Imprimir mensaje de progreso
+  print(paste("Archivo guardado:", output_filename))
+}
+setwd("D:/Escritorio/TFM/rTFM") # Vuelvo al setwd de antes
+
+mk <- raster.kendall(r8, method="none")
+
+plot(mk)
+
+
+
+
+
 
 
 
