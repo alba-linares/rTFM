@@ -35,3 +35,5 @@ for (i in 1:length(r_list)) {
 
 24-09-2024
 PUNTOS HIC: Quizás haya que tener en cuenta si están en zona marina o no
+
+Me he quedado a medias poniendo el nombre del humedal que coincide con MUCVA_zonas naturales, porque hay poligonos compartidos entre varios humedales y no sé cortarlos
