@@ -12,4 +12,6 @@ Ver cuántos puntos se han perdido (desde fecha cartografía HIC hasta SIOSE2020
 Los que caen en Urbano e infraestructuras se han perdido definitivamente
 Es un dato directo
 
+24-09-2024
+¿Qué hábitats se han perdido? ¿Cuáles hay? pie() de los que están y los que se han perdido, por separado
 
