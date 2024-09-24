@@ -8,6 +8,8 @@ Media y mediana de NDWI en humedal: -0.103248902 y -0.121976306
 20-09-2024
 Quiero hacer gitignore a .Rhistory
 
+
+
 Al correr este código me sale un error (In kendall(y) : The Kendall Tau should have at least 6 observations):
 for (i in 1:length(r_list)) {
   # Obtener el raster de la zona actual
