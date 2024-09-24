@@ -31,3 +31,7 @@ for (i in 1:length(r_list)) {
   # Imprimir mensaje de progreso
   print(paste("Archivo guardado:", output_filename))
 }
+
+
+24-09-2024
+PUNTOS HIC: Quizás haya que tener en cuenta si están en zona marina o no
