@@ -12,7 +12,13 @@ Ver cuántos puntos se han perdido (desde fecha cartografía HIC hasta SIOSE2020
 Los que caen en Urbano e infraestructuras se han perdido definitivamente
 Es un dato directo
 
-24-09-2024
+24-09-2024_______________________________________________________________________
 ¿Qué hábitats se han perdido? ¿Cuáles hay? pie() de los que están y los que se han perdido, por separado
 
 Enfocarme en HIC_noNATURAL, saber qué hábitats son
+
+
+25-09-2024_______________________________________________________________________
+En qué condiciones se han perdido hábitats
+Dónde se han perdido más hábitats (costa-interior, ENP-noENP e interacción)
+Variable respuesta: Presencia HIC (0/1), por ejemplo.
