@@ -22,30 +22,13 @@ datos$CODIGO_UE3 <- lapply(datos$CODIGO_UE3, as.factor)
 datos$CODIGO_UE4 <- lapply(datos$CODIGO_UE4, as.factor)
 datos[18:33] <- lapply(datos[18:33], as.factor)
 datos$PRESENCIA_ZONA_NAT<- lapply(datos$PRESENCIA_ZONA_NAT, as.factor)
-datos$SIOSE_T_ES<- lapply(datos$SIOSE_T_ES, as.factor)
 # sapply(datos[1:37], function(x) length(unique(x))) #nº de niveles
 
 # Deshacer lista
 datos$CODIGO_UE2<-unlist(datos$CODIGO_UE2)
 datos$CODIGO_UE3<-unlist(datos$CODIGO_UE3)
 datos$CODIGO_UE4<-unlist(datos$CODIGO_UE4)
-datos$SIOSE_T_ES<- unlist(datos$SIOSE_T_ES)
 datos$PRESENCIA_ZONA_NAT<-unlist(datos$PRESENCIA_ZONA_NAT)
-
-pie(table(datos$GRUPO_TIPO))
-pie(table(datos$PRESENCIA_ZONA_NAT))
-pie(table(datos$PRESENCIA_HIC))
-datos_costa <- subset(datos, datos$GRUPO_TIPO=="Costeros")
-datos_interior <- subset(datos, datos$GRUPO_TIPO=="Interiores")
-datos_ENP <- subset(datos, datos$ENP=="1")
-datos_noENP <- subset(datos, datos$ENP=="0")
-
-par(mfrow = c(2, 2), mar = c(5, 5, 2, 2)) 
-pie(table(datos_ENP$PRESENCIA_ZONA_NAT), col = c("white","lightblue"))
-pie(table(datos_ENP$PRESENCIA_HIC), col = c("lightblue", "white"))
-pie(table(datos_noENP$PRESENCIA_ZONA_NAT), col = c("white","lightblue"))
-pie(table(datos_noENP$PRESENCIA_HIC), col = c("lightblue","white"))
-
 
 
 # Modelo lineal generalizado binomial ##########################################
@@ -74,6 +57,31 @@ summary(modelo_glm4)
 modelo_glm5 <- glm(PRESENCIA_HIC~datos$SIOSE_C_ES, family = binomial, data=datos)
 summary(modelo_glm5)
 
+modelo_glm6 <- glm(PRESENCIA_HIC~datos$MUCVA_C_GE:SIOSE_C_GE, family = binomial, data=datos)
+summary(modelo_glm6)
+
+#De los que han cambiado, ¿qué hay ahora?:
+datos_cambios <- subset(datos, datos$COMPARACION=="DISTINTO")
+cambio_usos<-table(datos_cambios$SIOSE_T_ES)
+as.data.frame(cambio_usos)
+datos_cambios <- subset(datos, datos$COMPARACION=="DISTINTO")
+cambio_usos_general<-table(datos_cambios$MUCVA_T_GE,datos_cambios$SIOSE_T_GE)
+df_cambio_usos_general<-as.data.frame(cambio_usos_general)
+
+modelo_glm7 <- glm(PRESENCIA_HIC~MUCVA_C_GE:SIOSE_C_GE, family = binomial, data=datos_cambios)
+summary(modelo_glm7)
+
+library(dplyr)
+frecuencia_cambio_usos <- datos_cambios %>%
+  group_by(MUCVA_C_GE, SIOSE_C_GE) %>%
+  count()
+View(as.data.frame(frecuencia_cambio_usos))
+#########
+#########
+#########
+#########
+#########
+
 # Tukey
 datos2<-datos[-5]
 Tukey1<-glht(modelo_glm2, mcp(NOMBRE_HUM="Tukey")) #¿Por qué no me sale?
@@ -98,3 +106,23 @@ summary(Tukey3)
 #Salinas - Playas, dunas y arenales == 0                               ***
 #Vegetacion natural - Salinas == 0                                     ***
 #Vegetacion riparia - Salinas == 0                                     * 
+
+
+
+
+
+
+
+pie(table(datos$GRUPO_TIPO))
+pie(table(datos$PRESENCIA_ZONA_NAT))
+pie(table(datos$PRESENCIA_HIC))
+datos_costa <- subset(datos, datos$GRUPO_TIPO=="Costeros")
+datos_interior <- subset(datos, datos$GRUPO_TIPO=="Interiores")
+datos_ENP <- subset(datos, datos$ENP=="1")
+datos_noENP <- subset(datos, datos$ENP=="0")
+
+par(mfrow = c(2, 2), mar = c(5, 5, 2, 2)) 
+pie(table(datos_ENP$PRESENCIA_ZONA_NAT), col = c("white","lightblue"))
+pie(table(datos_ENP$PRESENCIA_HIC), col = c("lightblue", "white"))
+pie(table(datos_noENP$PRESENCIA_ZONA_NAT), col = c("white","lightblue"))
+pie(table(datos_noENP$PRESENCIA_HIC), col = c("lightblue","white"))
