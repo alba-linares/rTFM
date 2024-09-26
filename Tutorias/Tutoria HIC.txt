@@ -22,3 +22,9 @@ Enfocarme en HIC_noNATURAL, saber qué hábitats son
 En qué condiciones se han perdido hábitats
 Dónde se han perdido más hábitats (costa-interior, ENP-noENP e interacción)
 Variable respuesta: Presencia HIC (0/1), por ejemplo.
+
+26-09-2024_______________________________________________________________________
+analizar causas... Modelo con causas = USOS ACTUALES
+matriz de doble entrada y poner en negrita lo significativo. Poner colores por categoria general (zonas humedas azules, etc.)
+De los que han cambiado, qué hay ahora
+hacerla con categorías generales de los usos del suelo

@@ -22,12 +22,14 @@ datos$CODIGO_UE3 <- lapply(datos$CODIGO_UE3, as.factor)
 datos$CODIGO_UE4 <- lapply(datos$CODIGO_UE4, as.factor)
 datos[18:33] <- lapply(datos[18:33], as.factor)
 datos$PRESENCIA_ZONA_NAT<- lapply(datos$PRESENCIA_ZONA_NAT, as.factor)
+datos$SIOSE_T_ES<- lapply(datos$SIOSE_T_ES, as.factor)
 # sapply(datos[1:37], function(x) length(unique(x))) #nº de niveles
 
 # Deshacer lista
 datos$CODIGO_UE2<-unlist(datos$CODIGO_UE2)
 datos$CODIGO_UE3<-unlist(datos$CODIGO_UE3)
 datos$CODIGO_UE4<-unlist(datos$CODIGO_UE4)
+datos$SIOSE_T_ES<- unlist(datos$SIOSE_T_ES)
 datos$PRESENCIA_ZONA_NAT<-unlist(datos$PRESENCIA_ZONA_NAT)
 
 pie(table(datos$GRUPO_TIPO))
@@ -63,9 +65,14 @@ Anova(modelo_glm2_2) #tarda mucho
 #M_ZN_T_ES                                        305    8     <2e-16 ***
 #No hay interacción
 
-modelo_glm3 <- glm(PRESENCIA_HIC~datos$MUCVA_T_ES*SIOSE_T_ES, contrasts=list(MUCVA_T_ES=contr.sum,SIOSE_T_ES=contr.sum), family = binomial, data=datos)
-Anova(modelo_glm3)
+modelo_glm3 <- glm(PRESENCIA_HIC~datos$MUCVA_C_ES*SIOSE_C_ES, contrasts=list(MUCVA_T_ES=contr.sum,SIOSE_T_ES=contr.sum), family = binomial, data=datos)
+summary(modelo_glm3)
 
+modelo_glm4 <- glm(PRESENCIA_HIC~datos$MUCVA_C_ES+SIOSE_C_ES, family = binomial, data=datos)
+summary(modelo_glm4)
+
+modelo_glm5 <- glm(PRESENCIA_HIC~datos$SIOSE_C_ES, family = binomial, data=datos)
+summary(modelo_glm5)
 
 # Tukey
 datos2<-datos[-5]
