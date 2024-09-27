@@ -76,6 +76,13 @@ frecuencia_cambio_usos <- datos_cambios %>%
   group_by(MUCVA_C_GE, SIOSE_C_GE) %>%
   count()
 View(as.data.frame(frecuencia_cambio_usos))
+
+frecuencia_usos_HUM <- datos %>% #OJO, que lo he cambiado: datos_cambios -> datos
+  group_by(NOMBRE_HUM,MUCVA_C_ES,MUCVA_T_ES, SIOSE_C_ES, SIOSE_T_ES) %>%
+  count()
+View(as.data.frame(frecuencia_usos_HUM))
+write.table(frecuencia_usos_HUM, file="frecuencia_usos_HUM.txt", sep="\t", row.names=TRUE) 
+
 #########
 #########
 #########
@@ -112,7 +119,7 @@ summary(Tukey3)
 
 
 
-
+# Gráficos
 pie(table(datos$GRUPO_TIPO))
 pie(table(datos$PRESENCIA_ZONA_NAT))
 pie(table(datos$PRESENCIA_HIC))

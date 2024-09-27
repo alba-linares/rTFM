@@ -37,3 +37,7 @@ for (i in 1:length(r_list)) {
 PUNTOS HIC: Quizás haya que tener en cuenta si están en zona marina o no
 
 Me he quedado a medias poniendo el nombre del humedal que coincide con MUCVA_zonas naturales, porque hay poligonos compartidos entre varios humedales y no sé cortarlos
+
+27-09-2024
+Sigo con el calculo del area de los usos del suelo, ahora tengo que analizarlo en R, ¿cómo lo hago?
+También tengo que comparar los cambios de usos del suelo por buffer/humedal
