@@ -1,0 +1,296 @@
+"NOMBRE_HUM"	"MUCVA_C_ES"	"MUCVA_T_ES"	"SIOSE_C_ES"	"SIOSE_T_ES"	"n"
+"1"	"Albufera Honda"	"17"	"Invernaderos"	"2"	"Zonas industriales y comerciales"	1
+"2"	"Albufera Honda"	"17"	"Invernaderos"	"3"	"Infraestructuras de comunicaciones"	1
+"3"	"Albufera Honda"	"17"	"Invernaderos"	"6"	"Zonas verdes y espacios de ocio"	1
+"4"	"Albufera Honda"	"17"	"Invernaderos"	"17"	"Invernaderos"	13
+"5"	"Albufera Honda"	"17"	"Invernaderos"	"20"	"Vegetacion natural"	1
+"6"	"Albufera Honda"	"20"	"Vegetacion natural"	"20"	"Vegetacion natural"	2
+"7"	"Albufera Nueva"	"1"	"Tejido urbano"	"15"	"Lenoso regadio"	1
+"8"	"Albufera Nueva"	"1"	"Tejido urbano"	"17"	"Invernaderos"	1
+"9"	"Albufera Nueva"	"1"	"Tejido urbano"	"22"	"Playas, dunas y arenales"	2
+"10"	"Albufera Nueva"	"7"	"Marisma"	"3"	"Infraestructuras de comunicaciones"	1
+"11"	"Albufera Nueva"	"7"	"Marisma"	"11"	"Vegetacion riparia"	5
+"12"	"Albufera Nueva"	"7"	"Marisma"	"12"	"Lagos y lagunas"	2
+"13"	"Albufera Nueva"	"7"	"Marisma"	"17"	"Invernaderos"	2
+"14"	"Albufera Nueva"	"9"	"Mares y oceanos"	"9"	"Mares y oceanos"	11
+"15"	"Albufera Nueva"	"12"	"Lagos y lagunas"	"11"	"Vegetacion riparia"	1
+"16"	"Albufera Nueva"	"12"	"Lagos y lagunas"	"12"	"Lagos y lagunas"	20
+"17"	"Albufera Nueva"	"17"	"Invernaderos"	"3"	"Infraestructuras de comunicaciones"	4
+"18"	"Albufera Nueva"	"17"	"Invernaderos"	"11"	"Vegetacion riparia"	3
+"19"	"Albufera Nueva"	"17"	"Invernaderos"	"17"	"Invernaderos"	34
+"20"	"Albufera Nueva"	"17"	"Invernaderos"	"20"	"Vegetacion natural"	2
+"21"	"Albufera Nueva"	"17"	"Invernaderos"	"22"	"Playas, dunas y arenales"	4
+"22"	"Albufera Nueva"	"20"	"Vegetacion natural"	"3"	"Infraestructuras de comunicaciones"	2
+"23"	"Albufera Nueva"	"20"	"Vegetacion natural"	"11"	"Vegetacion riparia"	1
+"24"	"Albufera Nueva"	"20"	"Vegetacion natural"	"13"	"Masas de agua artificial"	1
+"25"	"Albufera Nueva"	"20"	"Vegetacion natural"	"17"	"Invernaderos"	3
+"26"	"Albufera Nueva"	"20"	"Vegetacion natural"	"20"	"Vegetacion natural"	4
+"27"	"Albufera Nueva"	"22"	"Playas, dunas y arenales"	"22"	"Playas, dunas y arenales"	2
+"28"	"Barranco del Agua"	"18"	"Cultivos herbaceos"	"18"	"Cultivos herbaceos"	5
+"29"	"Barranco del Agua"	"19"	"Areas agrarias heterogeneas"	"18"	"Cultivos herbaceos"	4
+"30"	"Barranco del Agua"	"19"	"Areas agrarias heterogeneas"	"20"	"Vegetacion natural"	10
+"31"	"Barranco del Agua"	"20"	"Vegetacion natural"	"11"	"Vegetacion riparia"	1
+"32"	"Barranco del Agua"	"20"	"Vegetacion natural"	"18"	"Cultivos herbaceos"	1
+"33"	"Barranco del Agua"	"20"	"Vegetacion natural"	"20"	"Vegetacion natural"	33
+"34"	"Barranco del Agua"	"20"	"Vegetacion natural"	"23"	"Areas con fuertes procesos erosivos"	3
+"35"	"Canada de las Norias"	"1"	"Tejido urbano"	"2"	"Zonas industriales y comerciales"	1
+"36"	"Canada de las Norias"	"1"	"Tejido urbano"	"19"	"Areas agrarias heterogeneas"	2
+"37"	"Canada de las Norias"	"2"	"Zonas industriales y comerciales"	"1"	"Tejido urbano"	6
+"38"	"Canada de las Norias"	"2"	"Zonas industriales y comerciales"	"11"	"Vegetacion riparia"	1
+"39"	"Canada de las Norias"	"2"	"Zonas industriales y comerciales"	"20"	"Vegetacion natural"	1
+"40"	"Canada de las Norias"	"2"	"Zonas industriales y comerciales"	"23"	"Areas con fuertes procesos erosivos"	1
+"41"	"Canada de las Norias"	"17"	"Invernaderos"	"1"	"Tejido urbano"	1
+"42"	"Canada de las Norias"	"17"	"Invernaderos"	"3"	"Infraestructuras de comunicaciones"	2
+"43"	"Canada de las Norias"	"17"	"Invernaderos"	"11"	"Vegetacion riparia"	2
+"44"	"Canada de las Norias"	"17"	"Invernaderos"	"12"	"Lagos y lagunas"	4
+"45"	"Canada de las Norias"	"17"	"Invernaderos"	"17"	"Invernaderos"	50
+"46"	"Canada de las Norias"	"17"	"Invernaderos"	"20"	"Vegetacion natural"	8
+"47"	"Canada de las Norias"	"17"	"Invernaderos"	"23"	"Areas con fuertes procesos erosivos"	7
+"48"	"Canada de las Norias"	"18"	"Cultivos herbaceos"	"1"	"Tejido urbano"	3
+"49"	"Canada de las Norias"	"18"	"Cultivos herbaceos"	"2"	"Zonas industriales y comerciales"	1
+"50"	"Canada de las Norias"	"18"	"Cultivos herbaceos"	"3"	"Infraestructuras de comunicaciones"	2
+"51"	"Canada de las Norias"	"18"	"Cultivos herbaceos"	"11"	"Vegetacion riparia"	2
+"52"	"Canada de las Norias"	"18"	"Cultivos herbaceos"	"12"	"Lagos y lagunas"	28
+"53"	"Canada de las Norias"	"18"	"Cultivos herbaceos"	"17"	"Invernaderos"	2
+"54"	"Canada de las Norias"	"18"	"Cultivos herbaceos"	"19"	"Areas agrarias heterogeneas"	1
+"55"	"Canada de las Norias"	"19"	"Areas agrarias heterogeneas"	"15"	"Lenoso regadio"	1
+"56"	"Canada de las Norias"	"19"	"Areas agrarias heterogeneas"	"17"	"Invernaderos"	4
+"57"	"Canada de las Norias"	"19"	"Areas agrarias heterogeneas"	"20"	"Vegetacion natural"	3
+"58"	"Canada de las Norias"	"20"	"Vegetacion natural"	"3"	"Infraestructuras de comunicaciones"	1
+"59"	"Canada de las Norias"	"20"	"Vegetacion natural"	"17"	"Invernaderos"	2
+"60"	"Canada de las Norias"	"20"	"Vegetacion natural"	"20"	"Vegetacion natural"	2
+"61"	"Canada de las Norias"	"24"	"Zonas en construccion"	"1"	"Tejido urbano"	2
+"62"	"Charcones de Punta Entinas"	"7"	"Marisma"	"7"	"Marisma"	2
+"63"	"Charcones de Punta Entinas"	"7"	"Marisma"	"11"	"Vegetacion riparia"	3
+"64"	"Charcones de Punta Entinas"	"7"	"Marisma"	"12"	"Lagos y lagunas"	7
+"65"	"Charcones de Punta Entinas"	"7"	"Marisma"	"22"	"Playas, dunas y arenales"	1
+"66"	"Charcones de Punta Entinas"	"9"	"Mares y oceanos"	"9"	"Mares y oceanos"	13
+"67"	"Charcones de Punta Entinas"	"9"	"Mares y oceanos"	"22"	"Playas, dunas y arenales"	6
+"68"	"Charcones de Punta Entinas"	"12"	"Lagos y lagunas"	"12"	"Lagos y lagunas"	31
+"69"	"Charcones de Punta Entinas"	"17"	"Invernaderos"	"2"	"Zonas industriales y comerciales"	1
+"70"	"Charcones de Punta Entinas"	"17"	"Invernaderos"	"3"	"Infraestructuras de comunicaciones"	1
+"71"	"Charcones de Punta Entinas"	"17"	"Invernaderos"	"17"	"Invernaderos"	24
+"72"	"Charcones de Punta Entinas"	"17"	"Invernaderos"	"20"	"Vegetacion natural"	1
+"73"	"Charcones de Punta Entinas"	"17"	"Invernaderos"	"22"	"Playas, dunas y arenales"	1
+"74"	"Charcones de Punta Entinas"	"18"	"Cultivos herbaceos"	"11"	"Vegetacion riparia"	1
+"75"	"Charcones de Punta Entinas"	"18"	"Cultivos herbaceos"	"22"	"Playas, dunas y arenales"	1
+"76"	"Charcones de Punta Entinas"	"19"	"Areas agrarias heterogeneas"	"11"	"Vegetacion riparia"	1
+"77"	"Charcones de Punta Entinas"	"19"	"Areas agrarias heterogeneas"	"20"	"Vegetacion natural"	4
+"78"	"Charcones de Punta Entinas"	"19"	"Areas agrarias heterogeneas"	"23"	"Areas con fuertes procesos erosivos"	2
+"79"	"Charcones de Punta Entinas"	"20"	"Vegetacion natural"	"7"	"Marisma"	6
+"80"	"Charcones de Punta Entinas"	"20"	"Vegetacion natural"	"11"	"Vegetacion riparia"	9
+"81"	"Charcones de Punta Entinas"	"20"	"Vegetacion natural"	"12"	"Lagos y lagunas"	2
+"82"	"Charcones de Punta Entinas"	"20"	"Vegetacion natural"	"17"	"Invernaderos"	2
+"83"	"Charcones de Punta Entinas"	"20"	"Vegetacion natural"	"20"	"Vegetacion natural"	14
+"84"	"Charcones de Punta Entinas"	"20"	"Vegetacion natural"	"22"	"Playas, dunas y arenales"	63
+"85"	"Charcones de Punta Entinas"	"20"	"Vegetacion natural"	"23"	"Areas con fuertes procesos erosivos"	3
+"86"	"Charcones de Punta Entinas"	"22"	"Playas, dunas y arenales"	"9"	"Mares y oceanos"	1
+"87"	"Charcones de Punta Entinas"	"22"	"Playas, dunas y arenales"	"22"	"Playas, dunas y arenales"	8
+"88"	"Charcones de Punta Entinas"	"23"	"Areas con fuertes procesos erosivos"	"5"	"Zonas mineras, escombreras o de vertido"	1
+"89"	"Charcones de Punta Entinas"	"23"	"Areas con fuertes procesos erosivos"	"20"	"Vegetacion natural"	1
+"90"	"Charcones de Punta Entinas"	"23"	"Areas con fuertes procesos erosivos"	"23"	"Areas con fuertes procesos erosivos"	1
+"91"	"Cola del Embalse del NegratiÃ‚Â­n"	"1"	"Tejido urbano"	"13"	"Masas de agua artificial"	1
+"92"	"Cola del Embalse del NegratiÃ‚Â­n"	"11"	"Vegetacion riparia"	"11"	"Vegetacion riparia"	5
+"93"	"Cola del Embalse del NegratiÃ‚Â­n"	"11"	"Vegetacion riparia"	"13"	"Masas de agua artificial"	2
+"94"	"Cola del Embalse del NegratiÃ‚Â­n"	"14"	"Lenoso secano"	"13"	"Masas de agua artificial"	2
+"95"	"Cola del Embalse del NegratiÃ‚Â­n"	"14"	"Lenoso secano"	"14"	"Lenoso secano"	2
+"96"	"Cola del Embalse del NegratiÃ‚Â­n"	"14"	"Lenoso secano"	"20"	"Vegetacion natural"	1
+"97"	"Cola del Embalse del NegratiÃ‚Â­n"	"15"	"Lenoso regadio"	"14"	"Lenoso secano"	9
+"98"	"Cola del Embalse del NegratiÃ‚Â­n"	"18"	"Cultivos herbaceos"	"11"	"Vegetacion riparia"	6
+"99"	"Cola del Embalse del NegratiÃ‚Â­n"	"18"	"Cultivos herbaceos"	"13"	"Masas de agua artificial"	7
+"100"	"Cola del Embalse del NegratiÃ‚Â­n"	"18"	"Cultivos herbaceos"	"14"	"Lenoso secano"	3
+"101"	"Cola del Embalse del NegratiÃ‚Â­n"	"18"	"Cultivos herbaceos"	"15"	"Lenoso regadio"	1
+"102"	"Cola del Embalse del NegratiÃ‚Â­n"	"18"	"Cultivos herbaceos"	"18"	"Cultivos herbaceos"	4
+"103"	"Cola del Embalse del NegratiÃ‚Â­n"	"18"	"Cultivos herbaceos"	"20"	"Vegetacion natural"	5
+"104"	"Cola del Embalse del NegratiÃ‚Â­n"	"19"	"Areas agrarias heterogeneas"	"3"	"Infraestructuras de comunicaciones"	1
+"105"	"Cola del Embalse del NegratiÃ‚Â­n"	"19"	"Areas agrarias heterogeneas"	"11"	"Vegetacion riparia"	11
+"106"	"Cola del Embalse del NegratiÃ‚Â­n"	"19"	"Areas agrarias heterogeneas"	"13"	"Masas de agua artificial"	23
+"107"	"Cola del Embalse del NegratiÃ‚Â­n"	"19"	"Areas agrarias heterogeneas"	"14"	"Lenoso secano"	18
+"108"	"Cola del Embalse del NegratiÃ‚Â­n"	"19"	"Areas agrarias heterogeneas"	"15"	"Lenoso regadio"	2
+"109"	"Cola del Embalse del NegratiÃ‚Â­n"	"19"	"Areas agrarias heterogeneas"	"18"	"Cultivos herbaceos"	9
+"110"	"Cola del Embalse del NegratiÃ‚Â­n"	"19"	"Areas agrarias heterogeneas"	"20"	"Vegetacion natural"	6
+"111"	"Cola del Embalse del NegratiÃ‚Â­n"	"19"	"Areas agrarias heterogeneas"	"23"	"Areas con fuertes procesos erosivos"	2
+"112"	"Cola del Embalse del NegratiÃ‚Â­n"	"20"	"Vegetacion natural"	"3"	"Infraestructuras de comunicaciones"	1
+"113"	"Cola del Embalse del NegratiÃ‚Â­n"	"20"	"Vegetacion natural"	"11"	"Vegetacion riparia"	2
+"114"	"Cola del Embalse del NegratiÃ‚Â­n"	"20"	"Vegetacion natural"	"13"	"Masas de agua artificial"	5
+"115"	"Cola del Embalse del NegratiÃ‚Â­n"	"20"	"Vegetacion natural"	"14"	"Lenoso secano"	3
+"116"	"Cola del Embalse del NegratiÃ‚Â­n"	"20"	"Vegetacion natural"	"18"	"Cultivos herbaceos"	1
+"117"	"Cola del Embalse del NegratiÃ‚Â­n"	"20"	"Vegetacion natural"	"20"	"Vegetacion natural"	48
+"118"	"Cola del Embalse del NegratiÃ‚Â­n"	"20"	"Vegetacion natural"	"23"	"Areas con fuertes procesos erosivos"	16
+"119"	"Cola del Embalse del NegratiÃ‚Â­n"	"24"	"Zonas en construccion"	"20"	"Vegetacion natural"	1
+"120"	"Humedales de Baza"	"18"	"Cultivos herbaceos"	"13"	"Masas de agua artificial"	1
+"121"	"Humedales de Baza"	"18"	"Cultivos herbaceos"	"14"	"Lenoso secano"	6
+"122"	"Humedales de Baza"	"18"	"Cultivos herbaceos"	"18"	"Cultivos herbaceos"	10
+"123"	"Humedales de Baza"	"18"	"Cultivos herbaceos"	"20"	"Vegetacion natural"	1
+"124"	"Humedales de Baza"	"18"	"Cultivos herbaceos"	"23"	"Areas con fuertes procesos erosivos"	3
+"125"	"Humedales de Baza"	"19"	"Areas agrarias heterogeneas"	"3"	"Infraestructuras de comunicaciones"	2
+"126"	"Humedales de Baza"	"19"	"Areas agrarias heterogeneas"	"14"	"Lenoso secano"	18
+"127"	"Humedales de Baza"	"19"	"Areas agrarias heterogeneas"	"15"	"Lenoso regadio"	2
+"128"	"Humedales de Baza"	"19"	"Areas agrarias heterogeneas"	"18"	"Cultivos herbaceos"	26
+"129"	"Humedales de Baza"	"19"	"Areas agrarias heterogeneas"	"19"	"Areas agrarias heterogeneas"	2
+"130"	"Humedales de Baza"	"19"	"Areas agrarias heterogeneas"	"20"	"Vegetacion natural"	4
+"131"	"Humedales de Baza"	"19"	"Areas agrarias heterogeneas"	"23"	"Areas con fuertes procesos erosivos"	1
+"132"	"Humedales de Baza"	"20"	"Vegetacion natural"	"14"	"Lenoso secano"	1
+"133"	"Humedales de Baza"	"20"	"Vegetacion natural"	"15"	"Lenoso regadio"	1
+"134"	"Humedales de Baza"	"20"	"Vegetacion natural"	"18"	"Cultivos herbaceos"	6
+"135"	"Humedales de Baza"	"20"	"Vegetacion natural"	"20"	"Vegetacion natural"	10
+"136"	"Laguna de la Gravera"	"5"	"Zonas mineras, escombreras o de vertido"	"1"	"Tejido urbano"	10
+"137"	"Laguna de la Gravera"	"8"	"Salinas"	"1"	"Tejido urbano"	1
+"138"	"Laguna de la Gravera"	"8"	"Salinas"	"3"	"Infraestructuras de comunicaciones"	1
+"139"	"Laguna de la Gravera"	"8"	"Salinas"	"7"	"Marisma"	1
+"140"	"Laguna de la Gravera"	"8"	"Salinas"	"8"	"Salinas"	33
+"141"	"Laguna de la Gravera"	"20"	"Vegetacion natural"	"1"	"Tejido urbano"	2
+"142"	"Laguna de la Gravera"	"20"	"Vegetacion natural"	"3"	"Infraestructuras de comunicaciones"	3
+"143"	"Laguna de la Gravera"	"20"	"Vegetacion natural"	"8"	"Salinas"	6
+"144"	"Laguna de la Gravera"	"20"	"Vegetacion natural"	"12"	"Lagos y lagunas"	2
+"145"	"Laguna de la Gravera"	"20"	"Vegetacion natural"	"13"	"Masas de agua artificial"	3
+"146"	"Laguna de la Gravera"	"20"	"Vegetacion natural"	"20"	"Vegetacion natural"	16
+"147"	"Laguna de la Gravera"	"20"	"Vegetacion natural"	"23"	"Areas con fuertes procesos erosivos"	3
+"148"	"Laguna de la Gravera"	"24"	"Zonas en construccion"	"1"	"Tejido urbano"	1
+"149"	"Laguna de la Gravera"	"24"	"Zonas en construccion"	"6"	"Zonas verdes y espacios de ocio"	11
+"150"	"Rambla Morales"	"9"	"Mares y oceanos"	"9"	"Mares y oceanos"	8
+"151"	"Rambla Morales"	"11"	"Vegetacion riparia"	"7"	"Marisma"	2
+"152"	"Rambla Morales"	"11"	"Vegetacion riparia"	"10"	"Rios, cauces o ramblas"	3
+"153"	"Rambla Morales"	"11"	"Vegetacion riparia"	"11"	"Vegetacion riparia"	1
+"154"	"Rambla Morales"	"18"	"Cultivos herbaceos"	"6"	"Zonas verdes y espacios de ocio"	1
+"155"	"Rambla Morales"	"18"	"Cultivos herbaceos"	"17"	"Invernaderos"	2
+"156"	"Rambla Morales"	"18"	"Cultivos herbaceos"	"22"	"Playas, dunas y arenales"	2
+"157"	"Rambla Morales"	"20"	"Vegetacion natural"	"22"	"Playas, dunas y arenales"	18
+"158"	"Rambla Morales"	"22"	"Playas, dunas y arenales"	"7"	"Marisma"	1
+"159"	"Rambla Morales"	"22"	"Playas, dunas y arenales"	"22"	"Playas, dunas y arenales"	16
+"160"	"RiÃ‚Â­o Antas"	"1"	"Tejido urbano"	"1"	"Tejido urbano"	6
+"161"	"RiÃ‚Â­o Antas"	"1"	"Tejido urbano"	"19"	"Areas agrarias heterogeneas"	1
+"162"	"RiÃ‚Â­o Antas"	"9"	"Mares y oceanos"	"9"	"Mares y oceanos"	9
+"163"	"RiÃ‚Â­o Antas"	"11"	"Vegetacion riparia"	"7"	"Marisma"	2
+"164"	"RiÃ‚Â­o Antas"	"11"	"Vegetacion riparia"	"15"	"Lenoso regadio"	1
+"165"	"RiÃ‚Â­o Antas"	"11"	"Vegetacion riparia"	"20"	"Vegetacion natural"	1
+"166"	"RiÃ‚Â­o Antas"	"18"	"Cultivos herbaceos"	"1"	"Tejido urbano"	2
+"167"	"RiÃ‚Â­o Antas"	"18"	"Cultivos herbaceos"	"3"	"Infraestructuras de comunicaciones"	1
+"168"	"RiÃ‚Â­o Antas"	"18"	"Cultivos herbaceos"	"5"	"Zonas mineras, escombreras o de vertido"	1
+"169"	"RiÃ‚Â­o Antas"	"18"	"Cultivos herbaceos"	"15"	"Lenoso regadio"	2
+"170"	"RiÃ‚Â­o Antas"	"18"	"Cultivos herbaceos"	"18"	"Cultivos herbaceos"	17
+"171"	"RiÃ‚Â­o Antas"	"18"	"Cultivos herbaceos"	"19"	"Areas agrarias heterogeneas"	1
+"172"	"RiÃ‚Â­o Antas"	"18"	"Cultivos herbaceos"	"20"	"Vegetacion natural"	4
+"173"	"RiÃ‚Â­o Antas"	"18"	"Cultivos herbaceos"	"23"	"Areas con fuertes procesos erosivos"	2
+"174"	"RiÃ‚Â­o Antas"	"19"	"Areas agrarias heterogeneas"	"15"	"Lenoso regadio"	2
+"175"	"RiÃ‚Â­o Antas"	"19"	"Areas agrarias heterogeneas"	"18"	"Cultivos herbaceos"	1
+"176"	"RiÃ‚Â­o Antas"	"19"	"Areas agrarias heterogeneas"	"20"	"Vegetacion natural"	2
+"177"	"RiÃ‚Â­o Antas"	"20"	"Vegetacion natural"	"1"	"Tejido urbano"	6
+"178"	"RiÃ‚Â­o Antas"	"20"	"Vegetacion natural"	"3"	"Infraestructuras de comunicaciones"	1
+"179"	"RiÃ‚Â­o Antas"	"20"	"Vegetacion natural"	"6"	"Zonas verdes y espacios de ocio"	1
+"180"	"RiÃ‚Â­o Antas"	"20"	"Vegetacion natural"	"11"	"Vegetacion riparia"	1
+"181"	"RiÃ‚Â­o Antas"	"20"	"Vegetacion natural"	"18"	"Cultivos herbaceos"	1
+"182"	"RiÃ‚Â­o Antas"	"20"	"Vegetacion natural"	"20"	"Vegetacion natural"	8
+"183"	"RiÃ‚Â­o Antas"	"20"	"Vegetacion natural"	"23"	"Areas con fuertes procesos erosivos"	3
+"184"	"RiÃ‚Â­o Antas"	"22"	"Playas, dunas y arenales"	"7"	"Marisma"	1
+"185"	"RiÃ‚Â­o Antas"	"22"	"Playas, dunas y arenales"	"22"	"Playas, dunas y arenales"	3
+"186"	"RiÃ‚Â­o Antas"	"24"	"Zonas en construccion"	"1"	"Tejido urbano"	1
+"187"	"Ribera de la Algaida"	"2"	"Zonas industriales y comerciales"	"10"	"Rios, cauces o ramblas"	1
+"188"	"Ribera de la Algaida"	"3"	"Infraestructuras de comunicaciones"	"6"	"Zonas verdes y espacios de ocio"	1
+"189"	"Ribera de la Algaida"	"3"	"Infraestructuras de comunicaciones"	"23"	"Areas con fuertes procesos erosivos"	1
+"190"	"Ribera de la Algaida"	"8"	"Salinas"	"3"	"Infraestructuras de comunicaciones"	1
+"191"	"Ribera de la Algaida"	"8"	"Salinas"	"8"	"Salinas"	12
+"192"	"Ribera de la Algaida"	"9"	"Mares y oceanos"	"9"	"Mares y oceanos"	27
+"193"	"Ribera de la Algaida"	"17"	"Invernaderos"	"17"	"Invernaderos"	3
+"194"	"Ribera de la Algaida"	"18"	"Cultivos herbaceos"	"1"	"Tejido urbano"	2
+"195"	"Ribera de la Algaida"	"18"	"Cultivos herbaceos"	"3"	"Infraestructuras de comunicaciones"	2
+"196"	"Ribera de la Algaida"	"18"	"Cultivos herbaceos"	"6"	"Zonas verdes y espacios de ocio"	2
+"197"	"Ribera de la Algaida"	"18"	"Cultivos herbaceos"	"17"	"Invernaderos"	4
+"198"	"Ribera de la Algaida"	"18"	"Cultivos herbaceos"	"20"	"Vegetacion natural"	6
+"199"	"Ribera de la Algaida"	"18"	"Cultivos herbaceos"	"22"	"Playas, dunas y arenales"	5
+"200"	"Ribera de la Algaida"	"18"	"Cultivos herbaceos"	"23"	"Areas con fuertes procesos erosivos"	6
+"201"	"Ribera de la Algaida"	"20"	"Vegetacion natural"	"11"	"Vegetacion riparia"	1
+"202"	"Ribera de la Algaida"	"20"	"Vegetacion natural"	"20"	"Vegetacion natural"	6
+"203"	"Ribera de la Algaida"	"20"	"Vegetacion natural"	"21"	"Vegetacion con eucaliptos"	1
+"204"	"Ribera de la Algaida"	"20"	"Vegetacion natural"	"22"	"Playas, dunas y arenales"	9
+"205"	"Ribera de la Algaida"	"22"	"Playas, dunas y arenales"	"9"	"Mares y oceanos"	1
+"206"	"Ribera de la Algaida"	"22"	"Playas, dunas y arenales"	"22"	"Playas, dunas y arenales"	1
+"207"	"Ribera de la Algaida"	"22"	"Playas, dunas y arenales"	"23"	"Areas con fuertes procesos erosivos"	1
+"208"	"Ribera de la Algaida"	"23"	"Areas con fuertes procesos erosivos"	"23"	"Areas con fuertes procesos erosivos"	1
+"209"	"Ribera de la Algaida"	"24"	"Zonas en construccion"	"2"	"Zonas industriales y comerciales"	3
+"210"	"Saladar del Margen"	"18"	"Cultivos herbaceos"	"3"	"Infraestructuras de comunicaciones"	1
+"211"	"Saladar del Margen"	"18"	"Cultivos herbaceos"	"14"	"Lenoso secano"	2
+"212"	"Saladar del Margen"	"18"	"Cultivos herbaceos"	"18"	"Cultivos herbaceos"	6
+"213"	"Saladar del Margen"	"18"	"Cultivos herbaceos"	"20"	"Vegetacion natural"	8
+"214"	"Saladar del Margen"	"19"	"Areas agrarias heterogeneas"	"11"	"Vegetacion riparia"	1
+"215"	"Saladar del Margen"	"19"	"Areas agrarias heterogeneas"	"18"	"Cultivos herbaceos"	2
+"216"	"Saladar del Margen"	"19"	"Areas agrarias heterogeneas"	"20"	"Vegetacion natural"	2
+"217"	"Saladar del Margen"	"20"	"Vegetacion natural"	"18"	"Cultivos herbaceos"	2
+"218"	"Saladar del Margen"	"20"	"Vegetacion natural"	"20"	"Vegetacion natural"	71
+"219"	"Salar de los Canos"	"1"	"Tejido urbano"	"1"	"Tejido urbano"	2
+"220"	"Salar de los Canos"	"1"	"Tejido urbano"	"15"	"Lenoso regadio"	2
+"221"	"Salar de los Canos"	"1"	"Tejido urbano"	"18"	"Cultivos herbaceos"	1
+"222"	"Salar de los Canos"	"1"	"Tejido urbano"	"20"	"Vegetacion natural"	1
+"223"	"Salar de los Canos"	"1"	"Tejido urbano"	"21"	"Vegetacion con eucaliptos"	1
+"224"	"Salar de los Canos"	"1"	"Tejido urbano"	"23"	"Areas con fuertes procesos erosivos"	4
+"225"	"Salar de los Canos"	"18"	"Cultivos herbaceos"	"1"	"Tejido urbano"	9
+"226"	"Salar de los Canos"	"18"	"Cultivos herbaceos"	"3"	"Infraestructuras de comunicaciones"	2
+"227"	"Salar de los Canos"	"18"	"Cultivos herbaceos"	"6"	"Zonas verdes y espacios de ocio"	1
+"228"	"Salar de los Canos"	"18"	"Cultivos herbaceos"	"20"	"Vegetacion natural"	9
+"229"	"Salar de los Canos"	"18"	"Cultivos herbaceos"	"23"	"Areas con fuertes procesos erosivos"	6
+"230"	"Salar de los Canos"	"19"	"Areas agrarias heterogeneas"	"1"	"Tejido urbano"	2
+"231"	"Salar de los Canos"	"20"	"Vegetacion natural"	"1"	"Tejido urbano"	17
+"232"	"Salar de los Canos"	"20"	"Vegetacion natural"	"3"	"Infraestructuras de comunicaciones"	6
+"233"	"Salar de los Canos"	"20"	"Vegetacion natural"	"14"	"Lenoso secano"	1
+"234"	"Salar de los Canos"	"20"	"Vegetacion natural"	"20"	"Vegetacion natural"	13
+"235"	"Salar de los Canos"	"20"	"Vegetacion natural"	"22"	"Playas, dunas y arenales"	2
+"236"	"Salar de los Canos"	"20"	"Vegetacion natural"	"23"	"Areas con fuertes procesos erosivos"	2
+"237"	"Salar de los Canos"	"21"	"Vegetacion con eucaliptos"	"20"	"Vegetacion natural"	1
+"238"	"Salar de los Canos"	"21"	"Vegetacion con eucaliptos"	"23"	"Areas con fuertes procesos erosivos"	1
+"239"	"Salar de los Canos"	"24"	"Zonas en construccion"	"3"	"Infraestructuras de comunicaciones"	1
+"240"	"Salar de los Canos"	"24"	"Zonas en construccion"	"23"	"Areas con fuertes procesos erosivos"	2
+"241"	"Salinas de Cabo de Gata"	"2"	"Zonas industriales y comerciales"	"1"	"Tejido urbano"	4
+"242"	"Salinas de Cabo de Gata"	"8"	"Salinas"	"2"	"Zonas industriales y comerciales"	3
+"243"	"Salinas de Cabo de Gata"	"8"	"Salinas"	"8"	"Salinas"	76
+"244"	"Salinas de Cabo de Gata"	"9"	"Mares y oceanos"	"9"	"Mares y oceanos"	44
+"245"	"Salinas de Cabo de Gata"	"18"	"Cultivos herbaceos"	"3"	"Infraestructuras de comunicaciones"	1
+"246"	"Salinas de Cabo de Gata"	"18"	"Cultivos herbaceos"	"7"	"Marisma"	1
+"247"	"Salinas de Cabo de Gata"	"18"	"Cultivos herbaceos"	"11"	"Vegetacion riparia"	1
+"248"	"Salinas de Cabo de Gata"	"18"	"Cultivos herbaceos"	"13"	"Masas de agua artificial"	1
+"249"	"Salinas de Cabo de Gata"	"18"	"Cultivos herbaceos"	"17"	"Invernaderos"	6
+"250"	"Salinas de Cabo de Gata"	"18"	"Cultivos herbaceos"	"18"	"Cultivos herbaceos"	15
+"251"	"Salinas de Cabo de Gata"	"18"	"Cultivos herbaceos"	"20"	"Vegetacion natural"	13
+"252"	"Salinas de Cabo de Gata"	"18"	"Cultivos herbaceos"	"23"	"Areas con fuertes procesos erosivos"	1
+"253"	"Salinas de Cabo de Gata"	"19"	"Areas agrarias heterogeneas"	"20"	"Vegetacion natural"	5
+"254"	"Salinas de Cabo de Gata"	"20"	"Vegetacion natural"	"3"	"Infraestructuras de comunicaciones"	2
+"255"	"Salinas de Cabo de Gata"	"20"	"Vegetacion natural"	"7"	"Marisma"	52
+"256"	"Salinas de Cabo de Gata"	"20"	"Vegetacion natural"	"8"	"Salinas"	11
+"257"	"Salinas de Cabo de Gata"	"20"	"Vegetacion natural"	"20"	"Vegetacion natural"	25
+"258"	"Salinas de Cabo de Gata"	"20"	"Vegetacion natural"	"22"	"Playas, dunas y arenales"	41
+"259"	"Salinas de Cabo de Gata"	"22"	"Playas, dunas y arenales"	"22"	"Playas, dunas y arenales"	12
+"260"	"Salinas de Cabo de Gata"	"22"	"Playas, dunas y arenales"	"23"	"Areas con fuertes procesos erosivos"	1
+"261"	"Salinas de Cabo de Gata"	"24"	"Zonas en construccion"	"1"	"Tejido urbano"	4
+"262"	"Salinas de Cerrillos"	"2"	"Zonas industriales y comerciales"	"23"	"Areas con fuertes procesos erosivos"	1
+"263"	"Salinas de Cerrillos"	"5"	"Zonas mineras, escombreras o de vertido"	"1"	"Tejido urbano"	3
+"264"	"Salinas de Cerrillos"	"5"	"Zonas mineras, escombreras o de vertido"	"6"	"Zonas verdes y espacios de ocio"	1
+"265"	"Salinas de Cerrillos"	"5"	"Zonas mineras, escombreras o de vertido"	"8"	"Salinas"	2
+"266"	"Salinas de Cerrillos"	"7"	"Marisma"	"3"	"Infraestructuras de comunicaciones"	1
+"267"	"Salinas de Cerrillos"	"7"	"Marisma"	"8"	"Salinas"	20
+"268"	"Salinas de Cerrillos"	"7"	"Marisma"	"12"	"Lagos y lagunas"	1
+"269"	"Salinas de Cerrillos"	"7"	"Marisma"	"17"	"Invernaderos"	1
+"270"	"Salinas de Cerrillos"	"8"	"Salinas"	"8"	"Salinas"	126
+"271"	"Salinas de Cerrillos"	"11"	"Vegetacion riparia"	"8"	"Salinas"	7
+"272"	"Salinas de Cerrillos"	"12"	"Lagos y lagunas"	"8"	"Salinas"	4
+"273"	"Salinas de Cerrillos"	"17"	"Invernaderos"	"3"	"Infraestructuras de comunicaciones"	3
+"274"	"Salinas de Cerrillos"	"17"	"Invernaderos"	"6"	"Zonas verdes y espacios de ocio"	1
+"275"	"Salinas de Cerrillos"	"17"	"Invernaderos"	"13"	"Masas de agua artificial"	2
+"276"	"Salinas de Cerrillos"	"17"	"Invernaderos"	"17"	"Invernaderos"	106
+"277"	"Salinas de Cerrillos"	"17"	"Invernaderos"	"20"	"Vegetacion natural"	1
+"278"	"Salinas de Cerrillos"	"17"	"Invernaderos"	"22"	"Playas, dunas y arenales"	7
+"279"	"Salinas de Cerrillos"	"17"	"Invernaderos"	"23"	"Areas con fuertes procesos erosivos"	1
+"280"	"Salinas de Cerrillos"	"18"	"Cultivos herbaceos"	"7"	"Marisma"	1
+"281"	"Salinas de Cerrillos"	"18"	"Cultivos herbaceos"	"17"	"Invernaderos"	1
+"282"	"Salinas de Cerrillos"	"19"	"Areas agrarias heterogeneas"	"8"	"Salinas"	6
+"283"	"Salinas de Cerrillos"	"19"	"Areas agrarias heterogeneas"	"22"	"Playas, dunas y arenales"	1
+"284"	"Salinas de Cerrillos"	"20"	"Vegetacion natural"	"3"	"Infraestructuras de comunicaciones"	3
+"285"	"Salinas de Cerrillos"	"20"	"Vegetacion natural"	"5"	"Zonas mineras, escombreras o de vertido"	1
+"286"	"Salinas de Cerrillos"	"20"	"Vegetacion natural"	"7"	"Marisma"	2
+"287"	"Salinas de Cerrillos"	"20"	"Vegetacion natural"	"8"	"Salinas"	93
+"288"	"Salinas de Cerrillos"	"20"	"Vegetacion natural"	"17"	"Invernaderos"	1
+"289"	"Salinas de Cerrillos"	"20"	"Vegetacion natural"	"20"	"Vegetacion natural"	8
+"290"	"Salinas de Cerrillos"	"20"	"Vegetacion natural"	"22"	"Playas, dunas y arenales"	10
+"291"	"Salinas de Cerrillos"	"20"	"Vegetacion natural"	"23"	"Areas con fuertes procesos erosivos"	5
+"292"	"Salinas de Cerrillos"	"22"	"Playas, dunas y arenales"	"8"	"Salinas"	2
+"293"	"Salinas de Cerrillos"	"22"	"Playas, dunas y arenales"	"22"	"Playas, dunas y arenales"	3
+"294"	"Salinas de Cerrillos"	"24"	"Zonas en construccion"	"1"	"Tejido urbano"	2
+"295"	"Salinas de Cerrillos"	"24"	"Zonas en construccion"	"6"	"Zonas verdes y espacios de ocio"	4
