@@ -11,7 +11,7 @@ library(multcomp) # Tukey
 
 # Leer los archivos
 setwd("D:/Escritorio/TFM/rTFM")
-datos <-read_excel("Cartografia/output/puntos_analisis/puntos_hic_zonas_naturales.xlsx", sheet = 1)
+datos <-read_excel("Excel/puntos_hic_zonas_naturales.xlsx", sheet = 1)
 # head(datos)
 # sum(as.numeric(is.na(datos$CODIGO_UE2))) #cantidad de NAs
 
@@ -22,6 +22,7 @@ datos$CODIGO_UE3 <- lapply(datos$CODIGO_UE3, as.factor)
 datos$CODIGO_UE4 <- lapply(datos$CODIGO_UE4, as.factor)
 datos[18:33] <- lapply(datos[18:33], as.factor)
 datos$PRESENCIA_ZONA_NAT<- lapply(datos$PRESENCIA_ZONA_NAT, as.factor)
+datos$MUCVA_ZONAS_NAT_T_ESPECIFICAS<- lapply(datos$MUCVA_ZONAS_NAT_T_ESPECIFICAS, as.factor)
 # sapply(datos[1:37], function(x) length(unique(x))) #nº de niveles
 
 # Deshacer lista
@@ -29,36 +30,58 @@ datos$CODIGO_UE2<-unlist(datos$CODIGO_UE2)
 datos$CODIGO_UE3<-unlist(datos$CODIGO_UE3)
 datos$CODIGO_UE4<-unlist(datos$CODIGO_UE4)
 datos$PRESENCIA_ZONA_NAT<-unlist(datos$PRESENCIA_ZONA_NAT)
+datos$MUCVA_ZONAS_NAT_T_ESPECIFICAS<-unlist(datos$MUCVA_ZONAS_NAT_T_ESPECIFICAS)
 
 
 # Modelo lineal generalizado binomial ##########################################
+#¿Que esté protegido y su localización con respecto a la costa repercuten en si hay HIC en 2020 o no?
 modelo_glm <- glm(PRESENCIA_HIC~ENP+GRUPO_TIPO, family = binomial, data=datos)
 Anova(modelo_glm)
 summary(modelo_glm) #ENP pendiente negativa
 # Sale diferencia significativa (***) en función de ENP
+table(datos$PRESENCIA_HIC,datos$FIGURA) #¿Hay una diferencia significativa en la que los puntos no protegidos tienen una mayor presencia de HIC?
 
+#¿El tipo de propiedad, el humedal o si hay zona natural en 1984 y el tipo de uso del suelo repercuten en si hay HIC en 2020 o no?
+#...SIN INTERACCIÓN:
 modelo_glm2 <- glm(PRESENCIA_HIC ~ PROPIEDAD+MUCVA_ZONAS_NAT_T_ESPECIFICAS+NOMBRE_HUM+PRESENCIA_ZONA_NAT, family = binomial, data = datos)
 Anova(modelo_glm2)
 # Sale diferencia significativa (***) en función de NOMBRE_HUM y MUCVA_ZONAS_NAT_T_ESPECIFICAS
 
-#con interacción: * y contrasts=list(), también he eliminado PROPIEDAD, porque no era significativo
-modelo_glm2_2 <- glm(PRESENCIA_HIC ~ M_ZN_T_ES*COD_IHA*PRESENCIA_ZONA_NAT, contrasts=list(M_ZN_T_ES=contr.sum,COD_IHA=contr.sum), family = binomial, data = datos)
+#...CON INTERACCIÓN: * y contrasts=list(), también he eliminado PROPIEDAD, porque no era significativo
+modelo_glm2_2 <- glm(PRESENCIA_HIC ~ MUCVA_ZONAS_NAT_T_ESPECIFICAS*COD_IHA*PRESENCIA_ZONA_NAT, contrasts=list(MUCVA_ZONAS_NAT_T_ESPECIFICAS=contr.sum,COD_IHA=contr.sum), family = binomial, data = datos)
 Anova(modelo_glm2_2) #tarda mucho
 #COD_IHA                                       8145.9   12     <2e-16 ***
 #M_ZN_T_ES                                        305    8     <2e-16 ***
 #No hay interacción
 
+#¿Los tipos de usos del suelo (específicos) 1984/2020 repercuten en si hay HIC en 2020 o no? ¿Cuáles repercuten?
+#...CON INTERACCIÓN: * y contrasts=list()
 modelo_glm3 <- glm(PRESENCIA_HIC~datos$MUCVA_C_ES*SIOSE_C_ES, contrasts=list(MUCVA_T_ES=contr.sum,SIOSE_T_ES=contr.sum), family = binomial, data=datos)
 summary(modelo_glm3)
 
+#...SIN INTERACCIÓN:
 modelo_glm4 <- glm(PRESENCIA_HIC~datos$MUCVA_C_ES+SIOSE_C_ES, family = binomial, data=datos)
 summary(modelo_glm4)
 
+#¿Los tipos de usos del suelo (específicos) del 2020 repercuten en si hay HIC en 2020 o no? ¿Cuáles repercuten?
 modelo_glm5 <- glm(PRESENCIA_HIC~datos$SIOSE_C_ES, family = binomial, data=datos)
 summary(modelo_glm5)
+wider<-pivot_wider(as.data.frame(table(datos$PRESENCIA_HIC,datos$SIOSE_T_ES)), names_from=Var1, values_from = Freq)
 
+#¿Los tipos de usos del suelo (generales) 1984/2020 repercuten en si hay HIC en 2020 o no?  ¿Cuáles repercuten?
 modelo_glm6 <- glm(PRESENCIA_HIC~datos$MUCVA_C_GE:SIOSE_C_GE, family = binomial, data=datos)
 summary(modelo_glm6)
+
+#¿Buffer/Humedal repercute en si hay HIC en 2020 o no?
+modelo_glm7 <- glm(PRESENCIA_HIC~ZONA, family = binomial, data=datos) #¿Está bien hecho?
+Anova(modelo_glm7) 
+summary(modelo_glm7)
+#¿Esto quiere decir que hay diferencias significativas en la zona buffer en cuanto a la presencia de HIC, como se puede ver aquí:
+table(datos$PRESENCIA_HIC, datos$ZONA)
+#   Buffer Humedal
+#0   1013     375
+#1    496     196
+#Se puede ver como hay menor presencia de HIC en el buffer
 
 #De los que han cambiado, ¿qué hay ahora?:
 datos_cambios <- subset(datos, datos$COMPARACION=="DISTINTO")
