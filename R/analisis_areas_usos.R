@@ -80,7 +80,6 @@ areas_usos_dif3_usos <- pivot_wider(areas_usos_dif3,names_from = USOS_GENERAL, v
 
 
 library(pheatmap)
-rownames(areas_usos_siose3_usos)<-areas_usos_siose3_usos$HUMEDAL
 areas_usos_siose3_usos$HUMEDAL<-as.factor(areas_usos_siose3_usos$HUMEDAL)
 pheatmap(areas_usos_siose3_usos[2:6],
          labels_row = areas_usos_siose3_usos$HUMEDAL,
@@ -89,7 +88,6 @@ pheatmap(areas_usos_siose3_usos[2:6],
          fontsize_number = 8)
 
 
-rownames(areas_usos_dif3_usos)<-areas_usos_dif3_usos$HUMEDAL
 areas_usos_dif3_usos$HUMEDAL<-as.factor(areas_usos_dif3_usos$HUMEDAL)
 pheatmap(areas_usos_dif3_usos[2:6],
          labels_row = areas_usos_dif3_usos$HUMEDAL,
@@ -97,9 +95,10 @@ pheatmap(areas_usos_dif3_usos[2:6],
          number_color = "black", 
          fontsize_number = 8)
 
+areas_usos_mucva3_usos$HUMEDAL<-as.factor(areas_usos_mucva3_usos$HUMEDAL)
+pheatmap(areas_usos_mucva3_usos[2:6],
+         labels_row = areas_usos_mucva3_usos$HUMEDAL,
+         display_numbers = TRUE,
+         number_color = "black", 
+         fontsize_number = 8)
 
-# ¿Por qué no se equilibran las pérdidas y ganancias de áreas?
-total_area_mucva3_usos <- sum(areas_usos_mucva3_usos$SUMA_AREAS) # Calcular el total de todas las áreas
-areas_usos_mucva3 <- areas_usos_mucva3 %>%
-  mutate(PORCENTAJE = (areas / total_area_mucva) * 100) # Añadir una nueva columna con el porcentaje que representa cada uso del suelo
-areas_usos_mucva

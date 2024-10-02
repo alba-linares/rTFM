@@ -53,3 +53,4 @@ Quiero saber las áreas de usos del suelo por USOS_DEFINITIVOS para 1984 y para 
 Libro: Análisis de datos ecológicos en R Luis Cayuela y Marcelino de la Cruz
 
 Debería equilibrarse las áreas ganadas y perdidas por humedal (pero no me sale así)
+Estaría bien hacer el análisis de las áreas de los usos POR HUMEDAL/BUFFER por separado
