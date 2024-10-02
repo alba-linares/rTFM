@@ -47,3 +47,9 @@ Tengo que enseñarle a Javi la grafica de LSWI vs NDWI, que ya está terminada
 Tengo que avanzar en la memoria (metodología y resultados)
 Tengo que analizar los datos de áreas ¿Cómo?
 Puede ser interesante estudiar la diferencia de áreas de usos del suelo por costero/interior y humedal/buffer entre 1984 y 2020.
+
+02/10/2024
+Quiero saber las áreas de usos del suelo por USOS_DEFINITIVOS para 1984 y para 2020
+Libro: Análisis de datos ecológicos en R Luis Cayuela y Marcelino de la Cruz
+
+Debería equilibrarse las áreas ganadas y perdidas por humedal (pero no me sale así)
