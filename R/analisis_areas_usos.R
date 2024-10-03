@@ -100,24 +100,33 @@ library(pheatmap)
 # Estos gráficos representan los usos del suelo con un área significativamente distinta:
 areas_siose_gen_x_hum_usos$HUMEDAL<-as.factor(areas_siose_gen_x_hum_usos$HUMEDAL)
 pheatmap(areas_siose_gen_x_hum_usos[2:6],
+         main = "Área de los usos del suelo en 2020",
          labels_row = areas_siose_gen_x_hum_usos$HUMEDAL,
          display_numbers = TRUE,
          number_color = "black", 
+         cluster_cols = F,  # Mantiene el orden original de las columnas
+         angle_col = 45,    # Inclina los nombres de las columnas 45 grados
          fontsize_number = 8)
 
 areas_mucva_gen_x_hum_usos$HUMEDAL<-as.factor(areas_mucva_gen_x_hum_usos$HUMEDAL)
 pheatmap(areas_mucva_gen_x_hum_usos[2:6],
+         main = "Área de los usos del suelo en 1984",
          labels_row = areas_mucva_gen_x_hum_usos$HUMEDAL,
          display_numbers = TRUE,
          number_color = "black", 
+         cluster_cols = F,  # Mantiene el orden original de las columnas
+         angle_col = 45,    # Inclina los nombres de las columnas 45 grados
          fontsize_number = 8)
 
-# Este gráfico representa los cambios de usos del suelo significativamente distintos:
+# Este gráfico representa los cambios de usos del suelo:
 areas_dif_gen_x_hum_usos$HUMEDAL<-as.factor(areas_dif_gen_x_hum_usos$HUMEDAL)
 pheatmap(areas_dif_gen_x_hum_usos[2:6],
+         main = "Cambio en el área de los usos del suelo entre 1984-2020",
          labels_row = areas_dif_gen_x_hum_usos$HUMEDAL,
          display_numbers = TRUE,
-         number_color = "black", 
+         number_color = "black",
+         cluster_cols = F,  # Mantiene el orden original de las columnas
+         angle_col = 45,    # Inclina los nombres de las columnas 45 grados 
          fontsize_number = 8)
 
 
@@ -168,6 +177,8 @@ pheatmap(areas_siose_gen_x_hum_H_usos[2:6],
          labels_row = areas_siose_gen_x_hum_H_usos$HUMEDAL,
          display_numbers = TRUE,
          number_color = "black", 
+         cluster_cols = F,  # Mantiene el orden original de las columnas
+         angle_col = 45,    # Inclina los nombres de las columnas 45 grados
          fontsize_number = 8)
 
 areas_mucva_gen_x_hum_H_usos$HUMEDAL<-as.factor(areas_mucva_gen_x_hum_H_usos$HUMEDAL)
@@ -175,7 +186,9 @@ pheatmap(areas_mucva_gen_x_hum_H_usos[2:6],
          main = "Área de los usos del suelo dentro del humedal en 1984",
          labels_row = areas_mucva_gen_x_hum_H_usos$HUMEDAL,
          display_numbers = TRUE,
-         number_color = "black", 
+         number_color = "black",
+         cluster_cols = F,  # Mantiene el orden original de las columnas
+         angle_col = 45,    # Inclina los nombres de las columnas 45 grados
          fontsize_number = 8)
 
 # Este gráfico representa los cambios de usos del suelo (DENTRO DEL HUMEDAL):
@@ -184,10 +197,13 @@ pheatmap(areas_dif_gen_x_hum_H_usos[2:6],
          main = "Cambios en el área de los usos del suelo dentro del humedal entre 1984-2020",
          labels_row = areas_dif_gen_x_hum_H_usos$HUMEDAL,
          display_numbers = TRUE,
-         number_color = "black", 
+         number_color = "black",
+         cluster_cols = F,  # Mantiene el orden original de las columnas
+         angle_col = 45,    # Inclina los nombres de las columnas 45 grados
          fontsize_number = 8)
-
-
+################################################################################
+#  REVISAR  cluster_Cols y angle_col  ##########################################
+################################################################################
 
 ################################################################################
 #ÁREA SOLO BUFFER (_B):
@@ -230,6 +246,8 @@ pheatmap(areas_siose_gen_x_hum_B_usos[2:6],
          labels_row = areas_siose_gen_x_hum_B_usos$HUMEDAL,
          display_numbers = TRUE,
          number_color = "black", 
+         cluster_cols = F,  # Mantiene el orden original de las columnas
+         angle_col = 45,    # Inclina los nombres de las columnas 45 grados
          fontsize_number = 8)
 
 areas_mucva_gen_x_hum_B_usos$HUMEDAL<-as.factor(areas_mucva_gen_x_hum_B_usos$HUMEDAL)
@@ -238,6 +256,8 @@ pheatmap(areas_mucva_gen_x_hum_B_usos[2:6],
          labels_row = areas_mucva_gen_x_hum_B_usos$HUMEDAL,
          display_numbers = TRUE,
          number_color = "black", 
+         cluster_cols = F,  # Mantiene el orden original de las columnas
+         angle_col = 45,    # Inclina los nombres de las columnas 45 grados
          fontsize_number = 8)
 
 # Este gráfico representa los cambios de usos del suelo EN BUFFER:
@@ -247,4 +267,6 @@ pheatmap(areas_dif_gen_x_hum_B_usos[2:6],
          labels_row = areas_dif_gen_x_hum_B_usos$HUMEDAL,
          display_numbers = TRUE,
          number_color = "black", 
+         cluster_cols = F,  # Mantiene el orden original de las columnas
+         angle_col = 45,    # Inclina los nombres de las columnas 45 grados
          fontsize_number = 8)
