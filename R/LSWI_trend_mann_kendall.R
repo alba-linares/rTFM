@@ -90,9 +90,9 @@ library(terra)
 # Definir años
 years <- 1999:2021
 
-# Definir la ruta base
+# Definir la ruta base ####################### ELEGIR ########################
 base_path <- "D:/Escritorio/TFM/rTFM/Google Earth Engine/zones_lswi/humedal/"
-
+base_path <- "D:/Escritorio/TFM/rTFM/Google Earth Engine/zones_lswi/buffer/"
 # Definir subrutas para cada zona
 paths <- c(
   "zone01h_albufera_honda/",
@@ -112,12 +112,36 @@ paths <- c(
   "zone15h_saladar_del_margen/"
 )
 
+paths <- c(
+  "zone01b_albufera_honda/",
+  "zone02b_albufera_nueva/",
+  "zone03b_barranco_del_agua/",
+  "zone04b_canada_de_las_norias/",
+  "zone05b_cola_del_embalse_del_negratin/",
+  "zone06b_charcones_de_punta_entinas/",
+  "zone07b_humedales_de_baza/",
+  "zone08b_laguna_de_la_gravera/",
+  "zone09b_rambla_morales/",
+  "zone10b_ribera_de_la_algaida/",
+  "zone11b_rio_antas/",
+  "zone12b_salinas_de_cabo_de_gata/",
+  "zone13b_salar_de_los_canos/",
+  "zone14b_salinas_de_cerrillos/",
+  "zone15b_saladar_del_margen/"
+)
+
 # Nombres de las zonas (corrigiendo zone13h)
 zones <- c("zone01h","zone02h","zone03h",
            "zone04h","zone05h","zone06h",
            "zone07h","zone08h","zone09h",
            "zone10h","zone11h","zone12h",
            "zone13h","zone14h","zone15h")
+
+zones <- c("zone01b","zone02b","zone03b",
+           "zone04b","zone05b","zone06b",
+           "zone07b","zone08b","zone09b",
+           "zone10b","zone11b","zone12b",
+           "zone13b","zone14b","zone15b")
 
 # Crear una lista para almacenar los datos de cada zona
 r_zones <- list()
@@ -159,6 +183,79 @@ r_zone13h <- rast(r_zones$zone13h)
 r_zone14h <- rast(r_zones$zone14h)
 r_zone15h <- rast(r_zones$zone15h)
 
+r_zone01b <- rast(r_zones$zone01b)
+r_zone02b <- rast(r_zones$zone02b)
+r_zone03b <- rast(r_zones$zone03b)
+r_zone04b <- rast(r_zones$zone04b)
+r_zone05b <- rast(r_zones$zone05b)
+r_zone06b <- rast(r_zones$zone06b)
+r_zone07b <- rast(r_zones$zone07b)
+r_zone08b <- rast(r_zones$zone08b)
+r_zone09b <- rast(r_zones$zone09b)
+r_zone10b <- rast(r_zones$zone10b)
+r_zone11b <- rast(r_zones$zone11b)
+r_zone12b <- rast(r_zones$zone12b)
+r_zone13b <- rast(r_zones$zone13b)
+r_zone14b <- rast(r_zones$zone14b)
+r_zone15b <- rast(r_zones$zone15b)
+
+# Crear una lista para almacenar los datos de cada zona
+r_zones <- list()
+
+# Loop para cargar los archivos de cada zona sin cambiar el directorio de trabajo
+for (i in 1:length(paths)) {
+  # Cargar los archivos usando lapply, construyendo la ruta completa
+  r_zones[[zones[i]]] <- lapply(years, function(year) {
+    # Crear la ruta completa del archivo TIFF
+    file_path <- paste0(base_path, paths[i], zones[i], "_lswi_", year, ".tif")
+    
+    # Cargar el archivo .tif
+    rast(file_path)
+  })
+}
+
+# Ahora tienes todos los archivos cargados en r_zones
+
+
+# Ahora tienes una lista con los datos cargados para cada zona
+# r_zones[["zone01h"]] contiene los archivos de la primera zona
+# r_zones[["zone03h"]] contiene los archivos de la segunda zona
+
+
+# Y ahora paso a rast() cada elemento de esa lista:
+r_zone01h <- rast(r_zones$zone01h)
+r_zone02h <- rast(r_zones$zone02h)
+r_zone03h <- rast(r_zones$zone03h)
+r_zone04h <- rast(r_zones$zone04h)
+r_zone05h <- rast(r_zones$zone05h)
+r_zone06h <- rast(r_zones$zone06h)
+r_zone07h <- rast(r_zones$zone07h)
+r_zone08h <- rast(r_zones$zone08h)
+r_zone09h <- rast(r_zones$zone09h)
+r_zone10h <- rast(r_zones$zone10h)
+r_zone11h <- rast(r_zones$zone11h)
+r_zone12h <- rast(r_zones$zone12h)
+r_zone13h <- rast(r_zones$zone13h)
+r_zone14h <- rast(r_zones$zone14h)
+r_zone15h <- rast(r_zones$zone15h)
+
+
+r_zone01b <- rast(r_zones$zone01b)
+r_zone02b <- rast(r_zones$zone02b)
+r_zone03b <- rast(r_zones$zone03b)
+r_zone04b <- rast(r_zones$zone04b)
+r_zone05b <- rast(r_zones$zone05b)
+r_zone06b <- rast(r_zones$zone06b)
+r_zone07b <- rast(r_zones$zone07b)
+r_zone08b <- rast(r_zones$zone08b)
+r_zone09b <- rast(r_zones$zone09b)
+r_zone10b <- rast(r_zones$zone10b)
+r_zone11b <- rast(r_zones$zone11b)
+r_zone12b <- rast(r_zones$zone12b)
+r_zone13b <- rast(r_zones$zone13b)
+r_zone14b <- rast(r_zones$zone14b)
+r_zone15b <- rast(r_zones$zone15b)
+
 # Por ejemplo, r_zone02h se ve así, como 15 gráficas, una para cada año, en ese humedal:
 plot(r_zone06h)
 
@@ -173,6 +270,11 @@ r_list <- list(r_zone01h,r_zone02h,r_zone03h,
                r_zone10h,r_zone11h,r_zone12h,
                r_zone13h,r_zone14h,r_zone15h)
 
+r_list <- list(r_zone01b,r_zone02b,r_zone03b,
+               r_zone04b,r_zone05b,r_zone06b,
+               r_zone07b,r_zone08b,r_zone09b,
+               r_zone10b,r_zone11b,r_zone12b,
+               r_zone13b,r_zone14b,r_zone15b)
 # Loop para agregar y escribir raster para cada zona
 setwd("D:/Escritorio/TFM/rTFM/R/resample_r8") # Para exportar los .tif a esta carpeta específica
 setwd("D:/Escritorio/TFM/rTFM/R/mk")
@@ -186,12 +288,12 @@ for (i in 1:length(r_list)) {
 
   ############################# EXPORTAR #######################################  
   # Escribir el raster resultante en un archivo TIFF
-  #setwd("D:/Escritorio/TFM/rTFM/R/resample_r8")
-  #output_filename <- paste0("input_", zones[i], "_lswi_ts_scale8.tif")
-  #writeRaster(r8, output_filename, overwrite = TRUE)
+  setwd("D:/Escritorio/TFM/rTFM/R/resample_r8")
+  output_filename <- paste0("input_", zones[i], "_lswi_ts_scale8.tif")
+  writeRaster(r8, here("R/resample_r8/", output_filename), overwrite = TRUE)
   
   # Imprimir mensaje de progreso
-  #print(paste("Archivo guardado:", output_filename))
+  print(paste("Archivo guardado:", output_filename))
   
   ################### SIGNIFICANCIA P-VALUE < 0.05 #############################
   # Calcular las estadísticas de Mann-Kendall
@@ -225,7 +327,7 @@ for (i in 1:length(r_list)) {
   writeRaster(mk_slope, output_signif_filename, overwrite = TRUE)
   
   # Guardar todas las pendientes (sin NA)
-  writeRaster(mk$slope, output_slope_filename, overwrite = TRUE)
+  writeRaster(mk$slope, here("R/mk/", output_slope_filename), overwrite = TRUE)
   
   # Imprimir mensaje de progreso
   print(paste("Archivos guardados para:", zones[i]))
