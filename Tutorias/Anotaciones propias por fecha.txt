@@ -45,12 +45,19 @@ También tengo que comparar los cambios de usos del suelo por buffer/humedal
 01/10/2024
 Tengo que enseñarle a Javi la grafica de LSWI vs NDWI, que ya está terminada
 Tengo que avanzar en la memoria (metodología y resultados)
-Tengo que analizar los datos de áreas ¿Cómo?
-Puede ser interesante estudiar la diferencia de áreas de usos del suelo por costero/interior y humedal/buffer entre 1984 y 2020.
+[Done] Tengo que analizar los datos de áreas ¿Cómo?
+[Falta comentarlo en la memoria, incluyendo costeros/de interior con el cluster:] Puede ser interesante estudiar la diferencia de áreas de usos del suelo por costero/interior y humedal/buffer entre 1984 y 2020.
 
 02/10/2024
-Quiero saber las áreas de usos del suelo por USOS_DEFINITIVOS para 1984 y para 2020
+[Done] Quiero saber las áreas de usos del suelo por USOS_DEFINITIVOS para 1984 y para 2020
 Libro: Análisis de datos ecológicos en R Luis Cayuela y Marcelino de la Cruz
 
-Debería equilibrarse las áreas ganadas y perdidas por humedal (pero no me sale así)
-Estaría bien hacer el análisis de las áreas de los usos POR HUMEDAL/BUFFER por separado
+[Resuelto] Debería equilibrarse las áreas ganadas y perdidas por humedal (pero no me sale así) [resuelto: orden de columnas al restar en Excel]
+[Done] Estaría bien hacer el análisis de las áreas de los usos POR HUMEDAL/BUFFER por separado
+
+03/10/2024
+¿Me quedo con el análisis cluster de los gráficos de áreas o es mejor conservar el mismo orden para comparar mejor?
+Comentarios de Eva: 
+	- hacer los gráficos según % de cambio, porque hay que estandarizar. Hay humedales MUY grandes y MUY pequeños y no se pueden comparar por unidades de área, sino %.
+	- quitar cluster_cols para que sea más fácilmente comparable. Los cluster que más interesan son los que hay entre humedales (cluster_rows)
+	- poner los cambios del área en la memoria y las áreas de 1984 y 2020 por separado dejarlo en ANEXOS
