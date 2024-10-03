@@ -95,6 +95,39 @@ areas_dif_gen_x_hum <- datos_dif %>%
   summarise(SUMA_AREAS = sum(AREA_USOS, na.rm = TRUE))  # Sumar las áreas por grupo
 areas_dif_gen_x_hum_usos <- pivot_wider(areas_dif_gen_x_hum,names_from = USOS_GENERAL, values_from = SUMA_AREAS)
 
+
+
+
+
+
+
+
+
+# PRUEBA: PORCENTAJE PARA EL GRÁFICO ###########################################
+#HAY QUE REVISAR, PORQUE NO APARECEN LOS HUMEDALES Y ES CONVENIENTE PARA EL ANÁLISIS
+areas_siose_general<-as.data.frame(tapply(datos_siose$AREA_USOS, INDEX=datos_siose$USOS_GENERAL, FUN=sum))
+colnames(areas_siose_general)<-"areas"
+areas_siose_general
+
+total_areas_siose_gen_x_hum_siose <- sum(areas_siose_general$areas) # Calcular el total de todas las áreas
+areas_siose_general <- areas_siose_general %>%
+  mutate(PORCENTAJE = (areas / total_area_siose) * 100) # Añadir una nueva columna con el porcentaje que representa cada uso del suelo
+areas_siose_general
+
+areas_mucva_general<-as.data.frame(tapply(datos_mucva$AREA_USOS, INDEX=datos_mucva$USOS_GENERAL, FUN=sum))
+colnames(areas_mucva_general)<-"areas"
+areas_mucva_general
+
+total_areas_mucva_gen_x_hum_mucva <- sum(areas_mucva_general$areas) # Calcular el total de todas las áreas
+areas_mucva_general <- areas_mucva_general %>%
+  mutate(PORCENTAJE = (areas / total_area_mucva) * 100) # Añadir una nueva columna con el porcentaje que representa cada uso del suelo
+areas_mucva_general
+
+
+
+
+
+
 # GRÁFICO DE USOS GENERALES POR HUMEDAL ########################################
 library(pheatmap)
 # Estos gráficos representan los usos del suelo con un área significativamente distinta:
@@ -201,9 +234,6 @@ pheatmap(areas_dif_gen_x_hum_H_usos[2:6],
          cluster_cols = F,  # Mantiene el orden original de las columnas
          angle_col = 45,    # Inclina los nombres de las columnas 45 grados
          fontsize_number = 8)
-################################################################################
-#  REVISAR  cluster_Cols y angle_col  ##########################################
-################################################################################
 
 ################################################################################
 #ÁREA SOLO BUFFER (_B):
