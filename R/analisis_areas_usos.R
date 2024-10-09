@@ -6,6 +6,7 @@ library(dplyr) # mutate()
 
 # Leer los archivos
 setwd("D:/Escritorio/TFM/rTFM")
+#setwd("D:/Escritorio/MASTER/TFM/rTFM")
 datos <-read_excel("Excel/MUCVA+SIOSE_areas_usos.xlsx", sheet = 1)
 # head(datos)
 
@@ -103,8 +104,23 @@ areas_dif_gen_x_hum_usos <- pivot_wider(areas_dif_gen_x_hum,names_from = USOS_GE
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+################################################################################
+################################################################################
+################################################################################
 # PRUEBA: PORCENTAJE PARA EL GRÁFICO ###########################################
-#HAY QUE REVISAR, PORQUE NO APARECEN LOS HUMEDALES Y ES CONVENIENTE PARA EL ANÁLISIS
+#HAY QUE REVISAR, PORQUE NO APARECEN LOS HUMEDALES Y ES CONVENIENTE PARA EL ANÁLISIS ###############################################################
 areas_siose_general<-as.data.frame(tapply(datos_siose$AREA_USOS, INDEX=datos_siose$USOS_GENERAL, FUN=sum))
 colnames(areas_siose_general)<-"areas"
 areas_siose_general
@@ -122,6 +138,63 @@ total_areas_mucva_gen_x_hum_mucva <- sum(areas_mucva_general$areas) # Calcular e
 areas_mucva_general <- areas_mucva_general %>%
   mutate(PORCENTAJE = (areas / total_area_mucva) * 100) # Añadir una nueva columna con el porcentaje que representa cada uso del suelo
 areas_mucva_general
+
+################################################################################
+################################################################################
+################################################################################
+################################################################################
+
+
+
+library(dplyr)
+
+# Agrupar por USOS_GENERAL y humedal, y sumar las áreas
+areas_siose_gen_x_hum <- datos_siose %>%
+  group_by(USOS_GENERAL, HUMEDAL) %>%
+  summarise(AREA_USOS = sum(AREA_USOS)) %>%
+  ungroup()
+
+# Calcular el total de todas las áreas
+total_areas_siose_gen_x_hum <- sum(areas_siose_gen_x_hum$AREA_USOS)
+
+# Añadir una nueva columna con el porcentaje
+areas_siose_gen_x_hum <- areas_siose_gen_x_hum %>%
+  mutate(PORCENTAJE = (AREA_USOS / total_areas_siose_gen_x_hum) * 100)
+
+# Mostrar el resultado
+areas_siose_gen_x_hum
+
+
+
+areas_siose_gen_x_hum$HUMEDAL<-as.factor(areas_siose_gen_x_hum$HUMEDAL)
+areas_siose_gen_x_hum_usos <- pivot_wider(areas_siose_gen_x_hum,names_from = USOS_GENERAL, values_from = PORCENTAJE)
+
+result <- areas_siose_gen_x_hum_usos %>%
+  group_by(HUMEDAL) %>%
+  summarise(
+    total_area_usos_agrario = sum(`Agrario`, na.rm = TRUE),
+    total_agrario_invernaderos = sum(`Agrario invernaderos`, na.rm = TRUE),
+    total_cobertura_vegetal = sum(`Cobertura vegetal y suelos`, na.rm = TRUE),
+    total_urbano_infraestructuras = sum(`Urbano e infraestructuras`, na.rm = TRUE),
+    total_zonas_humedas = sum(`Zonas humedas`, na.rm = TRUE)
+  )
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
