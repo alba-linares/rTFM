@@ -113,10 +113,16 @@ areas_siose_gen_x_hum_percent <- datos_siose %>%
   summarise(AREA_USOS = sum(AREA_USOS)) %>%
   ungroup()
 
-total_areas_siose_gen_x_hum_percent <- sum(areas_siose_gen_x_hum_percent$AREA_USOS) # Calcular el total de todas las áreas
+# ESTO ES SI QUIERO EL PORCENTAJE TOTAL, NO POR HUMEDAL
+#total_areas_siose_gen_x_hum_percent <- sum(areas_siose_gen_x_hum_percent$AREA_USOS) # Calcular el total de todas las áreas
+#areas_siose_gen_x_hum_percent <- areas_siose_gen_x_hum_percent %>%
+#  mutate(PORCENTAJE = (AREA_USOS / total_areas_siose_gen_x_hum_percent) * 100) # Añadir una nueva columna con el porcentaje
 
 areas_siose_gen_x_hum_percent <- areas_siose_gen_x_hum_percent %>%
-  mutate(PORCENTAJE = (AREA_USOS / total_areas_siose_gen_x_hum_percent) * 100) # Añadir una nueva columna con el porcentaje
+  group_by(HUMEDAL) %>%  # Agrupar por cada humedal
+  mutate(TOTAL_AREA_HUMEDAL = sum(AREA_USOS)) %>%  # Calcular el total del área para cada humedal
+  mutate(PORCENTAJE = (AREA_USOS / TOTAL_AREA_HUMEDAL) * 100) %>%  # Calcular el porcentaje para cada categoría de uso de suelo dentro del humedal
+  ungroup()  # Desagrupar para evitar problemas en operaciones posteriores
 
 # Separar los porcentajes en columnas de usos del suelo por humedal
 areas_siose_gen_x_hum_percent$HUMEDAL<-as.factor(areas_siose_gen_x_hum_percent$HUMEDAL)
@@ -137,10 +143,15 @@ areas_siose_gen_x_hum_percent <- datos_siose %>%
   summarise(AREA_USOS_HUMEDAL = sum(AREA_USOS_HUMEDAL)) %>%
   ungroup()
 
-total_areas_siose_gen_x_hum_percent <- sum(areas_siose_gen_x_hum_percent$AREA_USOS_HUMEDAL) # Calcular el total de todas las áreas
+#total_areas_siose_gen_x_hum_percent <- sum(areas_siose_gen_x_hum_percent$AREA_USOS_HUMEDAL) # Calcular el total de todas las áreas
+#areas_siose_gen_x_hum_percent <- areas_siose_gen_x_hum_percent %>%
+#  mutate(PORCENTAJE = (AREA_USOS_HUMEDAL / total_areas_siose_gen_x_hum_percent) * 100) # Añadir una nueva columna con el porcentaje
 
 areas_siose_gen_x_hum_percent <- areas_siose_gen_x_hum_percent %>%
-  mutate(PORCENTAJE = (AREA_USOS_HUMEDAL / total_areas_siose_gen_x_hum_percent) * 100) # Añadir una nueva columna con el porcentaje
+  group_by(HUMEDAL) %>%  # Agrupar por cada humedal
+  mutate(TOTAL_AREA_HUMEDAL = sum(AREA_USOS_HUMEDAL)) %>%  # Calcular el total del área para cada humedal
+  mutate(PORCENTAJE = (AREA_USOS_HUMEDAL / TOTAL_AREA_HUMEDAL) * 100) %>%  # Calcular el porcentaje para cada categoría de uso de suelo dentro del humedal
+  ungroup()  # Desagrupar para evitar problemas en operaciones posteriores
 
 # Separar los porcentajes en columnas de usos del suelo por humedal
 areas_siose_gen_x_hum_percent$HUMEDAL<-as.factor(areas_siose_gen_x_hum_percent$HUMEDAL)
@@ -161,10 +172,15 @@ areas_siose_gen_x_hum_percent <- datos_siose %>%
   summarise(AREA_USOS_BUFFER = sum(AREA_USOS_BUFFER)) %>%
   ungroup()
 
-total_areas_siose_gen_x_hum_percent <- sum(areas_siose_gen_x_hum_percent$AREA_USOS_BUFFER) # Calcular el total de todas las áreas
+#total_areas_siose_gen_x_hum_percent <- sum(areas_siose_gen_x_hum_percent$AREA_USOS_BUFFER) # Calcular el total de todas las áreas
+#areas_siose_gen_x_hum_percent <- areas_siose_gen_x_hum_percent %>%
+#  mutate(PORCENTAJE = (AREA_USOS_BUFFER / total_areas_siose_gen_x_hum_percent) * 100) # Añadir una nueva columna con el porcentaje
 
 areas_siose_gen_x_hum_percent <- areas_siose_gen_x_hum_percent %>%
-  mutate(PORCENTAJE = (AREA_USOS_BUFFER / total_areas_siose_gen_x_hum_percent) * 100) # Añadir una nueva columna con el porcentaje
+  group_by(HUMEDAL) %>%  # Agrupar por cada humedal
+  mutate(TOTAL_AREA_HUMEDAL = sum(AREA_USOS_BUFFER)) %>%  # Calcular el total del área para cada humedal
+  mutate(PORCENTAJE = (AREA_USOS_BUFFER / TOTAL_AREA_HUMEDAL) * 100) %>%  # Calcular el porcentaje para cada categoría de uso de suelo dentro del humedal
+  ungroup()  # Desagrupar para evitar problemas en operaciones posteriores
 
 # Separar los porcentajes en columnas de usos del suelo por humedal
 areas_siose_gen_x_hum_percent$HUMEDAL<-as.factor(areas_siose_gen_x_hum_percent$HUMEDAL)
@@ -187,10 +203,15 @@ areas_mucva_gen_x_hum_percent <- datos_mucva %>%
   summarise(AREA_USOS = sum(AREA_USOS)) %>%
   ungroup()
 
-total_areas_mucva_gen_x_hum_percent <- sum(areas_mucva_gen_x_hum_percent$AREA_USOS) # Calcular el total de todas las áreas
+#total_areas_mucva_gen_x_hum_percent <- sum(areas_mucva_gen_x_hum_percent$AREA_USOS) # Calcular el total de todas las áreas
+#areas_mucva_gen_x_hum_percent <- areas_mucva_gen_x_hum_percent %>%
+#  mutate(PORCENTAJE = (AREA_USOS / total_areas_mucva_gen_x_hum_percent) * 100) # Añadir una nueva columna con el porcentaje
 
 areas_mucva_gen_x_hum_percent <- areas_mucva_gen_x_hum_percent %>%
-  mutate(PORCENTAJE = (AREA_USOS / total_areas_mucva_gen_x_hum_percent) * 100) # Añadir una nueva columna con el porcentaje
+  group_by(HUMEDAL) %>%  # Agrupar por cada humedal
+  mutate(TOTAL_AREA_HUMEDAL = sum(AREA_USOS)) %>%  # Calcular el total del área para cada humedal
+  mutate(PORCENTAJE = (AREA_USOS / TOTAL_AREA_HUMEDAL) * 100) %>%  # Calcular el porcentaje para cada categoría de uso de suelo dentro del humedal
+  ungroup()  # Desagrupar para evitar problemas en operaciones posteriores
 
 # Separar los porcentajes en columnas de usos del suelo por humedal
 areas_mucva_gen_x_hum_percent$HUMEDAL<-as.factor(areas_mucva_gen_x_hum_percent$HUMEDAL)
@@ -211,10 +232,15 @@ areas_mucva_gen_x_hum_percent <- datos_mucva %>%
   summarise(AREA_USOS_HUMEDAL = sum(AREA_USOS_HUMEDAL)) %>%
   ungroup()
 
-total_areas_mucva_gen_x_hum_percent <- sum(areas_mucva_gen_x_hum_percent$AREA_USOS_HUMEDAL) # Calcular el total de todas las áreas
+#total_areas_mucva_gen_x_hum_percent <- sum(areas_mucva_gen_x_hum_percent$AREA_USOS) # Calcular el total de todas las áreas
+#areas_mucva_gen_x_hum_percent <- areas_mucva_gen_x_hum_percent %>%
+#  mutate(PORCENTAJE = (AREA_USOS / total_areas_mucva_gen_x_hum_percent) * 100) # Añadir una nueva columna con el porcentaje
 
 areas_mucva_gen_x_hum_percent <- areas_mucva_gen_x_hum_percent %>%
-  mutate(PORCENTAJE = (AREA_USOS_HUMEDAL / total_areas_mucva_gen_x_hum_percent) * 100) # Añadir una nueva columna con el porcentaje
+  group_by(HUMEDAL) %>%  # Agrupar por cada humedal
+  mutate(TOTAL_AREA_HUMEDAL = sum(AREA_USOS_HUMEDAL)) %>%  # Calcular el total del área para cada humedal
+  mutate(PORCENTAJE = (AREA_USOS_HUMEDAL / TOTAL_AREA_HUMEDAL) * 100) %>%  # Calcular el porcentaje para cada categoría de uso de suelo dentro del humedal
+  ungroup()  # Desagrupar para evitar problemas en operaciones posteriores
 
 # Separar los porcentajes en columnas de usos del suelo por humedal
 areas_mucva_gen_x_hum_percent$HUMEDAL<-as.factor(areas_mucva_gen_x_hum_percent$HUMEDAL)
@@ -235,10 +261,15 @@ areas_mucva_gen_x_hum_percent <- datos_mucva %>%
   summarise(AREA_USOS_BUFFER = sum(AREA_USOS_BUFFER)) %>%
   ungroup()
 
-total_areas_mucva_gen_x_hum_percent <- sum(areas_mucva_gen_x_hum_percent$AREA_USOS_BUFFER) # Calcular el total de todas las áreas
+#total_areas_mucva_gen_x_hum_percent <- sum(areas_mucva_gen_x_hum_percent$AREA_USOS) # Calcular el total de todas las áreas
+#areas_mucva_gen_x_hum_percent <- areas_mucva_gen_x_hum_percent %>%
+#  mutate(PORCENTAJE = (AREA_USOS / total_areas_mucva_gen_x_hum_percent) * 100) # Añadir una nueva columna con el porcentaje
 
 areas_mucva_gen_x_hum_percent <- areas_mucva_gen_x_hum_percent %>%
-  mutate(PORCENTAJE = (AREA_USOS_BUFFER / total_areas_mucva_gen_x_hum_percent) * 100) # Añadir una nueva columna con el porcentaje
+  group_by(HUMEDAL) %>%  # Agrupar por cada humedal
+  mutate(TOTAL_AREA_HUMEDAL = sum(AREA_USOS_BUFFER)) %>%  # Calcular el total del área para cada humedal
+  mutate(PORCENTAJE = (AREA_USOS_BUFFER / TOTAL_AREA_HUMEDAL) * 100) %>%  # Calcular el porcentaje para cada categoría de uso de suelo dentro del humedal
+  ungroup()  # Desagrupar para evitar problemas en operaciones posteriores
 
 # Separar los porcentajes en columnas de usos del suelo por humedal
 areas_mucva_gen_x_hum_percent$HUMEDAL<-as.factor(areas_mucva_gen_x_hum_percent$HUMEDAL)

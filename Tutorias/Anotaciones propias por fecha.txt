@@ -68,4 +68,4 @@ Para mañana:
 	- incluir la composición del tau en QGIS en la memoria del TFM
 
 12/10/2024
-El porcentaje lo he calculado en función del área total entre todos los humedales; creo que debería hacerlo por humedal para estandarizar. ¿Cómo lo hago? 
+[Resuelto] El porcentaje lo he calculado en función del área total entre todos los humedales; creo que debería hacerlo por humedal para estandarizar. ¿Cómo lo hago? 
