@@ -66,3 +66,6 @@ Para mañana:
 	- continuar con "# PRUEBA: PORCENTAJE PARA EL GRÁFICO" e incluir los humedales en ese análisis. Esto es para los gráficos estandarizados.
 	- se ha quedado a medias la composición en QGIS del tau.
 	- incluir la composición del tau en QGIS en la memoria del TFM
+
+12/10/2024
+El porcentaje lo he calculado en función del área total entre todos los humedales; creo que debería hacerlo por humedal para estandarizar. ¿Cómo lo hago? 
