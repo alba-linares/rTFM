@@ -58,14 +58,15 @@ Libro: Análisis de datos ecológicos en R Luis Cayuela y Marcelino de la Cruz
 03/10/2024
 ¿Me quedo con el análisis cluster de los gráficos de áreas o es mejor conservar el mismo orden para comparar mejor?
 Comentarios de Eva: 
-	- hacer los gráficos según % de cambio, porque hay que estandarizar. Hay humedales MUY grandes y MUY pequeños y no se pueden comparar por unidades de área, sino %.
-	- quitar cluster_cols para que sea más fácilmente comparable. Los cluster que más interesan son los que hay entre humedales (cluster_rows)
+	- [Done] hacer los gráficos según % de cambio, porque hay que estandarizar. Hay humedales MUY grandes y MUY pequeños y no se pueden comparar por unidades de área, sino %.
+	- [Done] quitar cluster_cols para que sea más fácilmente comparable. Los cluster que más interesan son los que hay entre humedales (cluster_rows)
 	- poner los cambios del área en la memoria y las áreas de 1984 y 2020 por separado dejarlo en ANEXOS
 
 Para mañana:
-	- continuar con "# PRUEBA: PORCENTAJE PARA EL GRÁFICO" e incluir los humedales en ese análisis. Esto es para los gráficos estandarizados.
+	- [Done] continuar con "# PRUEBA: PORCENTAJE PARA EL GRÁFICO" e incluir los humedales en ese análisis. Esto es para los gráficos estandarizados.
 	- se ha quedado a medias la composición en QGIS del tau.
 	- incluir la composición del tau en QGIS en la memoria del TFM
 
 12/10/2024
 [Resuelto] El porcentaje lo he calculado en función del área total entre todos los humedales; creo que debería hacerlo por humedal para estandarizar. ¿Cómo lo hago? 
+Habría que analizar si estos cambios son significativos y ponerlos en los gráficos
