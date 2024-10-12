@@ -15,8 +15,11 @@ datos[1:7] <- lapply(datos[1:7], as.factor)
 datos_mucva <- subset(datos, datos$ORIGEN=="MUCVA1984")
 datos_siose <- subset(datos, datos$ORIGEN=="SIOSE2020")
 datos_dif <- subset(datos, datos$ORIGEN=="DIFERENCIA")
-modelo_lm_dif <- lm(AREA_USOS~USOS_DEFINITIVOS+HUMEDAL, data=datos_dif)
 
+
+# MODELOS LINEALES #############################################################################################################################################
+
+modelo_lm_dif <- lm(AREA_USOS~USOS_DEFINITIVOS+HUMEDAL, data=datos_dif)
 Anova(modelo_lm_dif)
 summary(modelo_lm_dif)
 
@@ -37,7 +40,7 @@ summary(modelo_lm_buf)
 
 
 
-# Áreas por usos 1984-2020 (SIOSE, MUCVA) ESPECÍFICOS #####################################################
+# Áreas por usos 1984-2020 (SIOSE, MUCVA) ESPECÍFICOS ##########################################################################################################
 areas_mucva_especifico<-as.data.frame(tapply(datos_mucva$AREA_USOS, INDEX=datos_mucva$USOS_DEFINITIVOS, FUN=sum))
 colnames(areas_mucva_especifico)<-"areas"
 areas_mucva_especifico
@@ -67,7 +70,8 @@ areas_mucva_especifico
 #  mutate(PORCENTAJE = (areas / total_area_dif) * 100) # Añadir una nueva columna con el porcentaje que representa cada uso del suelo
 #areas_dif_especifico
 
-# Áreas por usos 1984-2020 (SIOSE, MUCVA) GENERALES #####################################################
+
+# Áreas por usos 1984-2020 (SIOSE, MUCVA) GENERALES ############################################################################################################
 areas_mucva_general<-as.data.frame(tapply(datos_mucva$AREA_USOS, INDEX=datos_mucva$USOS_GENERAL, FUN=sum))
 colnames(areas_mucva_general)<-"areas"
 areas_mucva_general
@@ -97,12 +101,12 @@ areas_dif_gen_x_hum <- datos_dif %>%
 areas_dif_gen_x_hum_usos <- pivot_wider(areas_dif_gen_x_hum,names_from = USOS_GENERAL, values_from = SUMA_AREAS)
 
 
-################################################################################
-################################################################################
-################################################################################
-# CÁLCULO DE PORCENTAJES PARA EL GRÁFICO #######################################
+
+
+
+# CÁLCULO DE PORCENTAJES PARA EL GRÁFICO #######################################################################################################################
 library(dplyr)
-############### PARA SIOSE
+############### PARA SIOSE######################################################################################################################################
 # Agrupar por USOS_GENERAL y humedal, y sumar las áreas
 areas_siose_gen_x_hum_percent <- datos_siose %>%
   group_by(USOS_GENERAL, HUMEDAL) %>%
@@ -120,14 +124,63 @@ areas_siose_gen_x_hum_percent_usos <- pivot_wider(areas_siose_gen_x_hum_percent,
 areas_siose_gen_x_hum_percent_usos <- areas_siose_gen_x_hum_percent_usos %>%
   group_by(HUMEDAL) %>%
   summarise(
-    total_area_usos_agrario = sum(`Agrario`, na.rm = TRUE),
+    total_agrario = sum(`Agrario`, na.rm = TRUE),
     total_agrario_invernaderos = sum(`Agrario invernaderos`, na.rm = TRUE),
     total_cobertura_vegetal = sum(`Cobertura vegetal y suelos`, na.rm = TRUE),
     total_urbano_infraestructuras = sum(`Urbano e infraestructuras`, na.rm = TRUE),
-    total_zonas__humedas = sum(`Zonas humedas`, na.rm = TRUE)
+    total_zonas_humedas = sum(`Zonas humedas`, na.rm = TRUE)
   )
 
-############### PARA MUCVA
+# Para SOLO humedal (_H)
+areas_siose_gen_x_hum_percent <- datos_siose %>%
+  group_by(USOS_GENERAL, HUMEDAL) %>%
+  summarise(AREA_USOS_HUMEDAL = sum(AREA_USOS_HUMEDAL)) %>%
+  ungroup()
+
+total_areas_siose_gen_x_hum_percent <- sum(areas_siose_gen_x_hum_percent$AREA_USOS_HUMEDAL) # Calcular el total de todas las áreas
+
+areas_siose_gen_x_hum_percent <- areas_siose_gen_x_hum_percent %>%
+  mutate(PORCENTAJE = (AREA_USOS_HUMEDAL / total_areas_siose_gen_x_hum_percent) * 100) # Añadir una nueva columna con el porcentaje
+
+# Separar los porcentajes en columnas de usos del suelo por humedal
+areas_siose_gen_x_hum_percent$HUMEDAL<-as.factor(areas_siose_gen_x_hum_percent$HUMEDAL)
+areas_siose_gen_x_hum_percent_usos_H <- pivot_wider(areas_siose_gen_x_hum_percent,names_from = USOS_GENERAL, values_from = PORCENTAJE)
+areas_siose_gen_x_hum_percent_usos_H <- areas_siose_gen_x_hum_percent_usos_H %>%
+  group_by(HUMEDAL) %>%
+  summarise(
+    total_AREA_USOS_HUMEDAL_agrario = sum(`Agrario`, na.rm = TRUE),
+    total_agrario_invernaderos = sum(`Agrario invernaderos`, na.rm = TRUE),
+    total_cobertura_vegetal = sum(`Cobertura vegetal y suelos`, na.rm = TRUE),
+    total_urbano_infraestructuras = sum(`Urbano e infraestructuras`, na.rm = TRUE),
+    total_zonas_humedas = sum(`Zonas humedas`, na.rm = TRUE)
+  )
+
+# Para SOLO buffer (_B)
+areas_siose_gen_x_hum_percent <- datos_siose %>%
+  group_by(USOS_GENERAL, HUMEDAL) %>%
+  summarise(AREA_USOS_BUFFER = sum(AREA_USOS_BUFFER)) %>%
+  ungroup()
+
+total_areas_siose_gen_x_hum_percent <- sum(areas_siose_gen_x_hum_percent$AREA_USOS_BUFFER) # Calcular el total de todas las áreas
+
+areas_siose_gen_x_hum_percent <- areas_siose_gen_x_hum_percent %>%
+  mutate(PORCENTAJE = (AREA_USOS_BUFFER / total_areas_siose_gen_x_hum_percent) * 100) # Añadir una nueva columna con el porcentaje
+
+# Separar los porcentajes en columnas de usos del suelo por humedal
+areas_siose_gen_x_hum_percent$HUMEDAL<-as.factor(areas_siose_gen_x_hum_percent$HUMEDAL)
+areas_siose_gen_x_hum_percent_usos_B <- pivot_wider(areas_siose_gen_x_hum_percent,names_from = USOS_GENERAL, values_from = PORCENTAJE)
+areas_siose_gen_x_hum_percent_usos_B <- areas_siose_gen_x_hum_percent_usos_B %>%
+  group_by(HUMEDAL) %>%
+  summarise(
+    total_agrario = sum(`Agrario`, na.rm = TRUE),
+    total_agrario_invernaderos = sum(`Agrario invernaderos`, na.rm = TRUE),
+    total_cobertura_vegetal = sum(`Cobertura vegetal y suelos`, na.rm = TRUE),
+    total_urbano_infraestructuras = sum(`Urbano e infraestructuras`, na.rm = TRUE),
+    total_zonas_humedas = sum(`Zonas humedas`, na.rm = TRUE)
+  )
+
+
+############### PARA MUCVA######################################################################################################################################
 # Agrupar por USOS_GENERAL y humedal, y sumar las áreas
 areas_mucva_gen_x_hum_percent <- datos_mucva %>%
   group_by(USOS_GENERAL, HUMEDAL) %>%
@@ -145,14 +198,63 @@ areas_mucva_gen_x_hum_percent_usos <- pivot_wider(areas_mucva_gen_x_hum_percent,
 areas_mucva_gen_x_hum_percent_usos <- areas_mucva_gen_x_hum_percent_usos %>%
   group_by(HUMEDAL) %>%
   summarise(
-    total_area_usos_agrario = sum(`Agrario`, na.rm = TRUE),
+    total_agrario = sum(`Agrario`, na.rm = TRUE),
     total_agrario_invernaderos = sum(`Agrario invernaderos`, na.rm = TRUE),
     total_cobertura_vegetal = sum(`Cobertura vegetal y suelos`, na.rm = TRUE),
     total_urbano_infraestructuras = sum(`Urbano e infraestructuras`, na.rm = TRUE),
-    total_zonas__humedas = sum(`Zonas humedas`, na.rm = TRUE)
+    total_zonas_humedas = sum(`Zonas humedas`, na.rm = TRUE)
   )
 
-############### PARA LA DIFERENCIA
+# Para SOLO humedal (_H)
+areas_mucva_gen_x_hum_percent <- datos_mucva %>%
+  group_by(USOS_GENERAL, HUMEDAL) %>%
+  summarise(AREA_USOS_HUMEDAL = sum(AREA_USOS_HUMEDAL)) %>%
+  ungroup()
+
+total_areas_mucva_gen_x_hum_percent <- sum(areas_mucva_gen_x_hum_percent$AREA_USOS_HUMEDAL) # Calcular el total de todas las áreas
+
+areas_mucva_gen_x_hum_percent <- areas_mucva_gen_x_hum_percent %>%
+  mutate(PORCENTAJE = (AREA_USOS_HUMEDAL / total_areas_mucva_gen_x_hum_percent) * 100) # Añadir una nueva columna con el porcentaje
+
+# Separar los porcentajes en columnas de usos del suelo por humedal
+areas_mucva_gen_x_hum_percent$HUMEDAL<-as.factor(areas_mucva_gen_x_hum_percent$HUMEDAL)
+areas_mucva_gen_x_hum_percent_usos_H <- pivot_wider(areas_mucva_gen_x_hum_percent,names_from = USOS_GENERAL, values_from = PORCENTAJE)
+areas_mucva_gen_x_hum_percent_usos_H <- areas_mucva_gen_x_hum_percent_usos_H %>%
+  group_by(HUMEDAL) %>%
+  summarise(
+    total_AREA_USOS_HUMEDAL_agrario = sum(`Agrario`, na.rm = TRUE),
+    total_agrario_invernaderos = sum(`Agrario invernaderos`, na.rm = TRUE),
+    total_cobertura_vegetal = sum(`Cobertura vegetal y suelos`, na.rm = TRUE),
+    total_urbano_infraestructuras = sum(`Urbano e infraestructuras`, na.rm = TRUE),
+    total_zonas_humedas = sum(`Zonas humedas`, na.rm = TRUE)
+  )
+
+# Para SOLO buffer (_B)
+areas_mucva_gen_x_hum_percent <- datos_mucva %>%
+  group_by(USOS_GENERAL, HUMEDAL) %>%
+  summarise(AREA_USOS_BUFFER = sum(AREA_USOS_BUFFER)) %>%
+  ungroup()
+
+total_areas_mucva_gen_x_hum_percent <- sum(areas_mucva_gen_x_hum_percent$AREA_USOS_BUFFER) # Calcular el total de todas las áreas
+
+areas_mucva_gen_x_hum_percent <- areas_mucva_gen_x_hum_percent %>%
+  mutate(PORCENTAJE = (AREA_USOS_BUFFER / total_areas_mucva_gen_x_hum_percent) * 100) # Añadir una nueva columna con el porcentaje
+
+# Separar los porcentajes en columnas de usos del suelo por humedal
+areas_mucva_gen_x_hum_percent$HUMEDAL<-as.factor(areas_mucva_gen_x_hum_percent$HUMEDAL)
+areas_mucva_gen_x_hum_percent_usos_B <- pivot_wider(areas_mucva_gen_x_hum_percent,names_from = USOS_GENERAL, values_from = PORCENTAJE)
+areas_mucva_gen_x_hum_percent_usos_B <- areas_mucva_gen_x_hum_percent_usos_B %>%
+  group_by(HUMEDAL) %>%
+  summarise(
+    total_agrario = sum(`Agrario`, na.rm = TRUE),
+    total_agrario_invernaderos = sum(`Agrario invernaderos`, na.rm = TRUE),
+    total_cobertura_vegetal = sum(`Cobertura vegetal y suelos`, na.rm = TRUE),
+    total_urbano_infraestructuras = sum(`Urbano e infraestructuras`, na.rm = TRUE),
+    total_zonas_humedas = sum(`Zonas humedas`, na.rm = TRUE)
+  )
+
+
+############### PARA LA DIFERENCIA##############################################################################################################################
 # Agrupar por USOS_GENERAL y humedal, y sumar las áreas
 # areas_dif_gen_x_hum_percent <- datos_dif %>%
 #   group_by(USOS_GENERAL, HUMEDAL) %>%
@@ -170,11 +272,11 @@ areas_mucva_gen_x_hum_percent_usos <- areas_mucva_gen_x_hum_percent_usos %>%
 # areas_dif_gen_x_hum_percent_usos <- areas_dif_gen_x_hum_percent_usos %>%
   #   group_by(HUMEDAL) %>%
   #   summarise(
-  #     total_area_usos_agrario = sum(`Agrario`, na.rm = TRUE),
+  #     total_agrario = sum(`Agrario`, na.rm = TRUE),
   #     total_agrario_invernaderos = sum(`Agrario invernaderos`, na.rm = TRUE),
   #     total_cobertura_vegetal = sum(`Cobertura vegetal y suelos`, na.rm = TRUE),
   #     total_urbano_infraestructuras = sum(`Urbano e infraestructuras`, na.rm = TRUE),
-  #     total_zonas__humedas = sum(`Zonas humedas`, na.rm = TRUE)
+  #     total_zonas_humedas = sum(`Zonas humedas`, na.rm = TRUE)
   #   )
 
 # Como la diferencia en porcentaje sale muy extraña, la he vuelto a calcular:
@@ -194,11 +296,44 @@ areas_dif_gen_x_hum_percent_usos <- M
 
 
 
+# Para SOLO humedal:
+M <- matrix (data=NA, 12, 6)
+M<-as.data.frame(M) 
 
-# GRÁFICO DE USOS GENERALES POR HUMEDAL ########################################
+for (i in 1:nrow(areas_siose_gen_x_hum_percent_usos_H)) {
+  for (j in 1:ncol(areas_siose_gen_x_hum_percent_usos_H)) {
+    M[i, j] <- areas_siose_gen_x_hum_percent_usos_H[i, j] - areas_mucva_gen_x_hum_percent_usos_H[i, j]
+  }
+}
+
+M[, 1] <- areas_siose_gen_x_hum_percent_usos_H[, 1]
+colnames(M)<-colnames(areas_siose_gen_x_hum_percent_usos_H)
+
+areas_dif_gen_x_hum_percent_usos_H <- M
+
+# Para SOLO buffer:
+M <- matrix (data=NA, 12, 6)
+M<-as.data.frame(M) 
+
+for (i in 1:nrow(areas_siose_gen_x_hum_percent_usos_B)) {
+  for (j in 1:ncol(areas_siose_gen_x_hum_percent_usos_B)) {
+    M[i, j] <- areas_siose_gen_x_hum_percent_usos_B[i, j] - areas_mucva_gen_x_hum_percent_usos_B[i, j]
+  }
+}
+
+M[, 1] <- areas_siose_gen_x_hum_percent_usos_B[, 1]
+colnames(M)<-colnames(areas_siose_gen_x_hum_percent_usos_B)
+
+areas_dif_gen_x_hum_percent_usos_B <- M
+
+
+
+
+# GRÁFICO DE USOS GENERALES POR HUMEDAL ########################################################################################################################
 library(pheatmap)
 # Estos gráficos representan los usos del suelo con un área significativamente distinta:
 areas_siose_gen_x_hum_percent_usos$HUMEDAL<-as.factor(areas_siose_gen_x_hum_percent_usos$HUMEDAL)
+colnames(areas_siose_gen_x_hum_percent_usos) <- colnames(areas_dif_gen_x_hum_usos)
 pheatmap(areas_siose_gen_x_hum_percent_usos[2:6],
          main = "Área de los usos del suelo en 2020",
          labels_row = areas_siose_gen_x_hum_percent_usos$HUMEDAL,
@@ -208,6 +343,7 @@ pheatmap(areas_siose_gen_x_hum_percent_usos[2:6],
          angle_col = 45,    # Inclina los nombres de las columnas 45 grados
          fontsize_number = 8)
 
+colnames(areas_mucva_gen_x_hum_percent_usos) <- colnames(areas_dif_gen_x_hum_usos)
 areas_mucva_gen_x_hum_percent_usos$HUMEDAL<-as.factor(areas_mucva_gen_x_hum_percent_usos$HUMEDAL)
 pheatmap(areas_mucva_gen_x_hum_percent_usos[2:6],
          main = "Área de los usos del suelo en 1984",
@@ -219,6 +355,7 @@ pheatmap(areas_mucva_gen_x_hum_percent_usos[2:6],
          fontsize_number = 8)
 
 # Este gráfico representa los cambios de usos del suelo:
+colnames(areas_dif_gen_x_hum_percent_usos) <- colnames(areas_dif_gen_x_hum_usos)
 areas_dif_gen_x_hum_percent_usos$HUMEDAL<-as.factor(areas_dif_gen_x_hum_percent_usos$HUMEDAL)
 pheatmap(areas_dif_gen_x_hum_percent_usos[2:6],
          main = "Cambio en el área de los usos del suelo entre 1984-2020",
@@ -231,14 +368,13 @@ pheatmap(areas_dif_gen_x_hum_percent_usos[2:6],
 
 
 
-################################################################################
-################################################################################
+################################################################################################################################################################
+
 # Ahora, el mismo análisis, pero para áreas de buffer y áreas de humedal por separado:
 
+#ÁREA SOLO HUMEDAL (_H):########################################################################################################################################
 
-#ÁREA SOLO HUMEDAL (_H):
-
-# Áreas por usos 1984-2020 (SIOSE, MUCVA) GENERALES (DENTRO DEL HUMEDAL) #####################################################
+# Áreas por usos 1984-2020 (SIOSE, MUCVA) GENERALES (DENTRO DEL HUMEDAL) #######################################################################################
 areas_mucva_general_H<-as.data.frame(tapply(datos_mucva$AREA_USOS_HUMEDAL, INDEX=datos_mucva$USOS_GENERAL, FUN=sum))
 colnames(areas_mucva_general_H)<-"areas"
 areas_mucva_general_H
@@ -268,24 +404,37 @@ areas_dif_gen_x_hum_H <- datos_dif %>%
   summarise(SUMA_AREAS = sum(AREA_USOS_HUMEDAL, na.rm = TRUE))  # Sumar las áreas por grupo
 areas_dif_gen_x_hum_H_usos <- pivot_wider(areas_dif_gen_x_hum_H,names_from = USOS_GENERAL, values_from = SUMA_AREAS)
 
+# Voy a recalcular areas_dif
+M <- matrix (data=NA, 12, 6)
+M<-as.data.frame(M) 
+for (i in 1:nrow(areas_siose_gen_x_hum_H_usos)) {
+  for (j in 1:ncol(areas_siose_gen_x_hum_H_usos)) {
+    M[i, j] <- areas_siose_gen_x_hum_H_usos[i, j] - areas_mucva_gen_x_hum_H_usos[i, j]
+  }
+}
+M[, 1] <- areas_siose_gen_x_hum_H_usos[, 1]
+colnames(M)<-colnames(areas_siose_gen_x_hum_H_usos)
+areas_dif_gen_x_hum_usos_H <- M
 
-# GRÁFICO DE USOS GENERALES POR HUMEDAL (SOLO DENTRO DE HUMEDAL) ########################################
+# GRÁFICO DE USOS GENERALES POR HUMEDAL (SOLO DENTRO DE HUMEDAL) ###############################################################################################
 library(pheatmap)
 # Estos gráficos representan los usos del suelo (DENTRO DEL HUMEDAL):
-areas_siose_gen_x_hum_H_usos$HUMEDAL<-as.factor(areas_siose_gen_x_hum_H_usos$HUMEDAL)
-pheatmap(areas_siose_gen_x_hum_H_usos[2:6],
+colnames(areas_siose_gen_x_hum_percent_usos_H) <- colnames(areas_dif_gen_x_hum_usos)
+areas_siose_gen_x_hum_percent_usos_H$HUMEDAL<-as.factor(areas_siose_gen_x_hum_percent_usos_H$HUMEDAL)
+pheatmap(areas_siose_gen_x_hum_percent_usos_H[2:6],
          main = "Área de los usos del suelo dentro del humedal en 2020",
-         labels_row = areas_siose_gen_x_hum_H_usos$HUMEDAL,
+         labels_row = areas_siose_gen_x_hum_percent_usos_H$HUMEDAL,
          display_numbers = TRUE,
          number_color = "black", 
          cluster_cols = F,  # Mantiene el orden original de las columnas
          angle_col = 45,    # Inclina los nombres de las columnas 45 grados
          fontsize_number = 8)
 
-areas_mucva_gen_x_hum_H_usos$HUMEDAL<-as.factor(areas_mucva_gen_x_hum_H_usos$HUMEDAL)
-pheatmap(areas_mucva_gen_x_hum_H_usos[2:6],
+colnames(areas_mucva_gen_x_hum_percent_usos_H) <- colnames(areas_dif_gen_x_hum_usos)
+areas_mucva_gen_x_hum_percent_usos_H$HUMEDAL<-as.factor(areas_mucva_gen_x_hum_percent_usos_H$HUMEDAL)
+pheatmap(areas_mucva_gen_x_hum_percent_usos_H[2:6],
          main = "Área de los usos del suelo dentro del humedal en 1984",
-         labels_row = areas_mucva_gen_x_hum_H_usos$HUMEDAL,
+         labels_row = areas_mucva_gen_x_hum_percent_usos_H$HUMEDAL,
          display_numbers = TRUE,
          number_color = "black",
          cluster_cols = F,  # Mantiene el orden original de las columnas
@@ -293,17 +442,20 @@ pheatmap(areas_mucva_gen_x_hum_H_usos[2:6],
          fontsize_number = 8)
 
 # Este gráfico representa los cambios de usos del suelo (DENTRO DEL HUMEDAL):
-areas_dif_gen_x_hum_H_usos$HUMEDAL<-as.factor(areas_dif_gen_x_hum_H_usos$HUMEDAL)
-pheatmap(areas_dif_gen_x_hum_H_usos[2:6],
+colnames(areas_dif_gen_x_hum_percent_usos_H) <- colnames(areas_dif_gen_x_hum_usos)
+areas_dif_gen_x_hum_percent_usos_H$HUMEDAL<-as.factor(areas_dif_gen_x_hum_percent_usos_H$HUMEDAL)
+pheatmap(areas_dif_gen_x_hum_percent_usos_H[2:6],
          main = "Cambios en el área de los usos del suelo dentro del humedal entre 1984-2020",
-         labels_row = areas_dif_gen_x_hum_H_usos$HUMEDAL,
+         labels_row = areas_dif_gen_x_hum_percent_usos_H$HUMEDAL,
          display_numbers = TRUE,
          number_color = "black",
          cluster_cols = F,  # Mantiene el orden original de las columnas
          angle_col = 45,    # Inclina los nombres de las columnas 45 grados
          fontsize_number = 8)
 
-################################################################################
+
+
+################################################################################################################################################################
 #ÁREA SOLO BUFFER (_B):
 
 # Áreas por usos 1984-2020 (SIOSE, MUCVA) GENERALES (EN BUFFER) #####################################################
@@ -335,23 +487,40 @@ areas_dif_gen_x_hum_B <- datos_dif %>%
   summarise(SUMA_AREAS = sum(AREA_USOS_BUFFER, na.rm = TRUE))  # Sumar las áreas por grupo
 areas_dif_gen_x_hum_B_usos <- pivot_wider(areas_dif_gen_x_hum_B,names_from = USOS_GENERAL, values_from = SUMA_AREAS)
 
-# GRÁFICO DE USOS GENERALES POR HUMEDAL (SOLO EN BUFFER) ########################################
+# Voy a recalcular areas_dif
+M <- matrix (data=NA, 12, 6)
+M<-as.data.frame(M) 
+for (i in 1:nrow(areas_siose_gen_x_hum_B_usos)) {
+  for (j in 1:ncol(areas_siose_gen_x_hum_B_usos)) {
+    M[i, j] <- areas_siose_gen_x_hum_B_usos[i, j] - areas_mucva_gen_x_hum_B_usos[i, j]
+  }
+}
+M[, 1] <- areas_siose_gen_x_hum_B_usos[, 1]
+colnames(M)<-colnames(areas_siose_gen_x_hum_B_usos)
+areas_dif_gen_x_hum_usos_B <- M
+
+
+
+
+# GRÁFICO DE USOS GENERALES POR HUMEDAL (SOLO EN BUFFER) #######################################################################################################
 library(pheatmap)
 # Estos gráficos representan los usos del suelo EN BUFFER:
-areas_siose_gen_x_hum_B_usos$HUMEDAL<-as.factor(areas_siose_gen_x_hum_B_usos$HUMEDAL)
-pheatmap(areas_siose_gen_x_hum_B_usos[2:6],
+colnames(areas_siose_gen_x_hum_percent_usos_B) <- colnames(areas_dif_gen_x_hum_usos)
+areas_siose_gen_x_hum_percent_usos_B$HUMEDAL<-as.factor(areas_siose_gen_x_hum_percent_usos_B$HUMEDAL)
+pheatmap(areas_siose_gen_x_hum_percent_usos_B[2:6],
          main = "Área de los usos del suelo fuera del humedal en 2020",
-         labels_row = areas_siose_gen_x_hum_B_usos$HUMEDAL,
+         labels_row = areas_siose_gen_x_hum_percent_usos_B$HUMEDAL,
          display_numbers = TRUE,
          number_color = "black", 
          cluster_cols = F,  # Mantiene el orden original de las columnas
          angle_col = 45,    # Inclina los nombres de las columnas 45 grados
          fontsize_number = 8)
 
-areas_mucva_gen_x_hum_B_usos$HUMEDAL<-as.factor(areas_mucva_gen_x_hum_B_usos$HUMEDAL)
-pheatmap(areas_mucva_gen_x_hum_B_usos[2:6],
+colnames(areas_mucva_gen_x_hum_percent_usos_B) <- colnames(areas_dif_gen_x_hum_usos)
+areas_mucva_gen_x_hum_percent_usos_B$HUMEDAL<-as.factor(areas_mucva_gen_x_hum_percent_usos_B$HUMEDAL)
+pheatmap(areas_mucva_gen_x_hum_percent_usos_B[2:6],
          main = "Área de los usos del suelo fuera del humedal en 1984",
-         labels_row = areas_mucva_gen_x_hum_B_usos$HUMEDAL,
+         labels_row = areas_mucva_gen_x_hum_percent_usos_B$HUMEDAL,
          display_numbers = TRUE,
          number_color = "black", 
          cluster_cols = F,  # Mantiene el orden original de las columnas
@@ -359,12 +528,14 @@ pheatmap(areas_mucva_gen_x_hum_B_usos[2:6],
          fontsize_number = 8)
 
 # Este gráfico representa los cambios de usos del suelo EN BUFFER:
-areas_dif_gen_x_hum_B_usos$HUMEDAL<-as.factor(areas_dif_gen_x_hum_B_usos$HUMEDAL)
-pheatmap(areas_dif_gen_x_hum_B_usos[2:6],
+colnames(areas_dif_gen_x_hum_percent_usos_B) <- colnames(areas_dif_gen_x_hum_usos)
+areas_dif_gen_x_hum_percent_usos_B$HUMEDAL<-as.factor(areas_dif_gen_x_hum_percent_usos_B$HUMEDAL)
+pheatmap(areas_dif_gen_x_hum_percent_usos_B[2:6],
          main = "Cambios en el área de los usos del suelo fuera del humedal entre 1984-2020",
-         labels_row = areas_dif_gen_x_hum_B_usos$HUMEDAL,
+         labels_row = areas_dif_gen_x_hum_percent_usos_B$HUMEDAL,
          display_numbers = TRUE,
          number_color = "black", 
          cluster_cols = F,  # Mantiene el orden original de las columnas
          angle_col = 45,    # Inclina los nombres de las columnas 45 grados
          fontsize_number = 8)
+
