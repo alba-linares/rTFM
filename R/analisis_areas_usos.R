@@ -16,6 +16,7 @@ datos_mucva <- subset(datos, datos$ORIGEN=="MUCVA1984")
 datos_siose <- subset(datos, datos$ORIGEN=="SIOSE2020")
 datos_dif <- subset(datos, datos$ORIGEN=="DIFERENCIA")
 
+pivot_wider(datos, names_from = ORIGEN,values_from = AREA_USOS)
 
 # MODELOS LINEALES #############################################################################################################################################
 
@@ -36,6 +37,11 @@ modelo_lm_buf <- lm(datos$AREA_USOS_BUFFER~USOS_DEFINITIVOS+HUMEDAL, data=datos)
 summary(modelo_lm_buf)
 
 
+
+modelo <- aov(AREA_USOS_BUFFER~USOS_GENERAL*HUMEDAL, data=datos) # Analisis de la varianza con funcion aov
+summary(modelo)
+Anova(modelo)
+TukeyHSD(modelo)
 
 
 

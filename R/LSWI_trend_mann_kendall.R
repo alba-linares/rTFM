@@ -6,7 +6,8 @@ library(Kendall)
 
 
 # Data
-setwd("D:/Escritorio/TFM/rTFM") # ¡Recuerda hacer setwd("D:/Escritorio/TFM/rTFM") en el portátil!
+setwd("D:/Escritorio/MASTER/TFM/rTFM") # ¡Recuerda hacer setwd("D:/Escritorio/MASTER/TFM/rTFM") en el portátil!
+#setwd("D:/Escritorio/MASTER/TFM/rTFM")
 data<-read.delim("Google Earth Engine/zones_buffer_lswi/lswi_zone01b.csv", sep=",", dec = ".")
 data<-read.delim("Google Earth Engine/zones_buffer_lswi/lswi_zone02b.csv", sep=",", dec = ".")
 data<-read.delim("Google Earth Engine/zones_buffer_lswi/lswi_zone03b.csv", sep=",", dec = ".")
@@ -91,8 +92,8 @@ library(terra)
 years <- 1999:2021
 
 # Definir la ruta base ####################### ELEGIR ########################
-base_path <- "D:/Escritorio/TFM/rTFM/Google Earth Engine/zones_lswi/humedal/"
-base_path <- "D:/Escritorio/TFM/rTFM/Google Earth Engine/zones_lswi/buffer/"
+base_path <- "D:/Escritorio/MASTER/TFM/rTFM/Google Earth Engine/zones_lswi/humedal/"
+base_path <- "D:/Escritorio/MASTER/TFM/rTFM/Google Earth Engine/zones_lswi/buffer/"
 # Definir subrutas para cada zona
 paths <- c(
   "zone01h_albufera_honda/",
@@ -276,8 +277,8 @@ r_list <- list(r_zone01b,r_zone02b,r_zone03b,
                r_zone10b,r_zone11b,r_zone12b,
                r_zone13b,r_zone14b,r_zone15b)
 # Loop para agregar y escribir raster para cada zona
-setwd("D:/Escritorio/TFM/rTFM/R/resample_r8") # Para exportar los .tif a esta carpeta específica
-setwd("D:/Escritorio/TFM/rTFM/R/mk")
+setwd("D:/Escritorio/MASTER/TFM/rTFM/R/resample_r8") # Para exportar los .tif a esta carpeta específica
+setwd("D:/Escritorio/MASTER/TFM/rTFM/R/mk")
 mk_results <- list()
 for (i in 1:length(r_list)) {
   # Obtener el raster de la zona actual
@@ -288,7 +289,7 @@ for (i in 1:length(r_list)) {
 
   ############################# EXPORTAR #######################################  
   # Escribir el raster resultante en un archivo TIFF
-  setwd("D:/Escritorio/TFM/rTFM/R/resample_r8")
+  setwd("D:/Escritorio/MASTER/TFM/rTFM/R/resample_r8")
   output_filename <- paste0("input_", zones[i], "_lswi_ts_scale8.tif")
   writeRaster(r8, here("R/resample_r8/", output_filename), overwrite = TRUE)
   
@@ -333,7 +334,7 @@ for (i in 1:length(r_list)) {
   print(paste("Archivos guardados para:", zones[i]))
   
 }
-setwd("D:/Escritorio/TFM/rTFM") # Vuelvo al setwd de antes
+setwd("D:/Escritorio/MASTER/TFM/rTFM") # Vuelvo al setwd de antes
 
 
 
@@ -374,7 +375,9 @@ writeRaster(mk_slope,'output_mk_slope_scale8_signif.tif',overwrite=T)
 #GRÁFICO LSWI HUMEDALES ########################################################
 # Tendencia del LSWI en el tiempo por humedal ##################################
 library(ggplot2)
+library(readxl)
 
+datos <-read_excel("Google Earth Engine/LSWI_zones_hum_buf.xlsx")
 # Tendencia del LSWI en el tiempo separado por humedal
 ggplot(datos, aes(x = year, y = lswi, color = wetland_name)) +
   geom_line() +
@@ -388,10 +391,8 @@ ggplot(datos, aes(x = year, y = lswi, color = wetland_name)) +
 # GRÁFICO CON R^2 AJUSTADO #####################################################
 library(ggplot2)
 library(dplyr)
-library(readxl)
 #library(broom) # Necesario para la función glance()
 
-datos <-read_excel("Google Earth Engine/LSWI_zones_hum_buf.xlsx")
 # Calcular el R^2 ajustado para cada humedal y unir con los datos originales
 datos_con_r2 <- datos %>%
   group_by(wetland_name) %>%
@@ -447,17 +448,17 @@ ggplot(datos, aes(x = year, y = lswi, color = wetland_or_buffer)) +
   scale_color_manual(values = c("Humedal" = "blue", "Buffer" = "orange")) +
   labs(title = "Tendencia del índice LSWI en el tiempo por humedal",
        x = "Año", y = "LSWI", color = "Tipo de área") +
-  facet_wrap(~ wetland_name, scales = "free_y", labeller = labeller(wetland_name = nombre_humedales_correctos) 
+  facet_wrap(~ wetland_name, scales = "free_y", ncol = 3, labeller = labeller(wetland_name = nombre_humedales_correctos) 
 ) + 
   coord_cartesian(ylim = c(-0.05, 0.12)) +
-  
   theme_minimal() +
   geom_hline(yintercept = 0, color = "black", linetype = 2) +
-  theme(plot.title = element_text(hjust=0.5))
+  theme(plot.title = element_text(hjust=0.5),    legend.position = "bottom")
   #geom_text(data = datos_con_r2, 
     #         aes(x = Inf, y = Inf, label = paste("R² adj: ", round(adj_r2, 3))),
     #        hjust = 1.1, vjust = 1.1, inherit.aes = FALSE, size = 3)
 
+  
 
 
 # Explicación del código: ######################################################
