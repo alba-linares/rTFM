@@ -8,6 +8,7 @@ library(dplyr) # mutate()
 setwd("D:/Escritorio/TFM/rTFM")
 #setwd("D:/Escritorio/MASTER/TFM/rTFM")
 datos <-read_excel("Excel/MUCVA+SIOSE_areas_usos.xlsx", sheet = 1)
+datos_wider <-read_excel("Excel/MUCVA+SIOSE_areas_usos.xlsx", sheet = 2)
 # head(datos)
 
 datos[1:7] <- lapply(datos[1:7], as.factor)
@@ -15,8 +16,6 @@ datos[1:7] <- lapply(datos[1:7], as.factor)
 datos_mucva <- subset(datos, datos$ORIGEN=="MUCVA1984")
 datos_siose <- subset(datos, datos$ORIGEN=="SIOSE2020")
 datos_dif <- subset(datos, datos$ORIGEN=="DIFERENCIA")
-
-pivot_wider(datos, names_from = ORIGEN,values_from = AREA_USOS)
 
 # MODELOS LINEALES #############################################################################################################################################
 
@@ -33,12 +32,12 @@ summary(modelo_lm2020)
 modelo_lm_hum <- lm(datos$AREA_USOS_HUMEDAL~USOS_DEFINITIVOS+HUMEDAL, data=datos_dif)
 summary(modelo_lm_hum)
 #Cambios del área de los usos del suelo fuera del humedal
-modelo_lm_buf <- lm(datos$AREA_USOS_BUFFER~USOS_DEFINITIVOS+HUMEDAL, data=datos)
+modelo_lm_buf <- lm(datos$AREA_USOS_BUFFER~USOS_GENERAL+HUMEDAL, data=datos_dif)
 summary(modelo_lm_buf)
 
 
-
-modelo <- aov(AREA_USOS_BUFFER~USOS_GENERAL*HUMEDAL, data=datos) # Analisis de la varianza con funcion aov
+# PRUEBA
+modelo <- aov(AREA_USOS_HUMEDAL ~ USOS_GENERAL * HUMEDAL, data=datos) # Analisis de la varianza con funcion aov
 summary(modelo)
 Anova(modelo)
 TukeyHSD(modelo)
