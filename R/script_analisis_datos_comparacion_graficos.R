@@ -15,11 +15,11 @@ df_area_usos20 <-read_excel("Resultados_puntos_analisis.xlsx", sheet = 3)
 ################################################################################
 # Análisis exploratorio de los datos: gráficas #################################
                     pie(table(datos$COMPARACION))
-                    pie(table(datos$MUCVA__USO)) #Usos 1984
-                    pie(table(datos$SIOSE__USO)) #Usos 2023
+                    pie(table(datos$MUCVA1984)) #Usos 1984
+                    pie(table(datos$SIOSE2020)) #Usos 2023
 
 # Gráfico de barras apiladas
-                    ggplot(datos, aes(x = datos$MUCVA__USO, fill = COMPARACION)) +
+                    ggplot(datos, aes(x = datos$MUCVA1984, fill = COMPARACION)) +
                       geom_bar(position = "fill") +
                       labs(title = "Comparación de Usos del Suelo entre 1984 y 2023", x = "Uso del Suelo en 1984", y = "Proporción") +
                       theme_minimal() +
@@ -27,19 +27,19 @@ df_area_usos20 <-read_excel("Resultados_puntos_analisis.xlsx", sheet = 3)
 
 
 # Contar las frecuencias de cada clase de uso del suelo por humedal
-tabla_frecuencia <- table(datos$NOMBRE_HUM, datos$MUCVA__USO)
+tabla_frecuencia <- table(datos$NOMBRE_HUM, datos$MUCVA1984)
 
 # Contar la frecuencia de cada clase por humedal
 frecuencia_clase_humedal <- datos %>%
-  group_by(NOMBRE_HUM, MUCVA__USO) %>%
+  group_by(NOMBRE_HUM, MUCVA1984) %>%
   count()
 
 # Ver los resultados
-View(frecuencia_clase_humedal)
+head(frecuencia_clase_humedal)
 
 ################################################################################
 # Gráfico de barras apiladas para mostrar la proporción de cada uso del suelo por humedal RELATIVO
-                    ggplot(datos, aes(x = MUCVA__USO, fill = NOMBRE_HUM)) +
+                    ggplot(datos, aes(x = MUCVA1984, fill = NOMBRE_HUM)) +
                       geom_bar(position = "fill") +
                       labs(title = "Proporción de usos del suelo en 1984 por humedal", 
                            x = "Uso del suelo", 
@@ -48,7 +48,7 @@ View(frecuencia_clase_humedal)
                       theme_minimal() +
                       theme(axis.text.x = element_text(angle = 270, vjust = 0.5, hjust = 0))
                     
-                    ggplot(datos, aes(x = SIOSE__USO, fill = NOMBRE_HUM)) +
+                    ggplot(datos, aes(x = SIOSE2020, fill = NOMBRE_HUM)) +
                       geom_bar(position = "fill") +
                       labs(title = "Proporción de usos del suelo en la actualidad por humedal", 
                        x = "Uso del suelo", 
@@ -58,7 +58,7 @@ View(frecuencia_clase_humedal)
                       theme(axis.text.x = element_text(angle = 270, vjust = 0.5, hjust=0))
 
 # ABSOLUTO #####################################################################
-                    ggplot(datos, aes(x = MUCVA__USO, fill = NOMBRE_HUM)) +
+                    ggplot(datos, aes(x = MUCVA1984, fill = NOMBRE_HUM)) +
                       geom_bar(position = "stack") +  # Cambia "fill" por "stack" para contar valores absolutos
                       labs(title = "Número de hectáreas por uso del suelo en 1984 por humedal", 
                            x = "Uso del suelo", 
@@ -68,7 +68,7 @@ View(frecuencia_clase_humedal)
                       theme_minimal() +
                       theme(axis.text.x = element_text(angle = 270, vjust = 0.5, hjust = 0))
                     
-                    ggplot(datos, aes(x = SIOSE__USO, fill = NOMBRE_HUM)) +
+                    ggplot(datos, aes(x = SIOSE2020, fill = NOMBRE_HUM)) +
                       geom_bar(position = "stack") +  # Cambia "fill" por "stack" para contar valores absolutos
                       labs(title = "Número de hectáreas por uso del suelo en la actualidad por humedal", 
                            x = "Uso del suelo", 
@@ -119,7 +119,7 @@ print(comparacion_proporciones)
 # Para evaluar los cambios específicos de uso del suelo ########################
 # Crear una columna que muestre el cambio de uso del suelo
 data <- datos %>%
-  mutate(cambio_uso = paste(MUCVA__USO, "a", SIOSE__USO))
+  mutate(cambio_uso = paste(MUCVA1984, "a", SIOSE2020))
 
 # Ver los primeros registros para confirmar
 head(data)
@@ -216,7 +216,7 @@ data_distintos <- data %>%
   filter(COMPARACION == "DISTINTO")
 # Crear una columna que muestre el cambio de uso del suelo
 data_distintos <- data_distintos %>%
-  mutate(cambio_uso = paste(MUCVA__USO, "a", SIOSE__USO))
+  mutate(cambio_uso = paste(MUCVA1984, "a", SIOSE2020))
 # Agrupar por tipo de cambio de uso del suelo y contar las ocurrencias
 cambio_uso_buf_hum <- data_distintos %>%
   group_by(cambio_uso) %>%
@@ -265,7 +265,7 @@ cambio_uso_buf_hum_simplificado <- cambio_uso_buf_hum %>%
 ################################################################################
 # Crear una columna que muestre el cambio de uso del suelo
 data <- datos %>%
-  mutate(cambio_uso = paste(MUCVA__USO, "a", SIOSE__USO))
+  mutate(cambio_uso = paste(MUCVA1984, "a", SIOSE2020))
 
 cambio_uso_cost_int <- data %>%
   group_by(GRUPO_TIPO, cambio_uso) %>%
@@ -283,7 +283,7 @@ tabla_ancha_ci <- as.data.frame(tabla_contingencia_ci) %>%
   pivot_wider(names_from = Var1, values_from = Freq)
 
 # Ver el resultado
-View(tabla_ancha_ci)
+head(tabla_ancha_ci)
 
 
 

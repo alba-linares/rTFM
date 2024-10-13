@@ -42,3 +42,26 @@ tabla_prop <- prop.table(tabla)
 tabla_prop
 tabla_3 <- addmargins(tabla_prop * 100)
 tabla_3
+
+
+library(dplyr)
+
+df_area_usos84 <- df_area_usos84 %>%
+  mutate(
+    `_USOS_DEFI` = case_when(
+      `_USOS_DEFI` == "Areas agricolas heterogeneas" ~ "Areas agrarias heterogeneas",
+      `_USOS_DEFI` == "Herbaceo secano" ~ "Cultivos herbaceos",
+      `_USOS_DEFI` == "Herbaceo regadio" ~ "Cultivos herbaceos",
+      TRUE ~ `_USOS_DEFI`  # Mantiene el valor original si no coincide con ninguna de las condiciones
+    )
+  )
+
+
+df_area_usos20 <- df_area_usos20 %>%
+  mutate(
+    `_USOS_DEFI` = case_when(
+      `_USOS_DEFI` == "Herbaceo secano" ~ "Cultivos herbaceos",
+      `_USOS_DEFI` == "Herbaceo regadio" ~ "Cultivos herbaceos",
+      TRUE ~ `_USOS_DEFI`
+    )
+  )

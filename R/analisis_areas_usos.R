@@ -36,11 +36,37 @@ modelo_lm_buf <- lm(datos$AREA_USOS_BUFFER~USOS_GENERAL+HUMEDAL, data=datos_dif)
 summary(modelo_lm_buf)
 
 
+
+
+
+
+
+
+
+
+
 # PRUEBA
-modelo <- aov(AREA_USOS_HUMEDAL ~ USOS_GENERAL * HUMEDAL, data=datos) # Analisis de la varianza con funcion aov
+modelo <- aov(MUCVA_percent~SIOSE_percent+USOS+HUMEDAL, data=dataset_percent) # Analisis de la varianza con funcion aov
 summary(modelo)
 Anova(modelo)
 TukeyHSD(modelo)
+
+dif_B <- areas_dif_gen_x_hum_usos_B %>%
+  pivot_longer(!HUMEDAL,names_to = "USOS", values_to = "PORCENTAJE")
+mucva_B <- areas_mucva_gen_x_hum_percent_usos_B %>%
+  pivot_longer(!HUMEDAL,names_to = "USOS", values_to = "PORCENTAJE")
+siose_B <- areas_siose_gen_x_hum_percent_usos_B %>%
+  pivot_longer(!HUMEDAL,names_to = "USOS", values_to = "PORCENTAJE")
+
+dataset_percent<- merge(x = mucva_B, y = siose_B, by = c("HUMEDAL", "USOS"))
+colnames(dataset_percent)[3]<- "MUCVA_percent"
+colnames(dataset_percent)[4]<- "SIOSE_percent"
+
+
+
+
+
+
 
 
 
@@ -574,4 +600,4 @@ pheatmap(areas_dif_gen_x_hum_percent_usos_B[2:6],
          cluster_cols = F,  # Mantiene el orden original de las columnas
          angle_col = 45,    # Inclina los nombres de las columnas 45 grados
          fontsize_number = 8)
-
+)

@@ -10,7 +10,7 @@ library(car) #Anova()
 library(multcomp) # Tukey
 
 # Leer los archivos
-setwd("D:/Escritorio/TFM/rTFM")
+setwd("D:/Escritorio/MASTER/TFM/rTFM")
 datos <-read_excel("Excel/puntos_hic_zonas_naturales.xlsx", sheet = 1)
 # head(datos)
 # sum(as.numeric(is.na(datos$CODIGO_UE2))) #cantidad de NAs
