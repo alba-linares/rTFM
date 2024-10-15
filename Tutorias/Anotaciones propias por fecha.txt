@@ -74,3 +74,4 @@ Habría que analizar si estos cambios son significativos y ponerlos en los gráf
 15/10/2024
 - Estaría bien mirar la relación entre LSWI y costero/interior y protección.
 - En LSWI_trend_mann_kendall.R estoy intentando hacer un ANOVA de medidas repetidas para analizar lo anterior, pero me da error, ¿cómo lo hago?
+- He empezado a hacer los mapas de NDVI -> eutrofización¿? en GEE y Colab
