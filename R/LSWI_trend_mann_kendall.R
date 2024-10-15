@@ -469,3 +469,31 @@ ggplot(datos, aes(x = year, y = lswi, color = wetland_or_buffer)) +
 #theme_minimal(): Aplica un tema minimalista al gráfico para mejorar la claridad visual.
 
 
+
+
+datos <-read_excel("Google Earth Engine/LSWI_zones_hum_buf.xlsx")
+# ANOVA de medidas repetidas con ezANOVA
+library(ez)
+datos$wetland_name <- as.factor(datos$wetland_name)
+datos$year <- as.factor(datos$year)
+
+
+ez_results <- ezANOVA(
+  data = datos,          # El dataframe con los datos
+  dv = lswi,             # La variable dependiente (lo que queremos analizar)
+  wid = wetland_name,    # El identificador de los sujetos (en este caso los humedales)
+  within = year,         # La variable dentro del sujeto (el tiempo, en este caso el año)
+  within_full = .(year),  # Asegura que se mantenga el diseño completo
+  detailed = TRUE        # Para obtener todos los resultados detallados
+)
+
+ez_results
+# o también:
+# ANOVA de medidas repetidas con aov()
+modelo_aov <- aov(lswi ~ year + Error(wetland_name/year), data = datos)
+
+# Resumen del modelo
+summary(modelo_aov)
+
+# Mostrar los resultados
+print(ez_results)
