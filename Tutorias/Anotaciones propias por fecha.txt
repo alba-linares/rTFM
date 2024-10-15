@@ -70,3 +70,6 @@ Para mañana:
 12/10/2024
 [Resuelto] El porcentaje lo he calculado en función del área total entre todos los humedales; creo que debería hacerlo por humedal para estandarizar. ¿Cómo lo hago? 
 Habría que analizar si estos cambios son significativos y ponerlos en los gráficos
+
+15/10/2024
+- Estaría bien mirar la relación entre LSWI y costero/interior y protección.
