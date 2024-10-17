@@ -476,15 +476,17 @@ datos <-read_excel("Google Earth Engine/LSWI_zones_hum_buf.xlsx")
 library(ez)
 datos$wetland_name <- as.factor(datos$wetland_name)
 datos$year <- as.factor(datos$year)
+datos$protection_yes_no <- as.factor(datos$protection_yes_no)
 
 
 ez_results <- ezANOVA(
-  data = datos,          # El dataframe con los datos
-  dv = lswi,             # La variable dependiente (lo que queremos analizar)
-  wid = wetland_name,    # El identificador de los sujetos (en este caso los humedales)
-  within = year,         # La variable dentro del sujeto (el tiempo, en este caso el año)
-  within_full = .(year),  # Asegura que se mantenga el diseño completo
-  detailed = TRUE        # Para obtener todos los resultados detallados
+  data = datos,                # El dataframe con los datos
+  dv = lswi,                   # La variable dependiente (lo que queremos analizar)
+  wid = wetland_name,          # El identificador de los sujetos (en este caso los humedales)
+  within = year,               # La variable dentro del sujeto (el tiempo, en este caso el año)
+  within_full = .(year),       # Asegura que se mantenga el diseño completo
+  between=protection_yes_no,   # entre qué queremos comparar: factor
+  detailed = TRUE              # Para obtener todos los resultados detallados
 )
 
 ez_results
