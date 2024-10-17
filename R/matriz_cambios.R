@@ -6,7 +6,7 @@ library(tidyr)
 
 # Leer los archivos
 setwd("D:/Escritorio/TFM/rTFM")
-datos <-read_excel("Excel/Resultados_puntos_analisis.xlsx", range = "A1:O2081")
+datos <-read_excel("Excel/Resultados_puntos_analisis.xlsx", range = "A1:S2081")
 head(datos)
 
 df_area_usos84 <-read_excel("Excel/Resultados_puntos_analisis.xlsx", sheet = 2)
@@ -21,6 +21,11 @@ matriz_cambios <- table(datos$MUCVA1984, datos$SIOSE2020)
 matriz_cambios
   # Exportar la matriz
 write.csv(matriz_cambios, file="Excel/matriz_cambios_exportada.csv")
+
+datos_hum <- subset(datos, datos$ZONA=="Humedal")
+datos_buf <- subset(datos, datos$ZONA=="Buffer")
+matriz_cambios_general_hum <- table(datos_hum$MUCVA1984_GENERAL, datos_hum$SIOSE2020_GENERAL)
+matriz_cambios_general_buf <- table(datos_buf$MUCVA1984_GENERAL, datos_buf$SIOSE2020_GENERAL)
 
 
 library(ggplot2)
