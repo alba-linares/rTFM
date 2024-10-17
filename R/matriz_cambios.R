@@ -6,20 +6,22 @@ library(tidyr)
 
 # Leer los archivos
 setwd("D:/Escritorio/TFM/rTFM")
-datos <-read_excel("Resultados_puntos_analisis.xlsx", range = "A1:O2081")
+datos <-read_excel("Excel/Resultados_puntos_analisis.xlsx", range = "A1:O2081")
 head(datos)
 
-df_area_usos84 <-read_excel("Resultados_puntos_analisis.xlsx", sheet = 2)
-df_area_usos20 <-read_excel("Resultados_puntos_analisis.xlsx", sheet = 3)
+df_area_usos84 <-read_excel("Excel/Resultados_puntos_analisis.xlsx", sheet = 2)
+df_area_usos20 <-read_excel("Excel/Resultados_puntos_analisis.xlsx", sheet = 3)
 
 ################################################################################
 # Matriz de doble entrada con los cambios
 # Crear una tabla de contingencia para los cambios de uso del suelo
 matriz_cambios_general <- table(datos$MUCVA1984_GENERAL, datos$SIOSE2020_GENERAL)
 matriz_cambios <- table(datos$MUCVA1984, datos$SIOSE2020)
-
 # Ver la matriz
-print(matriz_cambios)
+matriz_cambios
+  # Exportar la matriz
+write.csv(matriz_cambios, file="Excel/matriz_cambios_exportada.csv")
+
 
 library(ggplot2)
 

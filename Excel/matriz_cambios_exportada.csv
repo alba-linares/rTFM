@@ -1,0 +1,20 @@
+"","Areas agrarias heterogeneas","Areas con fuertes procesos erosivos","Cultivos herbaceos","Infraestructuras de comunicaciones","Invernaderos","Lagos y lagunas","Leñoso regadio","Leñoso secano","Mares y oceanos","Marisma","Masas de agua artificial","Playas, dunas y arenales","Rios, cauces o ramblas","Salinas","Tejido urbano","Vegetación con eucaliptos","Vegetacion natural","Vegetacion riparia","Zonas industriales y comerciales","Zonas mineras, escombreras o de vertido","Zonas verdes y espacios de ocio"
+"Areas agrarias heterogeneas",2,5,42,3,4,0,7,36,0,0,23,1,0,6,2,0,36,13,0,0,0
+"Areas con fuertes procesos erosivos",0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1,0
+"Cultivos herbaceos",2,18,57,9,15,28,3,11,0,2,9,8,0,0,16,0,46,10,1,1,4
+"Infraestructuras de comunicaciones",0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1
+"Invernaderos",0,8,0,11,230,4,0,0,0,0,2,12,0,0,1,0,13,5,2,0,2
+"Lagos y lagunas",0,0,0,0,0,51,0,0,0,0,0,0,0,4,0,0,0,1,0,0,0
+"Leñoso regadio",0,0,0,0,0,0,0,9,0,0,0,0,0,0,0,0,0,0,0,0,0
+"Leñoso secano",0,0,0,0,0,0,0,2,0,0,2,0,0,0,0,0,1,0,0,0,0
+"Mares y oceanos",0,0,0,0,0,0,0,0,113,0,0,4,0,0,0,0,0,0,0,0,0
+"Marisma",0,0,0,2,3,10,0,0,0,2,0,1,0,20,0,0,0,8,0,0,0
+"Playas, dunas y arenales",0,2,0,0,0,0,0,0,2,2,0,46,0,2,0,0,0,0,0,0,0
+"Salinas",0,0,0,2,0,0,0,0,0,1,0,0,0,247,1,0,0,0,3,0,0
+"Tejido urbano",3,4,1,0,1,0,3,0,0,0,1,2,0,0,8,1,1,0,1,0,0
+"Vegetación con eucaliptos",0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0
+"Vegetacion natural",0,35,11,19,8,4,1,5,0,60,9,143,0,110,25,1,260,15,0,1,1
+"Vegetacion riparia",0,0,0,0,0,0,1,0,0,4,2,0,3,7,0,0,1,6,0,0,0
+"Zonas en construccion",0,2,0,1,0,0,0,0,0,0,0,0,0,0,10,0,1,0,3,0,15
+"Zonas industriales y comerciales",0,2,0,0,0,0,0,0,0,0,0,0,1,0,10,0,1,1,0,0,0
+"Zonas mineras, escombreras o de vertido",0,0,0,0,0,0,0,0,0,0,0,0,0,2,13,0,0,0,0,0,1
