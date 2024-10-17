@@ -64,8 +64,8 @@ Comentarios de Eva:
 
 Para mañana:
 	- [Done] continuar con "# PRUEBA: PORCENTAJE PARA EL GRÁFICO" e incluir los humedales en ese análisis. Esto es para los gráficos estandarizados.
-	- se ha quedado a medias la composición en QGIS del tau.
-	- incluir la composición del tau en QGIS en la memoria del TFM
+	- [Done] se ha quedado a medias la composición en QGIS del tau.
+	- [Done] incluir la composición del tau en QGIS en la memoria del TFM
 
 12/10/2024
 [Resuelto] El porcentaje lo he calculado en función del área total entre todos los humedales; creo que debería hacerlo por humedal para estandarizar. ¿Cómo lo hago? 
@@ -75,3 +75,8 @@ Habría que analizar si estos cambios son significativos y ponerlos en los gráf
 - Estaría bien mirar la relación entre LSWI y costero/interior y protección.
 - En LSWI_trend_mann_kendall.R estoy intentando hacer un ANOVA de medidas repetidas para analizar lo anterior, pero me da error, ¿cómo lo hago?
 - He empezado a hacer los mapas de NDVI -> eutrofización¿? en GEE y Colab
+
+17/10/2024
+MODELOS Y GRÁFICO DE LÍNEAS PARA: Protegido o no, tendencia LSWI, estabilidad=bien, cambios lswi=mal, MIRAR SIGNIFICANCIA
+	Mirar también por buffer/humedal,
+Importante mirar responder preguntas importantes para la gestión antes de hacer cualquier análisis

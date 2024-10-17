@@ -471,6 +471,14 @@ ggplot(datos, aes(x = year, y = lswi, color = wetland_or_buffer)) +
 
 
 
+
+
+
+
+
+
+############REVISAR
+
 datos <-read_excel("Google Earth Engine/LSWI_zones_hum_buf.xlsx")
 # ANOVA de medidas repetidas con ezANOVA
 library(ez)
@@ -478,18 +486,53 @@ datos$wetland_name <- as.factor(datos$wetland_name)
 datos$year <- as.factor(datos$year)
 datos$protection_yes_no <- as.factor(datos$protection_yes_no)
 
-
+############REVISAR
 ez_results <- ezANOVA(
   data = datos,                # El dataframe con los datos
   dv = lswi,                   # La variable dependiente (lo que queremos analizar)
-  wid = wetland_name,          # El identificador de los sujetos (en este caso los humedales)
-  within = year,               # La variable dentro del sujeto (el tiempo, en este caso el año)
-  within_full = .(year),       # Asegura que se mantenga el diseño completo
+  wid = wetland_name,          # réplica o factor aleatorio entre réplicas (en este caso los humedales)
+  within_full = .(year),       # variable interna dentro del diseño que se debe al tiempo + _full porque los valores no han sido condensados en una única cifra
   between=protection_yes_no,   # entre qué queremos comparar: factor
   detailed = TRUE              # Para obtener todos los resultados detallados
 )
-
 ez_results
+
+modeloAMR <- lmer(lswi ~ protection_yes_no + (1 | wetland_name) + (1 | year), data = datos)  # A este se le comprueba todas las asunciones menos la de esfericidad
+modeloAMR2 <- lmer(lswi ~ year:protection_yes_no + (1 | wetland_name), data = datos)  # A este se le comprueba todas las asunciones menos la de esfericidad
+
+#PAQUETES DE R
+library(Hmisc)
+library(readxl)
+library(RcmdrMisc)
+library(psych)
+library(car)
+library(relaimpo)
+library(lmtest)
+library(MASS)
+library(MuMIn)
+library(lmPerm)
+library(sjstats)
+library(ggplot2) 
+library(plyr)
+library(heplots) 
+library(nortest)
+library(rsq)
+library(lme4)
+library(nlme)
+library(DHARMa)
+library(ez)
+library(lmerTest)
+library(vegan)
+
+shapiro.test(residuals(modeloAMR)) 			#NORMALIDAD
+lillie.test(residuals(modeloAMR)) 			#NORMALIDAD LILLIEFORS
+bptest(modeloAMR)		            			#HOMOCEDASTICIDAD
+leveneTest(dep~factor1, data=dataset, center="median") 	#HOMOCEDASTICIDAD solo categóricas
+resettest(modeloAMR)	          			#LINEALIDAD
+outlierTest(modeloAMR)         				#OUTLIER
+vif(modeloAMR)                 				#REDUNDANCIA
+
+
 # o también:
 # ANOVA de medidas repetidas con aov()
 modelo_aov <- aov(lswi ~ year + Error(wetland_name/year), data = datos)
