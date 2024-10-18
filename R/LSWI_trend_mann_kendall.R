@@ -6,8 +6,8 @@ library(Kendall)
 
 
 # Data
-setwd("D:/Escritorio/MASTER/TFM/rTFM") # ¡Recuerda hacer setwd("D:/Escritorio/MASTER/TFM/rTFM") en el portátil!
-#setwd("D:/Escritorio/MASTER/TFM/rTFM")
+setwd("D:/Escritorio/TFM/rTFM") # ¡Recuerda hacer setwd("D:/Escritorio/TFM/rTFM") en el portátil!
+#setwd("D:/Escritorio/TFM/rTFM")
 data<-read.delim("Google Earth Engine/zones_buffer_lswi/lswi_zone01b.csv", sep=",", dec = ".")
 data<-read.delim("Google Earth Engine/zones_buffer_lswi/lswi_zone02b.csv", sep=",", dec = ".")
 data<-read.delim("Google Earth Engine/zones_buffer_lswi/lswi_zone03b.csv", sep=",", dec = ".")
@@ -92,8 +92,8 @@ library(terra)
 years <- 1999:2021
 
 # Definir la ruta base ####################### ELEGIR ########################
-base_path <- "D:/Escritorio/MASTER/TFM/rTFM/Google Earth Engine/zones_lswi/humedal/"
-base_path <- "D:/Escritorio/MASTER/TFM/rTFM/Google Earth Engine/zones_lswi/buffer/"
+base_path <- "D:/Escritorio/TFM/rTFM/Google Earth Engine/zones_ndvi/humedal/"
+base_path <- "D:/Escritorio/TFM/rTFM/Google Earth Engine/zones_ndvi/buffer/"
 # Definir subrutas para cada zona
 paths <- c(
   "zone01h_albufera_honda/",
@@ -152,7 +152,7 @@ for (i in 1:length(paths)) {
   # Cargar los archivos usando lapply, construyendo la ruta completa
   r_zones[[zones[i]]] <- lapply(years, function(year) {
     # Crear la ruta completa del archivo TIFF
-    file_path <- paste0(base_path, paths[i], zones[i], "_lswi_", year, ".tif")
+    file_path <- paste0(base_path, paths[i], zones[i], "_ndvi_", year, ".tif")
     
     # Cargar el archivo .tif
     rast(file_path)
@@ -208,7 +208,7 @@ for (i in 1:length(paths)) {
   # Cargar los archivos usando lapply, construyendo la ruta completa
   r_zones[[zones[i]]] <- lapply(years, function(year) {
     # Crear la ruta completa del archivo TIFF
-    file_path <- paste0(base_path, paths[i], zones[i], "_lswi_", year, ".tif")
+    file_path <- paste0(base_path, paths[i], zones[i], "_ndvi_", year, ".tif")
     
     # Cargar el archivo .tif
     rast(file_path)
@@ -258,7 +258,7 @@ r_zone14b <- rast(r_zones$zone14b)
 r_zone15b <- rast(r_zones$zone15b)
 
 # Por ejemplo, r_zone02h se ve así, como 15 gráficas, una para cada año, en ese humedal:
-plot(r_zone06h)
+plot(r_zone10b)
 
 
 # Source: https://www.pmassicotte.com/posts/2022-04-28-changing-spatial-resolution-of-a-raster-with-terra/
@@ -277,8 +277,6 @@ r_list <- list(r_zone01b,r_zone02b,r_zone03b,
                r_zone10b,r_zone11b,r_zone12b,
                r_zone13b,r_zone14b,r_zone15b)
 # Loop para agregar y escribir raster para cada zona
-setwd("D:/Escritorio/MASTER/TFM/rTFM/R/resample_r8") # Para exportar los .tif a esta carpeta específica
-setwd("D:/Escritorio/MASTER/TFM/rTFM/R/mk")
 mk_results <- list()
 for (i in 1:length(r_list)) {
   # Obtener el raster de la zona actual
@@ -289,8 +287,8 @@ for (i in 1:length(r_list)) {
 
   ############################# EXPORTAR #######################################  
   # Escribir el raster resultante en un archivo TIFF
-  setwd("D:/Escritorio/MASTER/TFM/rTFM/R/resample_r8")
-  output_filename <- paste0("input_", zones[i], "_lswi_ts_scale8.tif")
+  setwd("D:/Escritorio/TFM/rTFM/R/resample_r8")
+  output_filename <- paste0("input_", zones[i], "_ndvi_ts_scale8.tif")
   writeRaster(r8, here("R/resample_r8/", output_filename), overwrite = TRUE)
   
   # Imprimir mensaje de progreso
@@ -320,8 +318,8 @@ for (i in 1:length(r_list)) {
   plot(mk_slope, main = paste("Pendientes significativas -", zones[i]))
   
   # Guardar los archivos raster con y sin significancia
-  output_signif_filename <- paste0("output_", zones[i], "_mk_slope_scale8_signif.tif")
-  output_slope_filename <- paste0("output_", zones[i], "_mk_slope_scale8.tif")
+  output_signif_filename <- paste0("output_", zones[i], "_ndvi_mk_slope_scale8_signif.tif")
+  output_slope_filename <- paste0("output_", zones[i], "_ndvi_mk_slope_scale8.tif")
   
   ############################# EXPORTAR #######################################
   # Guardar solo los valores significativos
@@ -334,7 +332,7 @@ for (i in 1:length(r_list)) {
   print(paste("Archivos guardados para:", zones[i]))
   
 }
-setwd("D:/Escritorio/MASTER/TFM/rTFM") # Vuelvo al setwd de antes
+setwd("D:/Escritorio/TFM/rTFM") # Vuelvo al setwd de antes
 
 
 
@@ -358,7 +356,7 @@ mk_slope[!signif]<-NA
 
 plot(mk_slope)
 
-writeRaster(mk_slope,'output_mk_slope_scale8_signif.tif',overwrite=T)
+writeRaster(mk_slope,'output_ndvi_mk_slope_scale8_signif.tif',overwrite=T)
 
 
 
@@ -480,12 +478,15 @@ ggplot(datos, aes(x = year, y = lswi, color = wetland_or_buffer)) +
 ############REVISAR
 library(readxl)
 setwd("D:/Escritorio/TFM/rTFM")
-datos <-read_excel("Google Earth Engine/LSWI_zones_hum_buf.xlsx")
+datos <-read_excel("Excel/LSWI_zones_hum_buf.xlsx", sheet=1)
+datos.p <-read_excel("Excel/LSWI_zones_hum_buf.xlsx", sheet=2)
 # ANOVA de medidas repetidas con ezANOVA
 library(ez)
 datos$wetland_name <- as.factor(datos$wetland_name)
 datos$year <- as.factor(datos$year)
+datos.p$year_periods <- as.factor(datos.p$year_periods)
 datos$protection_yes_no <- as.factor(datos$protection_yes_no)
+datos.p$protection_yes_no <- as.factor(datos.p$protection_yes_no)
 
 ############REVISAR
 ez_results <- ezANOVA(
@@ -493,19 +494,30 @@ ez_results <- ezANOVA(
   dv = lswi,                   # La variable dependiente (lo que queremos analizar)
   wid = wetland_name,          # réplica o factor aleatorio entre réplicas (en este caso los humedales)
   within_full = .(year),       # variable interna dentro del diseño que se debe al tiempo + _full porque los valores no han sido condensados en una única cifra
-  between=wetland_or_buffer,   # entre qué queremos comparar: factor
+  between=wetland_or_buffer,
+  ,   # entre qué queremos comparar: factor
   detailed = TRUE              # Para obtener todos los resultados detallados
 )
 ez_results
-
-library(lme4)
-modeloAMR <- lmer(lswi ~ wetland_or_buffer + (1 | wetland_name) + (1 | year), data = datos)  # A este se le comprueba todas las asunciones menos la de esfericidad
-modeloAMR2 <- lmer(lswi ~ year:protection_yes_no + (1 | wetland_name), data = datos)  # A este se le comprueba todas las asunciones menos la de esfericidad
-
-
 # Significativo: wetland_or_buffer 0.01
 # No significativo: hydro_periods 0.5, location 0.7, year 0.4, environmental_protection 0.2,
-                  # protection_yes_no 0.5, conservation 0.06, sup_ha 0.4, perim_m 0.3, COD_IHA 0.3
+# protection_yes_no 0.5, conservation 0.06, sup_ha 0.4, perim_m 0.3, COD_IHA 0.3
+
+ez_results <- ezANOVA(
+  data = datos.p,                # El dataframe con los datos
+  dv = lswi_periods,                   # La variable dependiente (lo que queremos analizar)
+  wid = wetland_name,          # réplica o factor aleatorio entre réplicas (en este caso los humedales)
+  within_full = .(year_periods),       # variable interna dentro del diseño que se debe al tiempo + _full porque los valores no han sido condensados en una única cifra
+  between=protection_yes_no + wetland_or_buffer,
+  ,   # entre qué queremos comparar: factor
+  detailed = TRUE              # Para obtener todos los resultados detallados
+)
+ez_results
+#periodos: significativo: wetland_or_buffer
+#no significativo: protection_yes_no, hydro_periods, location, environmental_protection, conservation 0.059, sup_ha, perim_m,COD_IHA
+library(lme4)
+modeloAMR <- lmer(lswi ~ wetland_or_buffer + ndvi + protection_yes_no + (1 | wetland_name) + (1 | year), data = datos)  # A este se le comprueba todas las asunciones menos la de esfericidad
+modeloAMR2 <- lmer(lswi_periods ~ protection_yes_no + hydro_periods+ location+ environmental_protection+ conservation + sup_ha+ perim_m+COD_IHA + (1 | wetland_name) + (1 | year_periods), data = datos.p)  # A este se le comprueba todas las asunciones menos la de esfericidad
 
 #PAQUETES DE R: ASUNCIONES
 library(nortest)
@@ -515,7 +527,7 @@ library(car)
 shapiro.test(residuals(modeloAMR)) 			#NORMALIDAD
 lillie.test(residuals(modeloAMR)) 			#NORMALIDAD LILLIEFORS
 bptest(modeloAMR)		            			#HOMOCEDASTICIDAD
-leveneTest(dep~factor1, data=dataset, center="median") 	#HOMOCEDASTICIDAD solo categóricas
+leveneTest(lswi~wetland_or_buffer, data=datos, center="median") 	#HOMOCEDASTICIDAD solo categóricas
 resettest(modeloAMR)	          			#LINEALIDAD
 outlierTest(modeloAMR)         				#OUTLIER
 vif(modeloAMR)                 				#REDUNDANCIA
@@ -530,3 +542,30 @@ summary(modelo_aov)
 
 # Mostrar los resultados
 print(ez_results)
+
+
+
+
+
+
+library(readxl)
+setwd("D:/Escritorio/TFM/rTFM")
+datos_ndvi <-read_excel("Excel/NDVI_zones_hum_buf.xlsx", sheet=1)
+# ANOVA de medidas repetidas con ezANOVA
+library(ez)
+datos_ndvi$wetland_name <- as.factor(datos_ndvi$wetland_name)
+datos_ndvi$year <- as.factor(datos_ndvi$year)
+datos_ndvi$protection_yes_no <- as.factor(datos_ndvi$protection_yes_no)
+
+
+############REVISAR
+ez_results <- ezANOVA(
+  data = datos,                # El dataframe con los datos_ndvi
+  dv = lswi,                   # La variable dependiente (lo que queremos analizar)
+  wid = wetland_name,          # réplica o factor aleatorio entre réplicas (en este caso los humedales)
+  within_full = .(year),       # variable interna dentro del diseño que se debe al tiempo + _full porque los valores no han sido condensados en una única cifra
+  between=ndvi,
+  ,   # entre qué queremos comparar: factor
+  detailed = TRUE              # Para obtener todos los resulta
+)
+ez_results
