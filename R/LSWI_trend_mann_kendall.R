@@ -478,7 +478,8 @@ ggplot(datos, aes(x = year, y = lswi, color = wetland_or_buffer)) +
 
 
 ############REVISAR
-
+library(readxl)
+setwd("D:/Escritorio/TFM/rTFM")
 datos <-read_excel("Google Earth Engine/LSWI_zones_hum_buf.xlsx")
 # ANOVA de medidas repetidas con ezANOVA
 library(ez)
@@ -492,37 +493,24 @@ ez_results <- ezANOVA(
   dv = lswi,                   # La variable dependiente (lo que queremos analizar)
   wid = wetland_name,          # réplica o factor aleatorio entre réplicas (en este caso los humedales)
   within_full = .(year),       # variable interna dentro del diseño que se debe al tiempo + _full porque los valores no han sido condensados en una única cifra
-  between=protection_yes_no,   # entre qué queremos comparar: factor
+  between=wetland_or_buffer,   # entre qué queremos comparar: factor
   detailed = TRUE              # Para obtener todos los resultados detallados
 )
 ez_results
 
-modeloAMR <- lmer(lswi ~ protection_yes_no + (1 | wetland_name) + (1 | year), data = datos)  # A este se le comprueba todas las asunciones menos la de esfericidad
+library(lme4)
+modeloAMR <- lmer(lswi ~ wetland_or_buffer + (1 | wetland_name) + (1 | year), data = datos)  # A este se le comprueba todas las asunciones menos la de esfericidad
 modeloAMR2 <- lmer(lswi ~ year:protection_yes_no + (1 | wetland_name), data = datos)  # A este se le comprueba todas las asunciones menos la de esfericidad
 
-#PAQUETES DE R
-library(Hmisc)
-library(readxl)
-library(RcmdrMisc)
-library(psych)
-library(car)
-library(relaimpo)
-library(lmtest)
-library(MASS)
-library(MuMIn)
-library(lmPerm)
-library(sjstats)
-library(ggplot2) 
-library(plyr)
-library(heplots) 
+
+# Significativo: wetland_or_buffer 0.01
+# No significativo: hydro_periods 0.5, location 0.7, year 0.4, environmental_protection 0.2,
+                  # protection_yes_no 0.5, conservation 0.06, sup_ha 0.4, perim_m 0.3, COD_IHA 0.3
+
+#PAQUETES DE R: ASUNCIONES
 library(nortest)
-library(rsq)
-library(lme4)
-library(nlme)
-library(DHARMa)
-library(ez)
-library(lmerTest)
-library(vegan)
+library(lmtest)
+library(car)
 
 shapiro.test(residuals(modeloAMR)) 			#NORMALIDAD
 lillie.test(residuals(modeloAMR)) 			#NORMALIDAD LILLIEFORS
