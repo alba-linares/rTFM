@@ -590,8 +590,7 @@ ez_results <- ezANOVA(
   dv = lswi,                   # La variable dependiente (lo que queremos analizar)
   wid = wetland_name,          # réplica o factor aleatorio entre réplicas (en este caso los humedales)
   within_full = .(year),       # variable interna dentro del diseño que se debe al tiempo + _full porque los valores no han sido condensados en una única cifra
-  between=ndvi,
-  ,   # entre qué queremos comparar: factor
+  between=ndvi,                # entre qué queremos comparar: factor
   detailed = TRUE              # Para obtener todos los resulta
 )
 ez_results
