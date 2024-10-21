@@ -480,6 +480,32 @@ library(readxl)
 setwd("D:/Escritorio/TFM/rTFM")
 datos <-read_excel("Excel/LSWI_zones_hum_buf.xlsx", sheet=1)
 datos.p <-read_excel("Excel/LSWI_zones_hum_buf.xlsx", sheet=2)
+library(tidyr)
+datos.p <- pivot_wider(datos.p, names_from=year_periods, values_from = c(lswi_periods,ndvi_periods))
+
+t_lswi <- t.test(datos.p$lswi_periods_2011_2021,
+          datos.p$lswi_periods_1999_2010, 
+          alternative = "two.sided",
+          var.equal = TRUE,
+          conf.level = 0.95,
+          paired=T,
+          data = datos.p)
+# Hay una diferencia significativa entre los valores de LSWI antes y después, y
+# parece que los valores del índice LSWI han aumentado en promedio en el período
+# 2011-2021 en comparación con 1999-2010.
+
+t_ndvi <- t.test(datos.p$ndvi_periods_2011_2021,
+          datos.p$ndvi_periods_1999_2010, 
+          alternative = "two.sided",
+          var.equal = TRUE,
+          conf.level = 0.95,
+          paired=T,
+          data = datos.p)
+# Hay una diferencia significativa entre los valores de NDVI antes y después, y
+# parece que los valores del índice NDVI han disminuido en promedio en el período
+# 2011-2021 en comparación con 1999-2010.
+
+
 # ANOVA de medidas repetidas con ezANOVA
 library(ez)
 datos$wetland_name <- as.factor(datos$wetland_name)
