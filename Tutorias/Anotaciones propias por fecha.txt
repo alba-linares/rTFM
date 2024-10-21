@@ -80,3 +80,6 @@ Habría que analizar si estos cambios son significativos y ponerlos en los gráf
 MODELOS Y GRÁFICO DE LÍNEAS PARA: Protegido o no, tendencia LSWI, estabilidad=bien, cambios lswi=mal, MIRAR SIGNIFICANCIA
 	Mirar también por buffer/humedal,
 Importante mirar responder preguntas importantes para la gestión antes de hacer cualquier análisis
+
+21/10/2024
+- Continuar comentando la tabla de HICxUSOS SIOSE en la memoria
