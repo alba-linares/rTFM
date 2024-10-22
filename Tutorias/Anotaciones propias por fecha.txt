@@ -95,7 +95,6 @@ NDVI +
 ¿Qué hago con Presión?
 
 ANOVA de medidas repetidas para LSWI/NDVI ¿?
-
 MODELOS Y GRÁFICO DE LÍNEAS PARA: Protegido o no, tendencia LSWI, estabilidad=bien, cambios lswi=mal, MIRAR SIGNIFICANCIA
 	Mirar también por buffer/humedal,
 
@@ -136,3 +135,20 @@ puntos_hic_zonas_naturales (analisis_hic_usos)
 MUCVA+SIOSE_areas_usos (analisis_areas_usos)
  [1] "COD_NUEVO"         "USOS_DEFINITIVOS"  "USOS_GENERAL"      "COD_GENERAL"       "COD_PRESION"     
  [6] "ORIGEN"            "HUMEDAL"           "AREA_USOS"         "AREA_USOS_HUMEDAL" "AREA_USOS_BUFFER" 
+
+
+________________________________________________________________________________________________________
+Tutoría:
+
+COMPARACIÓN: (IGUAL O DISTINTO) BINOMIAL. Análisis significancia
+Redactar
+% puntos que han cambiado
+Resta presión. Primero restar por puntos. Compararlo con buffer, protección...
+nº cambios y % de puntos que han ido a más intensivo
+
+Hilar el discurso de la memoria
+Citar valores extremos en el discurso
+Tablas en ANEXOS (seleccionar)
+
+Cantidad zonas húmedas antes y después y lo mismo con Cobertura vegetal y suelos: análisis análogo al LSWI y NDVI para ver cambios en la humedad y en la vegetación
+
