@@ -152,3 +152,5 @@ Tablas en ANEXOS (seleccionar)
 
 Cantidad zonas húmedas antes y después y lo mismo con Cobertura vegetal y suelos: análisis análogo al LSWI y NDVI para ver cambios en la humedad y en la vegetación
 
+Zonas naturales -> HIC y Zonas naturales -> noHIC + binomial
+Figura de protección ¿protege? Partir de las que son zonas naturales 
