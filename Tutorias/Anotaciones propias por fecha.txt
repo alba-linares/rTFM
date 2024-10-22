@@ -83,3 +83,56 @@ Importante mirar responder preguntas importantes para la gestión antes de hacer
 
 21/10/2024
 - Continuar comentando la tabla de HICxUSOS SIOSE en la memoria
+
+
+Comparaciones:
+USOS + costero/interior
+Presión + costero/interior
+USOS + protección
+LSWI +
+NDVI +
+
+¿Qué hago con Presión?
+
+ANOVA de medidas repetidas para LSWI/NDVI ¿?
+
+MODELOS Y GRÁFICO DE LÍNEAS PARA: Protegido o no, tendencia LSWI, estabilidad=bien, cambios lswi=mal, MIRAR SIGNIFICANCIA
+	Mirar también por buffer/humedal,
+
+DATASETS Y CATEGORÍAS
+Resultados_puntos_analisis.xlsx (analisis_cambios_usos)
+ [1] "wkt_geom"              "id"                    "NOMBRE_HUM"            "FIGURA"               
+ [5] "GRUPO_TIPO"            "COD_IHA"               "PROPIEDAD"             "ZONA"                 
+ [9] "MUCVA_COD"             "MUCVA1984"             "MUCVA1984_COD_GENERAL" "MUCVA1984_GENERAL"    
+[13] "MUCVA_PRES"            "SIOSE_COD"             "SIOSE2020"             "SIOSE2020_COD_GENERAL"
+[17] "SIOSE2020_GENERAL"     "SIOSE_PRES"            "COMPARACION"  
+
+
+LSWI_zones_hum_buf (LSWI_trend)
+> colnames(datos)
+ [1] "wetland_name"             "zone"                     "wetland_or_buffer"        "year"            
+ [5] "lswi"                     "ndvi"                     "environmental_protection" "protection_yes_no"       
+ [9] "conservation"             "location"                 "sup_ha"                   "perim_m"          
+[13] "hydro_periods"            "COD_IHA"     
+
+
+puntos_hic_zonas_naturales (analisis_hic_usos)
+> colnames(datos)
+ [1] "id"                            "NOMBRE_HUM"                    "FIGURA"                       
+ [4] "GRUPO_TIPO"                    "COD_IHA"                       "PROPIEDAD"                    
+ [7] "ZONA"                          "ENP"                           "CODIGO_UE1"                   
+[10] "NOM_ANEXO1"                    "LEYENDA_1"                     "CODIGO_UE2"                   
+[13] "LEYENDA_2"                     "CODIGO_UE3"                    "LEYENDA_3"                    
+[16] "CODIGO_UE4"                    "LEYENDA_4"                     "MUCVA_ZONAS_NAT_C_ESPECIFICAS"
+[19] "MUCVA_ZONAS_NAT_T_ESPECIFICAS" "MUCVA_ZONAS_NAT_T_GENERAL"     "MUCVA_ZONAS_NAT_C_GENERAL"    
+[22] "MUCVA_C_ES"                    "MUCVA_T_ES"                    "MUCVA_C_GE"                   
+[25] "MUCVA_T_GE"                    "MUCVA_PRES"                    "SIOSE_C_ES"                   
+[28] "SIOSE_T_ES"                    "SIOSE_C_GE"                    "SIOSE_T_GE"                   
+[31] "SIOSE_PRES"                    "SIOSE_C_RI"                    "SIOSE_T_RI"                   
+[34] "PRESENCIA_HIC"                 "PRESENCIA_ZONA_NAT"            "TIPO DE CAMBIO"               
+[37] "VARIEDAD_HIC"                  "COMPARACION" 
+
+
+MUCVA+SIOSE_areas_usos (analisis_areas_usos)
+ [1] "COD_NUEVO"         "USOS_DEFINITIVOS"  "USOS_GENERAL"      "COD_GENERAL"       "COD_PRESION"     
+ [6] "ORIGEN"            "HUMEDAL"           "AREA_USOS"         "AREA_USOS_HUMEDAL" "AREA_USOS_BUFFER" 
