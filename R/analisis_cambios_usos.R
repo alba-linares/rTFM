@@ -6,7 +6,7 @@ library(tidyr)
 
 # Leer los archivos
 setwd("D:/Escritorio/TFM/rTFM")
-datos <-read_excel("Resultados_puntos_analisis.xlsx", range = "A1:O2081")
+datos <-read_excel("Excel/Resultados_puntos_analisis.xlsx", range = "A1:S2081")
 head(datos)
 
 df_area_usos84 <-read_excel("Resultados_puntos_analisis.xlsx", sheet = 2)
@@ -311,22 +311,18 @@ count_humedales <- datos %>%
 print(count_humedales)
 
 # Gráfico de barras para comparar las zonas
-                    ggplot(count_humedales, aes(x = GRUPO_TIPO, y = n, fill = ZONA)) +
-                      geom_bar(stat = "identity", position = "dodge") +
-                      labs(title = "Comparación de Zonas y Tipos de Humedales",
-                           x = "Tipo de Humedal", y = "Número de Registros") +
-                      theme_minimal()
+ggplot(count_humedales, aes(x = GRUPO_TIPO, y = n, fill = ZONA)) +
+  geom_bar(stat = "identity", position = "dodge") +
+  labs(title = "Comparación de Zonas y Tipos de Humedales",
+       x = "Tipo de Humedal", y = "Número de Registros") +
+  theme_minimal()
 
 
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
+################################################################################
+modelo_lm <- lm(SIOSE_PRES ~ MUCVA1984, data = datos)
+Anova(modelo_lm)
+summary(modelo_lm)
 
 
+
+                    

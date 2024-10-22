@@ -43,8 +43,15 @@ summary(modelo_glm) #ENP pendiente negativa
 table(datos$PRESENCIA_HIC,datos$ENP)
 barplot(table(datos$PRESENCIA_HIC,datos$FIGURA),
         las=2,
-        legend.text = unique(datos$PRESENCIA_HIC),
+        legend.text = unique(c("Ausencia HIC","Presencia HIC")),
         args.legend = list(x = "top"),
+        ylab="Puntos de análisis (nº)",
+        main = "Presencia de HIC en función de la figura de protección")
+
+barplot(table(datos$PRESENCIA_HIC,datos$ENP),
+        las=2,
+        legend.text = unique(c("Ausencia HIC","Presencia HIC")),
+        args.legend = list(x = "topleft"),
         ylab="Puntos de análisis (nº)",
         main = "Presencia de HIC en función de la figura de protección")
         #arrows(data_summary$mean - data_summary$sd, data_summary$mean + data_summary$sd, angle = 90, code = 3, length = 0.1, col = "black"),

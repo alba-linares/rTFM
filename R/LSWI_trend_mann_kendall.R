@@ -530,7 +530,7 @@ ez_results <- ezANOVA(
   detailed = TRUE              # Para obtener todos los resultados detallados
 )
 ez_results
-# Significativo: wetland_or_buffer 0.01
+# LSWI Significativo: wetland_or_buffer 0.01
 # No significativo: hydro_periods 0.5, location 0.7, year 0.4, environmental_protection 0.2,
 # protection_yes_no 0.5, conservation 0.06, sup_ha 0.4, perim_m 0.3, COD_IHA 0.3
 
@@ -543,8 +543,18 @@ ez_results.p <- ezANOVA(
   detailed = TRUE                                # Para obtener todos los resultados detallados
 )
 ez_results.p
-#periodos: significativo: wetland_or_buffer
+#NDVI periodos: significativo: wetland_or_buffer
 #no significativo: protection_yes_no, hydro_periods, location, environmental_protection, conservation 0.059, sup_ha, perim_m,COD_IHA
+
+ez_results.p <- ezANOVA(
+  data = datos.p,                                # El dataframe con los datos
+  dv = lswi_periods,                             # La variable dependiente (lo que queremos analizar)
+  wid = wetland_name,                            # réplica o factor aleatorio entre réplicas (en este caso los humedales)
+  within_full = .(year_periods),                 # variable interna dentro del diseño que se debe al tiempo + _full porque los valores no han sido condensados en una única cifra
+  between=wetland_or_buffer , # entre qué queremos comparar: factor
+  detailed = TRUE                                # Para obtener todos los resultados detallados
+)
+ez_results.p
 
 # GRÁFICO WETLAND_OR_BUFFER LSWI
 library(ggplot2)
@@ -560,11 +570,24 @@ ggplot(datos.p, aes(x = wetland_or_buffer, y = lswi_periods, fill = year_periods
   scale_fill_manual(values = c("1999_2010" = "#DEB887", "2011_2021" = "#87CEFF")) +
   facet_wrap(~ year_periods)
 
+ggplot(datos.p, aes(x = wetland_or_buffer, y = ndvi_periods, fill = year_periods)) +
+  geom_boxplot() +
+  labs(title = "Relación entre NDVI y situación con respecto al humedal por periodos",
+       x = "Humedal o buffer",
+       y = "NDVI",
+       fill = "Periodos de análisis") +
+  theme_minimal() +
+  scale_fill_manual(values = c("1999_2010" = "#DEB887", "2011_2021" = "#87CEFF")) +
+  facet_wrap(~ year_periods)
+
+
+
+
 
 
 library(lme4)
 modeloAMR <- lmer(lswi ~ wetland_or_buffer + ndvi + protection_yes_no + (1 | wetland_name) + (1 | year), data = datos)  # A este se le comprueba todas las asunciones menos la de esfericidad
-modeloAMR2 <- lmer(lswi_periods ~ protection_yes_no + hydro_periods+ location+ environmental_protection+ conservation + sup_ha+ perim_m+COD_IHA + (1 | wetland_name) + (1 | year_periods), data = datos.p)  # A este se le comprueba todas las asunciones menos la de esfericidad
+modeloAMR2 <- lmer(lswi_periods ~ wetland_or_buffer + (1 | wetland_name) + (1 | year_periods), data = datos.p)  # A este se le comprueba todas las asunciones menos la de esfericidad
 
 #PAQUETES DE R: ASUNCIONES
 library(nortest)
@@ -574,7 +597,7 @@ library(car)
 shapiro.test(residuals(modeloAMR)) 			#NORMALIDAD
 lillie.test(residuals(modeloAMR)) 			#NORMALIDAD LILLIEFORS
 bptest(modeloAMR)		            			#HOMOCEDASTICIDAD
-leveneTest(lswi~wetland_or_buffer, data=datos, center="median") 	#HOMOCEDASTICIDAD solo categóricas
+leveneTest(lswi_periods~wetland_or_buffer, data=datos.p, center="median") 	#HOMOCEDASTICIDAD solo categóricas
 resettest(modeloAMR)	          			#LINEALIDAD
 outlierTest(modeloAMR)         				#OUTLIER
 vif(modeloAMR)                 				#REDUNDANCIA
