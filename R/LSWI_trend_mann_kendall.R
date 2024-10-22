@@ -481,28 +481,32 @@ setwd("D:/Escritorio/TFM/rTFM")
 datos <-read_excel("Excel/LSWI_zones_hum_buf.xlsx", sheet=1)
 datos.p <-read_excel("Excel/LSWI_zones_hum_buf.xlsx", sheet=2)
 library(tidyr)
-datos.p <- pivot_wider(datos.p, names_from=year_periods, values_from = c(lswi_periods,ndvi_periods))
+datos.pw <- pivot_wider(datos.p, names_from=year_periods, values_from = c(lswi_periods,ndvi_periods))
 
-t_lswi <- t.test(datos.p$lswi_periods_2011_2021,
-          datos.p$lswi_periods_1999_2010, 
+t_lswi <- t.test(datos.pw$lswi_periods_2011_2021,
+          datos.pw$lswi_periods_1999_2010, 
           alternative = "two.sided",
           var.equal = TRUE,
           conf.level = 0.95,
           paired=T,
-          data = datos.p)
+          data = datos.pw)
+
+t_lswi
 # Hay una diferencia significativa entre los valores de LSWI antes y después, y
-# parece que los valores del índice LSWI han aumentado en promedio en el período
+# parece que los valores del índice LSWI han AUMENTADO en promedio en el período
 # 2011-2021 en comparación con 1999-2010.
 
-t_ndvi <- t.test(datos.p$ndvi_periods_2011_2021,
-          datos.p$ndvi_periods_1999_2010, 
+t_ndvi <- t.test(datos.pw$ndvi_periods_2011_2021,
+          datos.pw$ndvi_periods_1999_2010, 
           alternative = "two.sided",
           var.equal = TRUE,
           conf.level = 0.95,
           paired=T,
-          data = datos.p)
+          data = datos.pw)
+
+t_ndvi
 # Hay una diferencia significativa entre los valores de NDVI antes y después, y
-# parece que los valores del índice NDVI han disminuido en promedio en el período
+# parece que los valores del índice NDVI han DISMINUIDO en promedio en el período
 # 2011-2021 en comparación con 1999-2010.
 
 
@@ -513,6 +517,8 @@ datos$year <- as.factor(datos$year)
 datos.p$year_periods <- as.factor(datos.p$year_periods)
 datos$protection_yes_no <- as.factor(datos$protection_yes_no)
 datos.p$protection_yes_no <- as.factor(datos.p$protection_yes_no)
+datos.p$environmental_protection <- as.factor(datos.p$environmental_protection)
+
 
 ############REVISAR
 ez_results <- ezANOVA(
@@ -520,8 +526,7 @@ ez_results <- ezANOVA(
   dv = lswi,                   # La variable dependiente (lo que queremos analizar)
   wid = wetland_name,          # réplica o factor aleatorio entre réplicas (en este caso los humedales)
   within_full = .(year),       # variable interna dentro del diseño que se debe al tiempo + _full porque los valores no han sido condensados en una única cifra
-  between=wetland_or_buffer,
-  ,   # entre qué queremos comparar: factor
+  between=wetland_or_buffer,   # entre qué queremos comparar: factor
   detailed = TRUE              # Para obtener todos los resultados detallados
 )
 ez_results
@@ -529,18 +534,34 @@ ez_results
 # No significativo: hydro_periods 0.5, location 0.7, year 0.4, environmental_protection 0.2,
 # protection_yes_no 0.5, conservation 0.06, sup_ha 0.4, perim_m 0.3, COD_IHA 0.3
 
-ez_results <- ezANOVA(
-  data = datos.p,                # El dataframe con los datos
-  dv = lswi_periods,                   # La variable dependiente (lo que queremos analizar)
-  wid = wetland_name,          # réplica o factor aleatorio entre réplicas (en este caso los humedales)
-  within_full = .(year_periods),       # variable interna dentro del diseño que se debe al tiempo + _full porque los valores no han sido condensados en una única cifra
-  between=protection_yes_no + wetland_or_buffer,
-  ,   # entre qué queremos comparar: factor
-  detailed = TRUE              # Para obtener todos los resultados detallados
+ez_results.p <- ezANOVA(
+  data = datos.p,                                # El dataframe con los datos
+  dv = lswi_periods,                             # La variable dependiente (lo que queremos analizar)
+  wid = wetland_name,                            # réplica o factor aleatorio entre réplicas (en este caso los humedales)
+  within_full = .(year_periods),                 # variable interna dentro del diseño que se debe al tiempo + _full porque los valores no han sido condensados en una única cifra
+  between=protection_yes_no + wetland_or_buffer, # entre qué queremos comparar: factor
+  detailed = TRUE                                # Para obtener todos los resultados detallados
 )
-ez_results
+ez_results.p
 #periodos: significativo: wetland_or_buffer
 #no significativo: protection_yes_no, hydro_periods, location, environmental_protection, conservation 0.059, sup_ha, perim_m,COD_IHA
+
+# GRÁFICO WETLAND_OR_BUFFER LSWI
+library(ggplot2)
+
+# Crear un gráfico de cajas para mostrar la relación
+ggplot(datos.p, aes(x = wetland_or_buffer, y = lswi_periods, fill = year_periods)) +
+  geom_boxplot() +
+  labs(title = "Relación entre LSWI y situación con respecto al humedal por periodos",
+       x = "Humedal o buffer",
+       y = "LSWI",
+       fill = "Periodos de análisis") +
+  theme_minimal() +
+  scale_fill_manual(values = c("1999_2010" = "#DEB887", "2011_2021" = "#87CEFF")) +
+  facet_wrap(~ year_periods)
+
+
+
 library(lme4)
 modeloAMR <- lmer(lswi ~ wetland_or_buffer + ndvi + protection_yes_no + (1 | wetland_name) + (1 | year), data = datos)  # A este se le comprueba todas las asunciones menos la de esfericidad
 modeloAMR2 <- lmer(lswi_periods ~ protection_yes_no + hydro_periods+ location+ environmental_protection+ conservation + sup_ha+ perim_m+COD_IHA + (1 | wetland_name) + (1 | year_periods), data = datos.p)  # A este se le comprueba todas las asunciones menos la de esfericidad
