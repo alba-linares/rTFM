@@ -171,3 +171,6 @@ Estaría bien definir una paleta de colores para las gráficas porque están sal
 #fc746c rojo rosado y #04bcc4 azul
 
 Incluir pie de tabla y pie de figura para que se entienda mejor todo por sí mismo (como la gráfica: Cambios en el área de usos del suelo en porcentaje fuera del humedal (buffer) entre los años 1984-2020)
+
+
+- Tengo que hacer el gráfico de proporción (sin cambios, cambios positivos, cambios negativos) para costeros/de interior
