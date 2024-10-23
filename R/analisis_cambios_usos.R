@@ -6,21 +6,21 @@ library(tidyr)
 
 # Leer los archivos
 setwd("D:/Escritorio/TFM/rTFM")
-  datos <-read_excel("Excel/Resultados_puntos_analisis.xlsx", range = "A1:T2081")
+  datos <-read_excel("Excel/Resultados_puntos_analisis.xlsx", range = "A1:V2081")
 head(datos)
 
-df_area_usos84 <-read_excel("Resultados_puntos_analisis.xlsx", sheet = 2)
-df_area_usos20 <-read_excel("Resultados_puntos_analisis.xlsx", sheet = 3)
+df_area_usos84 <-read_excel("Excel/Resultados_puntos_analisis.xlsx", sheet = 2)
+df_area_usos20 <-read_excel("Excel/Resultados_puntos_analisis.xlsx", sheet = 3)
 
 ################################################################################
 # Análisis exploratorio de los datos: gráficas #################################
-                    pie(table(datos$COMPARACION))
+                    pie(table(datos$CAMBIO))
                     pie(table(datos$MUCVA1984)) #Usos 1984
                     pie(table(datos$SIOSE2020)) #Usos 2020
                     #pie(table(datos$TIPO_DE_CAMBIO),names=c(0_0=="s",0_1=="q",1_0=="r",1_1=="w",)) #Usos 2020
 
 # Gráfico de barras apiladas
-                    ggplot(datos, aes(x = datos$MUCVA1984, fill = COMPARACION)) +
+                    ggplot(datos, aes(x = datos$MUCVA1984_GENERAL, fill = CAMBIO)) +
                       geom_bar(position = "fill") +
                       labs(title = "Comparación de usos del suelo entre 1984 y 2020", x = "Uso del suelo en 1984", y = "Proporción") +
                       theme_minimal() +
@@ -40,44 +40,44 @@ head(frecuencia_clase_humedal)
 
 ################################################################################
 # Gráfico de barras apiladas para mostrar la proporción de cada uso del suelo por humedal RELATIVO
-                    ggplot(datos, aes(x = MUCVA1984, fill = NOMBRE_HUM)) +
-                      geom_bar(position = "fill") +
-                      labs(title = "Proporción de usos del suelo en 1984 por humedal", 
-                           x = "Uso del suelo", 
-                           y = "Proporción") +
-                      scale_fill_viridis_d(option = "H") + #B o H están bien, se distinguen los humedales
-                      theme_minimal() +
-                      theme(axis.text.x = element_text(angle = 270, vjust = 0.5, hjust = 0))
-                    
-                    ggplot(datos, aes(x = SIOSE2020, fill = NOMBRE_HUM)) +
-                      geom_bar(position = "fill") +
-                      labs(title = "Proporción de usos del suelo en la actualidad por humedal", 
-                       x = "Uso del suelo", 
-                       y = "Proporción") +
-                      scale_fill_viridis_d(option = "H") + #B o H están bien, se distinguen los humedales
-                      theme_minimal() +
-                      theme(axis.text.x = element_text(angle = 270, vjust = 0.5, hjust=0))
+#ggplot(datos, aes(x = MUCVA1984, fill = NOMBRE_HUM)) +
+#  geom_bar(position = "fill") +
+#  labs(title = "Proporción de usos del suelo en 1984 por humedal", 
+#       x = "Uso del suelo", 
+#       y = "Proporción") +
+#  scale_fill_viridis_d(option = "H") + #B o H están bien, se distinguen los humedales
+#  theme_minimal() +
+#  theme(axis.text.x = element_text(angle = 270, vjust = 0.5, hjust = 0))
+
+#ggplot(datos, aes(x = SIOSE2020, fill = NOMBRE_HUM)) +
+#  geom_bar(position = "fill") +
+#  labs(title = "Proporción de usos del suelo en la actualidad por humedal", 
+#       x = "Uso del suelo", 
+#       y = "Proporción") +
+#  scale_fill_viridis_d(option = "H") + #B o H están bien, se distinguen los humedales
+#  theme_minimal() +
+#  theme(axis.text.x = element_text(angle = 270, vjust = 0.5, hjust=0))
 
 # ABSOLUTO #####################################################################
-                    ggplot(datos, aes(x = MUCVA1984, fill = NOMBRE_HUM)) +
-                      geom_bar(position = "stack") +  # Cambia "fill" por "stack" para contar valores absolutos
-                      labs(title = "Número de hectáreas por uso del suelo en 1984 por humedal", 
-                           x = "Uso del suelo", 
-                           y = "Hectáreas") +
-                      scale_fill_viridis_d(option = "H") + #B o H están bien, se distinguen los humedales
-                      ylim(0, 800) +  # Establece el límite del eje y entre 0 y 800
-                      theme_minimal() +
-                      theme(axis.text.x = element_text(angle = 270, vjust = 0.5, hjust = 0))
-                    
-                    ggplot(datos, aes(x = SIOSE2020, fill = NOMBRE_HUM)) +
-                      geom_bar(position = "stack") +  # Cambia "fill" por "stack" para contar valores absolutos
-                      labs(title = "Número de hectáreas por uso del suelo en la actualidad por humedal", 
-                           x = "Uso del suelo", 
-                           y = "Hectáreas") +
-                      scale_fill_viridis_d(option = "H") + #B o H están bien, se distinguen los humedales
-                      ylim(0, 800) +  # Establece el límite del eje y entre 0 y 800
-                        theme_minimal() +
-                      theme(axis.text.x = element_text(angle = 270, vjust = 0.5, hjust=0))
+#ggplot(datos, aes(x = MUCVA1984, fill = NOMBRE_HUM)) +
+#  geom_bar(position = "stack") +  # Cambia "fill" por "stack" para contar valores absolutos
+#  labs(title = "Número de hectáreas por uso del suelo en 1984 por humedal", 
+#       x = "Uso del suelo", 
+#       y = "Hectáreas") +
+#  scale_fill_viridis_d(option = "H") + #B o H están bien, se distinguen los humedales
+#  ylim(0, 800) +  # Establece el límite del eje y entre 0 y 800
+#  theme_minimal() +
+#  theme(axis.text.x = element_text(angle = 270, vjust = 0.5, hjust = 0))
+
+#ggplot(datos, aes(x = SIOSE2020, fill = NOMBRE_HUM)) +
+#  geom_bar(position = "stack") +  # Cambia "fill" por "stack" para contar valores absolutos
+#  labs(title = "Número de hectáreas por uso del suelo en la actualidad por humedal", 
+#       x = "Uso del suelo", 
+#       y = "Hectáreas") +
+#  scale_fill_viridis_d(option = "H") + #B o H están bien, se distinguen los humedales
+#  ylim(0, 800) +  # Establece el límite del eje y entre 0 y 800
+#  theme_minimal() +
+#  theme(axis.text.x = element_text(angle = 270, vjust = 0.5, hjust=0))
 
 
 ################################################################################
@@ -93,9 +93,9 @@ result_area20 <- df_area_usos20 %>%
 
 ################################################################################
 ################################################################################
-# Agrupar por ZONA (BUFFER VS HUMEDAL) y COMPARACION (IGUAL VS DISTINTO), y contar las ocurrencias
+# Agrupar por ZONA (BUFFER VS HUMEDAL) y CAMBIO (IGUAL VS DISTINTO), y contar las ocurrencias
 comparacion_resumen <- datos %>%
-  group_by(ZONA, COMPARACION) %>%
+  group_by(ZONA, CAMBIO) %>%
   summarize(count = n()) %>%
   ungroup()
 
@@ -109,19 +109,22 @@ comparacion_proporciones <- comparacion_resumen %>%
 print(comparacion_proporciones)
 
 # Gráfico de barras apiladas
-                    ggplot(comparacion_proporciones, aes(x = ZONA, y = proporcion, fill = COMPARACION)) +
-                      geom_bar(stat = "identity") +
-                      labs(title = "Cambios de uso del suelo en función de situación con respecto al humedal",
-                           x = "Zona (dentro/fuera del humedal)", y = "Proporción") +
-                      scale_y_continuous(labels = scales::percent_format()) +
-                      scale_fill_manual(values = c("IGUAL" = "honeydew3", "DISTINTO" = "darkorchid1")) +
-                      theme_minimal()
+
+ggplot(comparacion_resumen, aes(x = ZONA, y = count, fill = CAMBIO)) +
+  geom_bar(stat = "identity", position = "fill") +  # Agregar position = "fill"
+  labs(title = "Cambios de uso del suelo en función de situación con respecto al humedal",
+       x = "Zona (dentro/fuera del humedal)", 
+       y = "Porcentaje") +  # Cambiar la etiqueta del eje Y
+  scale_fill_manual(values = c("0" = "honeydew3", "1" = "darkorchid1")) +
+  scale_y_continuous(labels = scales::percent) +  # Mostrar porcentajes en el eje Y
+  theme_minimal()
+
 
 ################################################################################
 # Para evaluar los cambios específicos de uso del suelo ########################
 # Crear una columna que muestre el cambio de uso del suelo
 data <- datos %>%
-  mutate(cambio_uso = paste(MUCVA_T_GE, "a", SIOSE_T_GE))
+  mutate(cambio_uso = paste(MUCVA1984_GENERAL, "a", SIOSE2020_GENERAL))
 
 # Ver los primeros registros para confirmar
 head(data)
@@ -139,22 +142,6 @@ print(cambio_uso_buf_hum)
 
 
 
-
-
-# Gráfico de barras apiladas por tipo de cambio
-                    ggplot(cambio_uso_buf_hum, aes(x = ZONA, y = count, fill = cambio_uso)) +
-                      geom_bar(stat = "identity") +
-                      labs(title = "Cambios de Uso del suelo Dentro y Fuera de Humedales",
-                           x = "Zona (Dentro/Fuera del Humedal)", y = "Número de Cambios") +
-                      theme_minimal()
-                    
-# Gráfico de barras agrupadas
-                    ggplot(cambio_uso_buf_hum, aes(x = cambio_uso, y = count, fill = ZONA)) +
-                      geom_bar(stat = "identity", position = "dodge") +
-                      labs(title = "Cambios Específicos de Uso del suelo por Zona",
-                           x = "Cambio de Uso del suelo", y = "Número de Cambios") +
-                      theme_minimal() +
-                      theme(axis.text.x = element_text(angle = 45, hjust = 1))
 
 # Resumen descriptivo
 cambio_uso_buf_hum %>%
@@ -176,12 +163,6 @@ print(tabla_ancha)
 
 
 # Gráfico de barras horizontales ###############################################
-                    ggplot(cambio_uso_buf_hum, aes(x = count, y = reorder(cambio_uso, count))) +
-                      geom_bar(stat = "identity", fill = "steelblue") +
-                      labs(title = "Cambios de Uso del suelo",
-                           x = "Número de Cambios", y = "Cambio de Uso del suelo") +
-                      theme_minimal()
-                    
 # Filtrar para mostrar solo las 10 categorías más comunes
                     top_cambios <- cambio_uso_buf_hum %>%
                       top_n(10, count)
@@ -212,10 +193,11 @@ cambio_uso_buf_hum_simplificado <- cambio_uso_buf_hum %>%
                       theme_minimal()
 
 
-# SOLO CAMBIOS (COMPARACION = DISTINTO) ########################################
+                    
+# SOLO CAMBIOS (CAMBIO = DISTINTO) ########################################
 # Filtrar los datos para obtener solo los cambios distintos ####################
 data_distintos <- data %>%
-  filter(COMPARACION == "DISTINTO")
+  filter(CAMBIO == "1")
 # Crear una columna que muestre el cambio de uso del suelo
 data_distintos <- data_distintos %>%
   mutate(cambio_uso = paste(MUCVA1984, "a", SIOSE2020))
@@ -228,12 +210,6 @@ cambio_uso_buf_hum <- data_distintos %>%
 # Ver los resultados
 print(cambio_uso_buf_hum)
 # Gráfico de barras horizontales para cambios distintos
-                    ggplot(cambio_uso_buf_hum, aes(x = count, y = reorder(cambio_uso, count))) +
-                      geom_bar(stat = "identity", fill = "steelblue") +
-                      labs(title = "Cambios de Uso del suelo (DISTINTO)",
-                           x = "Número de Cambios", y = "Cambio de Uso del suelo") +
-                      theme_minimal()
-
 # Mostrar solo las 10 categorías más comunes
 top_cambios <- cambio_uso_buf_hum %>%
   top_n(10, count)
@@ -307,7 +283,7 @@ humedales_interior <- dentro_humedales %>% filter(GRUPO_TIPO != "Costeros")
 
 # Contar los registros en cada grupo
 count_humedales <- datos %>%
-  group_by(ZONA, GRUPO_TIPO) %>%
+  group_by(ZONA, GRUPO_TIPO,CAMBIO) %>%
   summarize(n = n())
 
 print(count_humedales)
@@ -319,6 +295,115 @@ ggplot(count_humedales, aes(x = GRUPO_TIPO, y = n, fill = ZONA)) +
        x = "Tipo de Humedal", y = "Número de Registros") +
   theme_minimal()
 
+sum_presion <- datos %>%
+  group_by(ZONA, GRUPO_TIPO,CAMBIO_PRESION) %>%
+  sum(n = n())
+
+print(count_humedales)
+
+# Según presión:
+# Calcular la suma ponderada de la presión por ZONA y GRUPO_TIPO
+suma_presion_cost_int <- datos %>%
+  group_by(ZONA, GRUPO_TIPO) %>%
+  summarise(balance_presion = sum(CAMBIO_PRESION))  # ¿Debería multiplicar el cambio de presión por el número de casos?
+
+# GRÁFICO HUMEDAL/BUFFER + COSTEROS/INTERIORES + CAMBIO: IGUAL/DISTINTO
+ggplot(suma_presion_cost_int, aes(x = interaction(ZONA, GRUPO_TIPO), y = balance_presion, fill = balance_presion)) +
+  geom_bar(stat = "identity", position = "fill") +
+  labs(title = "Presión de los cambios de uso del suelo según situación con respecto al humedal y a la costa",
+       x = "Situación con respecto al humedal y a la costa", 
+       y = "Porcentaje") +
+  scale_fill_manual(values = c("0" = "honeydew3", "1" = "darkorchid1")) +
+  scale_y_continuous(labels = scales::percent) +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+
+ggplot(suma_presion_cost_int, aes(x = interaction(ZONA, GRUPO_TIPO), y = balance_presion, fill = balance_presion)) +
+  geom_bar(stat = "identity", position = "dodge") +
+  labs(title = "Presión de los cambios de uso del suelo según situación con respecto al humedal y a la costa",
+       x = "Situación con respecto al humedal y a la costa", 
+       y = "Balance de presión de los usos del suelo") +
+  scale_fill_gradient2(low = "red", mid = "white", high = "blue", midpoint = 0) +  # Escala de color continua
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+ggplot(suma_presion_cost_int, aes(x = interaction(ZONA, GRUPO_TIPO), y = balance_presion, fill = balance_presion)) +
+  geom_bar(stat = "identity", position = "dodge") +
+  labs(title = "Presión de los cambios de uso del suelo según situación con respecto al humedal y a la costa",
+       x = "Situación con respecto al humedal y a la costa", 
+       y = "Balance de presión de los usos del suelo",
+       fill = "Balance de presión") +  # Cambiar título de la leyenda
+  scale_x_discrete(labels = c("Buffer.Costeros" = "Buffer-costeros", 
+                              "Buffer.Interiores" = "Buffer-interiores",
+                              "Humedal.Costeros" = "Humedal-costeros", 
+                              "Humedal.Interiores" = "Humedal-interiores")) +  # Cambiar etiquetas del eje X
+  scale_fill_gradient2(low = "red", mid = "white", high = "blue", midpoint = 0) +  # Escala de color continua
+  theme_minimal()
+
+
+suma_presion_cost_int_2 <- datos %>%
+  group_by(ZONA, GRUPO_TIPO) %>%
+  summarise(suma_positivos = sum(CAMBIO_PRESION[CAMBIO_PRESION > 0], na.rm = TRUE),
+            suma_negativos = sum(CAMBIO_PRESION[CAMBIO_PRESION < 0], na.rm = TRUE))  
+
+# GRÁFICO HUMEDAL/BUFFER + COSTEROS/INTERIORES + BALANCE DE PRESIÓN SEPARADO EN + -
+ggplot(suma_presion_cost_int_2, aes(x = interaction(ZONA, GRUPO_TIPO))) +
+  geom_bar(aes(y = suma_positivos, fill = "Positivos"), stat = "identity", position = "dodge") +
+  geom_bar(aes(y = suma_negativos, fill = "Negativos"), stat = "identity", position = "dodge") +
+  labs(title = "Presión de los cambios de uso del suelo según situación con respecto al humedal y a la costa",
+       x = "Situación con respecto al humedal y a la costa", 
+       y = "Balance de presión de los usos del suelo",
+       fill = "Balance de presión") +  # Cambiar título de la leyenda
+  scale_x_discrete(labels = c("Buffer.Costeros" = "Buffer-costeros", 
+                              "Buffer.Interiores" = "Buffer-interiores",
+                              "Humedal.Costeros" = "Humedal-costeros", 
+                              "Humedal.Interiores" = "Humedal-interiores")) +  # Cambiar etiquetas del eje X
+  scale_fill_manual(values = c("Positivos" = "#04bcc4", "Negativos" = "#fc746c")) +  # Asignar colores específicos
+  theme_minimal()
+
+
+
+
+
+# Calcular la suma ponderada de la presión por ZONA y ENP
+suma_presion_ENP <- datos %>%
+  group_by(ZONA, ENP) %>%
+  summarise(balance_presion = sum(CAMBIO_PRESION))  # ¿Debería multiplicar el cambio de presión por el número de casos?
+
+ggplot(suma_presion_ENP, aes(x = interaction(ZONA, ENP), y = balance_presion, fill = balance_presion)) +
+  geom_bar(stat = "identity", position = "dodge") +
+  labs(title = "Presión de los cambios de uso del suelo según situación con respecto al humedal y protección",
+       x = "Situación con respecto al humedal y protección", 
+       y = "Balance de presión de los usos del suelo",
+       fill = "Balance de presión") +  # Cambiar título de la leyenda
+  scale_x_discrete(labels = c("Buffer.0" = "Buffer-no protegido", 
+                              "Buffer.1" = "Buffer-protegido",
+                              "Humedal.0" = "Humedal-no protegido", 
+                              "Humedal.1" = "Humedal-protegido")) +  # Cambiar etiquetas del eje X
+  scale_fill_gradient2(low = "red", mid = "white", high = "blue", midpoint = 0) +  # Escala de color continua
+  theme_minimal()
+
+
+suma_presion_ENP_2 <- datos %>%
+  group_by(ZONA, ENP) %>%
+  summarise(suma_positivos = sum(CAMBIO_PRESION[CAMBIO_PRESION > 0], na.rm = TRUE),
+            suma_negativos = sum(CAMBIO_PRESION[CAMBIO_PRESION < 0], na.rm = TRUE))  # Multiplicación por n y suma condicional
+
+# GRÁFICO HUMEDAL/BUFFER + PROTECCIÓN + BALANCE DE PRESIÓN SEPARADO EN + -
+ggplot(suma_presion_ENP_2, aes(x = interaction(ZONA, ENP))) +
+  geom_bar(aes(y = suma_positivos, fill = "Positivos"), stat = "identity", position = "dodge") +
+  geom_bar(aes(y = suma_negativos, fill = "Negativos"), stat = "identity", position = "dodge") +
+  labs(title = "Presión de los cambios de uso del suelo según situación con respecto al humedal y protección",
+       x = "Situación con respecto al humedal y protección", 
+       y = "Balance de presión de los usos del suelo",
+       fill = "Balance de presión") +  # Cambiar título de la leyenda
+  scale_x_discrete(labels = c("Buffer.0" = "Buffer-no protegido", 
+                              "Buffer.1" = "Buffer-protegido",
+                              "Humedal.0" = "Humedal-no protegido", 
+                              "Humedal.1" = "Humedal-protegido")) +  # Cambiar etiquetas del eje X
+  scale_fill_manual(values = c("Positivos" = "#04bcc4", "Negativos" = "#fc746c")) +  # Asignar colores específicos
+  theme_minimal()
 
 ################################################################################
 modelo_lm <- lm(SIOSE_PRES ~ MUCVA1984, data = datos)
@@ -340,13 +425,16 @@ ggplot(datos.p, aes(x = wetland_or_buffer, y = ndvi_periods, fill = year_periods
   scale_fill_manual(values = c("1999_2010" = "#DEB887", "2011_2021" = "#87CEFF")) +
   facet_wrap(~ year_periods)
 
-ggplot(comparacion_proporciones, aes(x = ZONA, y = proporcion, fill = COMPARACION)) +
+ggplot(comparacion_resumen, aes(x = ZONA, y = count, fill = CAMBIO)) +
   geom_bar(stat = "identity") +
   labs(title = "Cambios de uso del suelo en función de situación con respecto al humedal",
-       x = "Zona (dentro/fuera del humedal)", y = "Proporción") +
-  scale_y_continuous(labels = scales::percent_format()) +
-  scale_fill_manual(values = c("IGUAL" = "honeydew3", "DISTINTO" = "darkorchid1")) +
+       x = "Zona (dentro/fuera del humedal)", y = "Puntos de análisis (nº)") +
+  scale_fill_manual(values = c("0" = "honeydew3", "1" = "darkorchid1")) +
   theme_minimal()
 
-
-                    
+ggplot(count_humedales, aes(x = ZONA, y = GRUPO_TIPO, fill = CAMBIO)) +
+  geom_bar(stat = "identity") +
+  labs(title = "Cambios de uso del suelo en función de situación con respecto al humedal",
+       x = "Zona (dentro/fuera del humedal)", y = "Puntos de análisis (nº)") +
+  scale_fill_manual(values = c("0" = "honeydew3", "1" = "darkorchid1")) +
+  theme_minimal()
