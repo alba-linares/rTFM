@@ -154,3 +154,20 @@ Cantidad zonas húmedas antes y después y lo mismo con Cobertura vegetal y suel
 
 Zonas naturales -> HIC y Zonas naturales -> noHIC + binomial
 Figura de protección ¿protege? Partir de las que son zonas naturales 
+
+
+
+23/10/2024
+Preg 1: cambios son similares/diferentes interior-costa y protegido-no protegido: graf barras <- % cambio y buffer-humedal + modelo mixto
+
+Preg 2: en humedales donde haya un incremento del regadío en el buffer, habrá más comunidades de saladar/carrizal y un incremento en el índice de humedad
+
+Resultados puntos analisis: 0=IGUAL 1=DISTINTO cambio
+Tipo de cambio = resta de presiones. + y - MUCVA-SIOSE= - ES MÁS PRESIÓN
+Puntos por buffer son más que en humedal¿?  Buffer (1509) Humedal (571) 
+Separar los análisis por buffer y por humedal y que el % sea sobre el total en cada grupo y no sobre el total de puntos
+
+Estaría bien definir una paleta de colores para las gráficas porque están saliendo muy diferentes entre sí
+#fc746c rojo rosado y #04bcc4 azul
+
+Incluir pie de tabla y pie de figura para que se entienda mejor todo por sí mismo (como la gráfica: Cambios en el área de usos del suelo en porcentaje fuera del humedal (buffer) entre los años 1984-2020)
