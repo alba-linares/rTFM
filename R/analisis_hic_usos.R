@@ -22,6 +22,7 @@ datos$CODIGO_UE2 <- lapply(datos$CODIGO_UE2, as.factor)
 datos$CODIGO_UE3 <- lapply(datos$CODIGO_UE3, as.factor)
 datos$CODIGO_UE4 <- lapply(datos$CODIGO_UE4, as.factor)
 datos[18:33] <- lapply(datos[18:33], as.factor)
+datos$TIPO_DE_CAMBIO<- lapply(datos$TIPO_DE_CAMBIO, as.factor)
 datos$PRESENCIA_ZONA_NAT<- lapply(datos$PRESENCIA_ZONA_NAT, as.factor)
 datos$MUCVA_ZONAS_NAT_T_ESPECIFICAS<- lapply(datos$MUCVA_ZONAS_NAT_T_ESPECIFICAS, as.factor)
 # sapply(datos[1:37], function(x) length(unique(x))) #nº de niveles
@@ -31,6 +32,7 @@ datos$CODIGO_UE2<-unlist(datos$CODIGO_UE2)
 datos$CODIGO_UE3<-unlist(datos$CODIGO_UE3)
 datos$CODIGO_UE4<-unlist(datos$CODIGO_UE4)
 datos$PRESENCIA_ZONA_NAT<-unlist(datos$PRESENCIA_ZONA_NAT)
+datos$TIPO_DE_CAMBIO<-unlist(datos$TIPO_DE_CAMBIO)
 datos$MUCVA_ZONAS_NAT_T_ESPECIFICAS<-unlist(datos$MUCVA_ZONAS_NAT_T_ESPECIFICAS)
 
 
@@ -56,8 +58,13 @@ barplot(table(datos$PRESENCIA_HIC,datos$ENP),
         main = "Presencia de HIC en función de la figura de protección")
         #arrows(data_summary$mean - data_summary$sd, data_summary$mean + data_summary$sd, angle = 90, code = 3, length = 0.1, col = "black"),
         #text(data_summary$mean + data_summary$sd + 0.02, labels = tukey_labels, col = "black")        # Añadir letras de Tukey
-        
-#¿Hay una diferencia significativa en la que los puntos no protegidos tienen una mayor presencia de HIC?
+
+modelo_glm <- glm(PRESENCIA_ZONA_NAT~FIGURA, family = binomial, data=datos)
+Anova(modelo_glm)
+summary(modelo_glm) #
+
+modelo_lm <- lm(TIPO_DE_CAMBIO ~ ENP, data=datos)
+summary(modelo_lm) #
 
 ################################################################################
 #library(dplyr)
