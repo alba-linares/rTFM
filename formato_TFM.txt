@@ -1,0 +1,27 @@
+La elaboración de una Memoria final de TFM, en castellano o inglés, que debe presentarse
+según el esquema: 
+Portada, 
+Índice, 
+Aportación del Estudiante (ver apartado de Evaluación:
+declaración de originalidad y contribución del estudiante al TFM), 
+Resumen (máximo 300
+palabras), 
+Introducción, 
+Hipótesis (en su caso) y 
+Objetivos, 
+Material y Métodos, 
+Resultados,
+Discusión, 
+Conclusiones, 
+Bibliografía y 
+Anexos (en su caso). 
+
+La extensión de la Memoria de TFM debe de ser inferior a 50 páginas desde el Resumen hasta la Bibliografía. Los Anexos, con información complementaria menos relevante, no entran en este cómputo de páginas. 
+El formato del texto debe cumplir: 
+tipo de letra Calibri, 
+tamaño de fuente 11, 
+espaciado de 1,15, 
+texto justificado, 
+márgenes de 2,5 cm, 
+pies de figuras y fotos y encabezados de tablas tipo de letra Calibri con tamaño de fuente 10 con interlineado 1,0. 
+Formato electrónico en pdf.
