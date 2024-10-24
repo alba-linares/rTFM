@@ -14,17 +14,17 @@ df_area_usos20 <-read_excel("Excel/Resultados_puntos_analisis.xlsx", sheet = 3)
 
 ################################################################################
 # Análisis exploratorio de los datos: gráficas #################################
-                    pie(table(datos$CAMBIO))
-                    pie(table(datos$MUCVA1984)) #Usos 1984
-                    pie(table(datos$SIOSE2020)) #Usos 2020
-                    #pie(table(datos$TIPO_DE_CAMBIO),names=c(0_0=="s",0_1=="q",1_0=="r",1_1=="w",)) #Usos 2020
+pie(table(datos$CAMBIO))
+pie(table(datos$MUCVA1984)) #Usos 1984
+pie(table(datos$SIOSE2020)) #Usos 2020
+#pie(table(datos$TIPO_DE_CAMBIO),names=c(0_0=="s",0_1=="q",1_0=="r",1_1=="w",)) #Usos 2020
 
 # Gráfico de barras apiladas
-                    ggplot(datos, aes(x = datos$MUCVA1984_GENERAL, fill = CAMBIO)) +
-                      geom_bar(position = "fill") +
-                      labs(title = "Comparación de usos del suelo entre 1984 y 2020", x = "Uso del suelo en 1984", y = "Proporción") +
-                      theme_minimal() +
-                      theme(axis.text.x = element_text(angle = 270, vjust = 0.5, hjust=0))
+ggplot(datos, aes(x = datos$MUCVA1984_GENERAL, fill = CAMBIO)) +
+  geom_bar(position = "fill") +
+  labs(title = "Comparación de usos del suelo entre 1984 y 2020", x = "Uso del suelo en 1984", y = "Proporción") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 270, vjust = 0.5, hjust=0))
 
 
 # Contar las frecuencias de cada clase de uso del suelo por humedal
@@ -269,17 +269,16 @@ head(tabla_ancha_ci)
 
 
 
-
-
-
+################################################################################
+################################################################################
 ################################################################################
 # Filtrar datos dentro y fuera de humedales y costeros-interiores ##############
-dentro_humedales <- datos %>% filter(ZONA == "Humedal")
-fuera_humedales <- datos %>% filter(ZONA != "Humedal")
+#dentro_humedales <- datos %>% filter(ZONA == "Humedal")
+#fuera_humedales <- datos %>% filter(ZONA != "Humedal")
 
 # Filtrar humedales costeros e interiores
-humedales_costeros <- dentro_humedales %>% filter(GRUPO_TIPO == "Costeros")
-humedales_interior <- dentro_humedales %>% filter(GRUPO_TIPO != "Costeros")
+#humedales_costeros <- dentro_humedales %>% filter(GRUPO_TIPO == "Costeros")
+#humedales_interior <- dentro_humedales %>% filter(GRUPO_TIPO != "Costeros")
 
 # Contar los registros en cada grupo
 count_humedales <- datos %>%
@@ -288,6 +287,7 @@ count_humedales <- datos %>%
 
 print(count_humedales)
 
+
 # Gráfico de barras para comparar las zonas
 ggplot(count_humedales, aes(x = GRUPO_TIPO, y = n, fill = ZONA)) +
   geom_bar(stat = "identity", position = "dodge") +
@@ -295,12 +295,8 @@ ggplot(count_humedales, aes(x = GRUPO_TIPO, y = n, fill = ZONA)) +
        x = "Tipo de Humedal", y = "Número de Registros") +
   theme_minimal()
 
-sum_presion <- datos %>%
-  group_by(ZONA, GRUPO_TIPO,CAMBIO_PRESION) %>%
-  sum(n = n())
 
-print(count_humedales)
-
+################################################################################
 # Según presión:
 # Calcular la suma ponderada de la presión por ZONA y GRUPO_TIPO
 suma_presion_cost_int <- datos %>%
@@ -320,16 +316,8 @@ ggplot(suma_presion_cost_int, aes(x = interaction(ZONA, GRUPO_TIPO), y = balance
   theme_minimal() +
   theme(axis.text.x = element_text(angle = 45, hjust = 1))
 
-
-ggplot(suma_presion_cost_int, aes(x = interaction(ZONA, GRUPO_TIPO), y = balance_presion, fill = balance_presion)) +
-  geom_bar(stat = "identity", position = "dodge") +
-  labs(title = "Presión de los cambios de uso del suelo según situación con respecto al humedal y a la costa",
-       x = "Situación con respecto al humedal y a la costa", 
-       y = "Balance de presión de los usos del suelo") +
-  scale_fill_gradient2(low = "red", mid = "white", high = "blue", midpoint = 0) +  # Escala de color continua
-  theme_minimal() +
-  theme(axis.text.x = element_text(angle = 45, hjust = 1))
-
+################################################################################
+# GRÁFICO SUMA TOTAL DE PRESIONES (MULTIPLICANTO CAMBIO DE PRESIÓN POR NÚMERO DE CASOS)
 ggplot(suma_presion_cost_int, aes(x = interaction(ZONA, GRUPO_TIPO), y = balance_presion, fill = balance_presion)) +
   geom_bar(stat = "identity", position = "dodge") +
   labs(title = "Presión de los cambios de uso del suelo según situación con respecto al humedal y a la costa",
@@ -344,12 +332,13 @@ ggplot(suma_presion_cost_int, aes(x = interaction(ZONA, GRUPO_TIPO), y = balance
   theme_minimal()
 
 
+################################################################################
+# GRÁFICO HUMEDAL/BUFFER + COSTEROS/INTERIORES + BALANCE DE PRESIÓN SEPARADO EN + -
 suma_presion_cost_int_2 <- datos %>%
   group_by(ZONA, GRUPO_TIPO) %>%
   summarise(suma_positivos = sum(CAMBIO_PRESION[CAMBIO_PRESION > 0], na.rm = TRUE),
             suma_negativos = sum(CAMBIO_PRESION[CAMBIO_PRESION < 0], na.rm = TRUE))  
 
-# GRÁFICO HUMEDAL/BUFFER + COSTEROS/INTERIORES + BALANCE DE PRESIÓN SEPARADO EN + -
 ggplot(suma_presion_cost_int_2, aes(x = interaction(ZONA, GRUPO_TIPO))) +
   geom_bar(aes(y = suma_positivos, fill = "Positivos"), stat = "identity", position = "dodge") +
   geom_bar(aes(y = suma_negativos, fill = "Negativos"), stat = "identity", position = "dodge") +
@@ -366,8 +355,8 @@ ggplot(suma_presion_cost_int_2, aes(x = interaction(ZONA, GRUPO_TIPO))) +
 
 
 
-
-
+################################################################################
+# GRÁFICO SUMA TOTAL DE PRESIONES (MULTIPLICANTO CAMBIO DE PRESIÓN POR NÚMERO DE CASOS)
 # Calcular la suma ponderada de la presión por ZONA y ENP
 suma_presion_ENP <- datos %>%
   group_by(ZONA, ENP) %>%
@@ -388,7 +377,8 @@ ggplot(suma_presion_ENP, aes(x = interaction(ZONA, ENP), y = balance_presion, fi
   scale_fill_gradient2(low = "red", mid = "white", high = "blue", midpoint = 0) +  # Escala de color continua
   theme_minimal()
 
-
+################################################################################
+# GRÁFICO HUMEDAL/BUFFER + PROTEGIDOS/NO PROTEGIDOS + BALANCE DE PRESIÓN SEPARADO EN + -
 suma_presion_ENP_2 <- datos %>%
   group_by(ZONA, ENP) %>%
   summarise(suma_positivos = sum(CAMBIO_PRESION[CAMBIO_PRESION > 0], na.rm = TRUE),
@@ -412,66 +402,16 @@ ggplot(suma_presion_ENP_2, aes(x = interaction(ZONA, ENP))) +
 
 
 ################################################################################
-# Intento de estandarizar:
-# Cálculo de la suma de positivos, negativos y el número total de puntos
-suma_presion_ENP_2 <- datos %>%
-  group_by(ZONA, ENP) %>%
-  summarise(
-    suma_positivos = sum(CAMBIO_PRESION[CAMBIO_PRESION > 0], na.rm = TRUE),
-    suma_negativos = sum(CAMBIO_PRESION[CAMBIO_PRESION < 0], na.rm = TRUE),
-    puntos_neutrales = n()-suma_positivos+suma_negativos  # Número total de puntos
-  )
-
-# Gráfico
-ggplot(suma_presion_ENP_2, aes(x = interaction(ZONA, ENP))) +
-  # Añadir barra para el total de puntos
-  geom_bar(aes(y = puntos_neutrales, fill = "Total"), stat = "identity", alpha = 0.2, color = "black", position = "dodge") +
-  
-  # Añadir barra para los positivos
-  geom_bar(aes(y = suma_positivos, fill = "Positivos"), stat = "identity", position = "dodge") +
-  
-  # Añadir barra para los negativos
-  geom_bar(aes(y = -suma_negativos, fill = "Negativos"), stat = "identity", position = "dodge") +
-  
-  # Ajustes de etiquetas y colores
-  labs(title = "Presión de los cambios de uso del suelo según situación con respecto al humedal y protección",
-       x = "Situación con respecto al humedal y protección", 
-       y = "Balance de presión de los usos del suelo",
-       fill = "Balance de presión") +  # Cambiar título de la leyenda
-  
-  scale_x_discrete(labels = c("Buffer.0" = "Buffer-no protegido", 
-                              "Buffer.1" = "Buffer-protegido",
-                              "Humedal.0" = "Humedal-no protegido", 
-                              "Humedal.1" = "Humedal-protegido")) +  # Cambiar etiquetas del eje X
-  
-  scale_fill_manual(values = c("Positivos" = "#04bcc4", "Negativos" = "#fc746c", "Total" = "#cccccc")) +  # Colores
-  
-  theme_minimal() +
-  theme(axis.text.x = element_text(angle = 45, hjust = 1))
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+                              # ESTANDARIZACIÓN
+################################################################################
+                         #GRÁFICO ESTANDARIZADO ENP
+################################################################################
 library(dplyr)
 library(tidyr)
 library(ggplot2)
 
 # Cálculo de la suma de positivos, negativos y el número total de puntos
-suma_presion_ENP_2 <- datos %>%
+suma_presion_ENP_3 <- datos %>%
   group_by(ZONA, ENP) %>%
   summarise(
     #suma_positivos = sum(CAMBIO_PRESION[CAMBIO_PRESION > 0], na.rm = TRUE),
@@ -494,9 +434,10 @@ suma_presion_ENP_2 <- datos %>%
 mutate(Categoria = factor(Categoria, levels = c("num_positivos", "num_negativos","sin_cambios")))
 
 # Gráfico apilado
-ggplot(suma_presion_ENP_2, aes(x = interaction(ZONA, ENP), y = Proporción, fill = Categoria)) +
+ggplot(suma_presion_ENP_3, aes(x = interaction(ZONA, ENP), y = Proporción, fill = Categoria)) +
   geom_bar(stat = "identity", position = "stack") +  # Apilar las barras
-  labs(title = "Proporción de la presión de los cambios de uso del suelo según situación con respecto al humedal y protección",
+  labs(title = "Proporción de la presión de los cambios de uso del suelo
+       según situación con respecto al humedal y protección",
        x = "Situación con respecto al humedal y protección", 
        y = "Proporción (%)",
        fill = "Categoría de presión") +  # Cambiar título de la leyenda
@@ -505,11 +446,71 @@ ggplot(suma_presion_ENP_2, aes(x = interaction(ZONA, ENP), y = Proporción, fill
                               "Humedal.0" = "Humedal-no protegido", 
                               "Humedal.1" = "Humedal-protegido")) +  # Cambiar etiquetas del eje X
   scale_fill_manual(values = c("num_positivos" = "#04bcc4", "num_negativos" = "#fc746c","sin_cambios" = "#D3D3D3"),  # Colores en el orden deseado
-  labels=c("Cambios positivos", "Cambios negativos","Sin cambios")) +
-  theme_minimal()  # Cambiar a un tema con fondo blanco
+  labels=c("Cambios positivos", "Cambios negativos","Sin cambios"))  +
+  theme(plot.title = element_text(hjust = 0.5, size = 13),  # Centrar y reducir el tamaño del título
+        panel.background = element_rect(fill = "white", color = NA),  # Fondo blanco
+        panel.grid.major = element_line(color = "gray90"),  # Líneas de cuadrícula principales en gris claro
+        panel.grid.minor = element_line(color = "gray95"),   # Líneas de cuadrícula menores en un gris más claro
+        axis.text.x = element_text(size = 12),
+        plot.title.position = "panel",
+        legend.text = element_text(size = 10),
+        legend.title = element_text(size = 12,face="bold")
+  )# Centrar y reducir el tamaño del título
   
 
+################################################################################
+                   #GRÁFICO ESTANDARIZADO COSTERO-INTERIOR
+################################################################################
+library(dplyr)
+library(tidyr)
+library(ggplot2)
 
+# Cálculo de la suma de positivos, negativos y el número total de puntos
+suma_presion_cost_int_3 <- datos %>%
+  group_by(ZONA, GRUPO_TIPO) %>%
+  summarise(
+    #suma_positivos = sum(CAMBIO_PRESION[CAMBIO_PRESION > 0], na.rm = TRUE),
+    #suma_negativos = abs(sum(CAMBIO_PRESION[CAMBIO_PRESION < 0], na.rm = TRUE)),
+    # Contar la cantidad de valores positivos
+    num_positivos = sum(CAMBIO_PRESION > 0, na.rm = TRUE),
+    # Contar la cantidad de valores negativos
+    num_negativos = sum(CAMBIO_PRESION < 0, na.rm = TRUE),
+    total_puntos = n()  # Número total de puntos
+  ) %>%
+  # Calcular neutros
+  mutate(sin_cambios = total_puntos - num_positivos - abs(num_negativos)) %>% 
+  # Transformar a formato largo para apilamiento
+  pivot_longer(cols = c(num_positivos, num_negativos,sin_cambios),
+               names_to = "Categoria",
+               values_to = "Valor") %>%
+  # Calcular la proporción sobre el total
+  mutate(Proporción = Valor / total_puntos) %>%
+  # Definir el orden de las categorías
+  mutate(Categoria = factor(Categoria, levels = c("num_positivos", "num_negativos","sin_cambios")))
+
+# Gráfico apilado
+ggplot(suma_presion_cost_int_3, aes(x = interaction(ZONA, GRUPO_TIPO), y = Proporción, fill = Categoria)) +
+  geom_bar(stat = "identity", position = "stack") +  # Apilar las barras
+  labs(title = "Presión de los cambios de uso del suelo
+       según situación con respecto al humedal y a la costa",
+       x = "Situación con respecto al humedal y a la costa", 
+       y = "Proporción (%)",
+       fill = "Categoría de presión") +  # Cambiar título de la leyenda
+  scale_x_discrete(labels = c("Buffer.Costeros" = "Buffer-costeros", 
+                              "Buffer.Interiores" = "Buffer-interiores",
+                              "Humedal.Costeros" = "Humedal-costeros", 
+                              "Humedal.Interiores" = "Humedal-interiores")) +  # Cambiar etiquetas del eje X
+  scale_fill_manual(values = c("num_positivos" = "#04bcc4", "num_negativos" = "#fc746c","sin_cambios" = "#D3D3D3"),  # Colores en el orden deseado
+                      labels=c("Cambios positivos", "Cambios negativos","Sin cambios")) +
+  theme(plot.title = element_text(hjust = 0.5, size = 13),  # Centrar y reducir el tamaño del título
+        panel.background = element_rect(fill = "white", color = NA),  # Fondo blanco
+        panel.grid.major = element_line(color = "gray90"),  # Líneas de cuadrícula principales en gris claro
+        panel.grid.minor = element_line(color = "gray95"),   # Líneas de cuadrícula menores en un gris más claro
+        axis.text.x = element_text(size = 12),
+        plot.title.position = "panel",
+        legend.text = element_text(size = 10),
+        legend.title = element_text(size = 12,face="bold")
+  )# Centrar y reducir el tamaño del título
 
 
 
