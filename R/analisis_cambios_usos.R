@@ -523,13 +523,38 @@ ggplot(suma_presion_cost_int_3, aes(x = interaction(ZONA, GRUPO_TIPO), y = Propo
 
 
 
-  ################################################################################
-modelo_lm <- lm(SIOSE_PRES ~ MUCVA1984, data = datos)
-Anova(modelo_lm)
-summary(modelo_lm)
+################################################################################
+                            # ANÁLISIS MODELOS 
+################################################################################
+#Preg 1: cambios son similares/diferentes interior-costa y protegido-no protegido: graf barras <- % cambio y buffer-humedal + modelo mixto
+datos$CAMBIO <- as.numeric(as.factor(datos$CAMBIO)) - 1  # Convertir a 0 y 1 si es necesario
+datos$GRUPO_TIPO <- as.factor(datos$GRUPO_TIPO)
+modelo_glm <- glm(CAMBIO ~ GRUPO_TIPO, family=binomial,data = datos)
+Anova(modelo_glm)
+summary(modelo_glm)
+library(multcomp) 
+Tukey<-glht(modelo_glm, mcp(GRUPO_TIPO="Tukey"))
+summary(Tukey)
 
 
+#Se puede ver como hay menor presencia de HIC en el buffer
+CAMBIOxcost_int_1 <- table(datos$CAMBIO,datos$GRUPO_TIPO)
+# Convertir los valores de HICxHB en proporciones
+CAMBIOxcost_int <- prop.table(CAMBIOxcost_int_1, margin = 2)  # Margen 2 asegura que sumen 1 por columna
+rownames(CAMBIOxcost_int)<- c("Sin cambios", "Con cambios")
+barplot(CAMBIOxcost_int,
+        ylab = "Puntos de análisis (nº)",
+        main = "Presencia de HIC en función de la situación con respecto al humedal",
+        cex.main=0.9,
+        col = c("mistyrose3", "palegreen3"),  # Colores para las barras
+        ylim = c(0, max(HICxENP) * 1.2),  # Ajustar el límite del eje Y para dar espacio a la leyenda
+        legend.text = c("Sin cambios", "Con cambios"),
+        args.legend = list(x = "bottom",  # Ubicar la leyenda
+                           horiz = TRUE,   # Poner la leyenda en horizontal
+                           inset = c(0, -0.35),  # Ajustar la posición de la leyenda dentro del gráfico
+                           cex = 0.9))     # Ajustar el tamaño del texto de la leyenda
 
+# CONTINUAR CON ANALISIS Y GRÁFICOS
 
 ################################################################################
 # GRÁFICOS PLANTILLA
