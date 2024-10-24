@@ -50,14 +50,37 @@ barplot(table(datos$PRESENCIA_HIC,datos$FIGURA),
         ylab="Puntos de análisis (nº)",
         main = "Presencia de HIC en función de la figura de protección")
 
-barplot(table(datos$PRESENCIA_HIC,datos$ENP),
-        las=2,
-        legend.text = unique(c("Ausencia HIC","Presencia HIC")),
-        args.legend = list(x = "topleft"),
-        ylab="Puntos de análisis (nº)",
-        main = "Presencia de HIC en función de la figura de protección")
-        #arrows(data_summary$mean - data_summary$sd, data_summary$mean + data_summary$sd, angle = 90, code = 3, length = 0.1, col = "black"),
-        #text(data_summary$mean + data_summary$sd + 0.02, labels = tukey_labels, col = "black")        # Añadir letras de Tukey
+
+#Se puede ver como hay menor presencia de HIC en el buffer
+HICxENP_1 <- table(datos$PRESENCIA_HIC,datos$ENP)
+# Convertir los valores de HICxHB en proporciones
+HICxENP <- prop.table(HICxENP_1, margin = 2)  # Margen 2 asegura que sumen 1 por columna
+colnames(HICxENP)<- c("No protegido", "Protegido")
+rownames(HICxENP)<- c("Ausencia HIC", "Presencia HIC")
+barplot(HICxENP,
+        ylab = "Puntos de análisis (nº)",
+        main = "Presencia de HIC en función de la figura de protección",
+        col = c("mistyrose3", "palegreen3"),  # Colores para las barras
+        ylim = c(0, max(HICxENP) * 1.2),  # Ajustar el límite del eje Y para dar espacio a la leyenda
+        legend.text = c("Ausencia HIC", "Presencia HIC"),  # Añadir la leyenda dentro de barplot()
+        args.legend = list(x = "bottom",  # Ubicar la leyenda
+                           horiz = TRUE,   # Poner la leyenda en horizontal
+                           inset = c(0, -0.35),  # Ajustar la posición de la leyenda dentro del gráfico
+                           cex = 0.9))     # Ajustar el tamaño del texto de la leyenda
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 modelo_glm <- glm(PRESENCIA_ZONA_NAT~FIGURA, family = binomial, data=datos)
 Anova(modelo_glm)
@@ -142,12 +165,21 @@ table(datos$PRESENCIA_HIC, datos$ZONA)
 #0   1013     375
 #1    496     196
 #Se puede ver como hay menor presencia de HIC en el buffer
-barplot(table(datos$PRESENCIA_HIC,datos$ZONA),
-        legend.text = unique(datos$PRESENCIA_HIC),
-        las=2,
-        args.legend = list(x = "topright"),
-        ylab="Puntos de análisis (nº)",
-        main = "Presencia de HIC en función de la situación con respecto al humedal")
+HICxHB_1 <- table(datos$PRESENCIA_HIC,datos$ZONA)
+# Convertir los valores de HICxHB en proporciones
+HICxHB <- prop.table(HICxHB_1, margin = 2)  # Margen 2 asegura que sumen 1 por columna
+rownames(HICxHB)<- c("Ausencia HIC", "Presencia HIC")
+barplot(HICxHB,
+        ylab = "Puntos de análisis (nº)",
+        main = "Presencia de HIC en función de la situación con respecto al humedal",
+        cex.main=0.9,
+        col = c("mistyrose3", "palegreen3"),  # Colores para las barras
+        ylim = c(0, max(HICxENP) * 1.2),  # Ajustar el límite del eje Y para dar espacio a la leyenda
+        legend.text = c("Ausencia HIC", "Presencia HIC"),
+        args.legend = list(x = "bottom",  # Ubicar la leyenda
+                           horiz = TRUE,   # Poner la leyenda en horizontal
+                           inset = c(0, -0.35),  # Ajustar la posición de la leyenda dentro del gráfico
+                           cex = 0.9))     # Ajustar el tamaño del texto de la leyenda
 
 #De los que han cambiado, ¿qué hay ahora?:
 datos_cambios <- subset(datos, datos$COMPARACION=="DISTINTO")
