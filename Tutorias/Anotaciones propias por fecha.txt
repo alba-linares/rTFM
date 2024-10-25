@@ -175,3 +175,11 @@ Incluir pie de tabla y pie de figura para que se entienda mejor todo por sí mis
 
 - [Done] Tengo que hacer el gráfico de proporción (sin cambios, cambios positivos, cambios negativos) para costeros/de interior
 - Continuar modelos y gráficos para responder la pregunta 1 a partir del código de analisis_cambios_usos
+
+
+25/10/2024
+MODELOS:
+	Qué factores hacen que aumente la presión: + y 0 es 0 y 1 en -
+	Multivariante con tres variables respuesta 0 - y + en % (estandarizar)
+
+PROPIEDAD POR ANÁLISIS MULTIVARIANTE, QUE DEPENDE DEL HUMEDAL

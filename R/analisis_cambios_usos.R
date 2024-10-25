@@ -571,6 +571,52 @@ emm <- emmeans(modelo_lme_pres_cost_hb, ~ GRUPO_TIPO * ZONA)
 letras_significancia <- cld(emm, Letters = letters, adjust = "Bonferroni")
 # Mostrar el resultado
 print(letras_significancia)  #a a a b
+
+# GRAFICO DE SOLO NEGATIVO
+suma_presion_cost_int_4 <- datos %>%
+  group_by(ZONA, GRUPO_TIPO) %>%
+  summarise(
+    # Contar la cantidad de valores positivos
+    num_positivos = sum(PRESION_BIN == 0, na.rm = TRUE), #OTRA OPCIÓN: suma_positivos = sum(CAMBIO_PRESION[CAMBIO_PRESION > 0], na.rm = TRUE),
+    # Contar la cantidad de valores negativos
+    num_negativos = sum(PRESION_BIN == 1, na.rm = TRUE),  #OTRA OPCIÓN: suma_negativos = abs(sum(CAMBIO_PRESION[CAMBIO_PRESION < 0], na.rm = TRUE)),
+    total_puntos = n()  # Número total de puntos
+  ) %>%
+  pivot_longer(cols = c(num_positivos, num_negativos),  # Transformar a formato largo para apilamiento
+               names_to = "Categoria",
+               values_to = "Valor") %>%
+  mutate(Proporcion = Valor / total_puntos) %>%  # Calcular la proporción sobre el total
+  mutate(Categoria = factor(Categoria, levels = c("num_positivos", "num_negativos")))  # Definir el orden de las categorías
+
+
+ggplot(suma_presion_cost_int_4, aes(x = interaction(ZONA, GRUPO_TIPO), y = Proporcion, fill = Categoria)) +
+  geom_bar(stat = "identity", position = "stack") +  # Apilar las barras
+  labs(title = "Presión de los cambios de uso del suelo
+       según situación con respecto al humedal y a la costa",
+       x = "Situación con respecto al humedal y a la costa", 
+       y = "Proporción (%)",
+       fill = "Categoría de presión") +  # Cambiar título de la leyenda
+  scale_x_discrete(labels = c("Buffer.Costeros" = "Buffer-costeros", 
+                              "Buffer.Interiores" = "Buffer-interiores",
+                              "Humedal.Costeros" = "Humedal-costeros", 
+                              "Humedal.Interiores" = "Humedal-interiores")) +  # Cambiar etiquetas del eje X
+  scale_fill_manual(values = c("num_positivos" = "#04bcc4", "num_negativos" = "#fc746c"),  # Colores en el orden deseado
+                    labels=c("Sin presión", "Presión")) +
+  theme(plot.title = element_text(hjust = 0.5, size = 13),  # Centrar y reducir el tamaño del título
+        panel.background = element_rect(fill = "white", color = NA),  # Fondo blanco
+        panel.grid.major = element_line(color = "gray90"),  # Líneas de cuadrícula principales en gris claro
+        panel.grid.minor = element_line(color = "gray95"),   # Líneas de cuadrícula menores en un gris más claro
+        axis.text.x = element_text(size = 12),
+        plot.title.position = "panel",
+        legend.text = element_text(size = 10),
+        legend.title = element_text(size = 12,face="bold") # Centrar y reducir el tamaño del título
+  )
+
+
+
+
+
+
 ################################################################################
 
 # Cálculo de la suma de positivos, negativos y el número total de puntos
