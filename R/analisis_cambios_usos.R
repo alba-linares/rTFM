@@ -3,10 +3,15 @@ library(readxl)
 library(dplyr)
 library(ggplot2)
 library(tidyr)
+library(car)
+library(multcomp) #glht() post-hoc y letras de significancia
+library(emmeans) #letras de significancia
+library(lme4) #glmer()
+
 
 # Leer los archivos
 setwd("D:/Escritorio/TFM/rTFM")
-  datos <-read_excel("Excel/Resultados_puntos_analisis.xlsx", range = "A1:V2081")
+datos <-read_excel("Excel/Resultados_puntos_analisis.xlsx", range = "A1:X2081")
 head(datos)
 
 df_area_usos84 <-read_excel("Excel/Resultados_puntos_analisis.xlsx", sheet = 2)
@@ -404,11 +409,55 @@ ggplot(suma_presion_ENP_2, aes(x = interaction(ZONA, ENP))) +
 ################################################################################
                               # ESTANDARIZACIÓN
 ################################################################################
-                         #GRÁFICO ESTANDARIZADO ENP
 ################################################################################
-library(dplyr)
-library(tidyr)
-library(ggplot2)
+# MODELO Y GRÁFICO ESTANDARIZADO
+# CAMBIO_PRESION ~ PROTEGIDO/NO PROTEGIDO * HUMEDAL/BUFFER
+################################################################################
+# datos$CAMBIO <- as.numeric(as.factor(datos$CAMBIO)) - 1  # Convertir a 0 y 1 si es necesario
+datos$ENP <- as.factor(datos$ENP)
+datos$ZONA <- as.factor(datos$ZONA)
+# datos$CAMBIO_PRESION <- as.factor(datos$CAMBIO_PRESION)
+
+# modelo_lm_pres_ENP_hb <- lm(CAMBIO_PRESION ~ ENP * ZONA, contrasts=list(ENP=contr.sum, ZONA=contr.sum), data = datos)
+# Anova(modelo_lm_pres_ENP_hb)
+# summary(modelo_lm_pres_ENP_hb)
+# # Interacción significativa: de no protegido x humedal.
+# 
+# # Obtener las medias marginales estimadas y comparaciones
+# emm1 <- emmeans(modelo_lm_pres_ENP_hb, ~ ENP * ZONA)
+# # Aplicar comparación de letras de significancia
+# letras_significancia1 <- cld(emm1, Letters = letters, adjust = "Bonferroni")
+# # Mostrar el resultado
+# print(letras_significancia1) #a a a b
+
+
+# # MODELO LINEAL MIXTO
+# modelo_lme_pres_ENP_hb <- lme(CAMBIO_PRESION ~ ENP * ZONA, random = ~ 1 | NOMBRE_HUM,data=datos)
+# anova(modelo_lme_pres_ENP_hb)
+# 
+# # Obtener las medias marginales estimadas y comparaciones
+# emm <- emmeans(modelo_lme_pres_ENP_hb, ~ ENP * ZONA)
+# # Aplicar comparación de letras de significancia
+# letras_significancia <- cld(emm, Letters = letters, adjust = "Bonferroni")
+# # Mostrar el resultado
+# print(letras_significancia)  #a ab ab b
+
+# PRESION_BIN + MODELO MIXTO (NEGATIVA = 1, NO PRESIÓN O POSITIVA = 0)
+modelo_glmer_pres_ENP_hb <- glmer(PRESION_BIN ~ ENP * ZONA + (1 | NOMBRE_HUM), family = binomial, data=datos)
+Anova(modelo_glmer_pres_ENP_hb)
+# Interacción significativa
+
+# Obtener las estimaciones marginales
+emmeans_result <- emmeans(modelo_glmer_pres_ENP_hb, ~ ENP * ZONA)
+
+# Realizar comparaciones post-hoc y obtener letras de significancia
+comparisons <- cld(emmeans_result, alpha = 0.05, Letters = letters)
+
+# Mostrar resultados con letras de significancia
+print(comparisons) # a b b b
+
+
+
 
 # Cálculo de la suma de positivos, negativos y el número total de puntos
 suma_presion_ENP_3 <- datos %>%
@@ -459,34 +508,89 @@ ggplot(suma_presion_ENP_3, aes(x = interaction(ZONA, ENP), y = Proporción, fill
   
 
 ################################################################################
-                   #GRÁFICO ESTANDARIZADO COSTERO-INTERIOR
+                       # MODELO Y GRÁFICO ESTANDARIZADO
+            # CAMBIO_PRESION ~ INTERIOR/COSTERO * HUMEDAL/BUFFER
 ################################################################################
-library(dplyr)
-library(tidyr)
-library(ggplot2)
+# PRESION_SIMPLIF
+presion_COST_HB_xHUM <- datos %>%
+  group_by(ZONA, GRUPO_TIPO, NOMBRE_HUM) %>%
+  summarise(
+    # Contar la cantidad de valores positivos
+    num_positivos = sum(CAMBIO_PRESION > 0, na.rm = TRUE), #OTRA OPCIÓN: suma_positivos = sum(CAMBIO_PRESION[CAMBIO_PRESION > 0], na.rm = TRUE),
+    # Contar la cantidad de valores negativos
+    num_negativos = sum(CAMBIO_PRESION < 0, na.rm = TRUE),  #OTRA OPCIÓN: suma_negativos = abs(sum(CAMBIO_PRESION[CAMBIO_PRESION < 0], na.rm = TRUE)),
+    total_puntos = n()  # Número total de puntos
+  ) %>%
+  mutate(sin_cambios = total_puntos - num_positivos - abs(num_negativos)) %>%   # Calcular ceros
+  pivot_longer(cols = c(num_positivos, num_negativos,sin_cambios),  # Transformar a formato largo para apilamiento
+               names_to = "Categoria",
+               values_to = "Valor") %>%
+  mutate(Proporcion = Valor / total_puntos) %>%  # Calcular la proporción sobre el total
+  mutate(Categoria = factor(Categoria, levels = c("num_positivos", "num_negativos","sin_cambios")))  # Definir el orden de las categorías
+
+presion_COST_HB_xHUM_wider <- pivot_wider(presion_COST_HB_xHUM, values_from = c(Valor, Proporcion), names_from = Categoria)
+
+# # datos$CAMBIO <- as.numeric(as.factor(datos$CAMBIO)) - 1  # Convertir a 0 y 1 si es necesario
+# datos$GRUPO_TIPO <- as.factor(datos$GRUPO_TIPO)
+# datos$ZONA <- as.factor(datos$ZONA)
+# # datos$CAMBIO_PRESION <- as.factor(datos$CAMBIO_PRESION)
+
+# manova <- manova(cbind(Proporcion_num_positivos, Proporcion_sin_cambios, Proporcion_num_negativos) ~ (GRUPO_TIPO*ZONA), data = presion_COST_HB_xHUM_wider) 
+# manova
+
+
+# PRESION_BIN (NEGATIVA = 1, NO PRESIÓN O POSITIVA = 0)
+# modelo_lm_pres_cost_hb <- glm(PRESION_BIN ~ GRUPO_TIPO * ZONA, contrasts=list(GRUPO_TIPO=contr.sum, ZONA=contr.sum), family=binomial, data = datos)
+# Anova(modelo_lm_pres_cost_hb)
+# summary(modelo_lm_pres_cost_hb)
+
+# PRESION_BIN + MODELO MIXTO (NEGATIVA = 1, NO PRESIÓN O POSITIVA = 0)
+modelo_glmer_pres_cost_hb <- glmer(PRESION_BIN ~ GRUPO_TIPO * ZONA + (1 | NOMBRE_HUM), family = binomial, data=datos)
+Anova(modelo_glmer_pres_cost_hb)
+# Interacción significativa
+
+# Obtener las estimaciones marginales
+emmeans_result <- emmeans(modelo_glmer_pres_cost_hb, ~ GRUPO_TIPO * ZONA)
+
+# Realizar comparaciones post-hoc y obtener letras de significancia
+comparisons <- cld(emmeans_result, alpha = 0.05, Letters = letters)
+
+# Mostrar resultados con letras de significancia
+print(comparisons)
+
+
+
+
+# # MODELO LINEAL MIXTO
+# modelo_lme_pres_cost_hb <- lme(CAMBIO_PRESION ~ GRUPO_TIPO * ZONA, random = ~ 1 | NOMBRE_HUM,data=datos)
+# anova(modelo_lme_pres_cost_hb)
+
+# Obtener las medias marginales estimadas y comparaciones
+emm <- emmeans(modelo_lme_pres_cost_hb, ~ GRUPO_TIPO * ZONA)
+# Aplicar comparación de letras de significancia
+letras_significancia <- cld(emm, Letters = letters, adjust = "Bonferroni")
+# Mostrar el resultado
+print(letras_significancia)  #a a a b
+################################################################################
 
 # Cálculo de la suma de positivos, negativos y el número total de puntos
 suma_presion_cost_int_3 <- datos %>%
   group_by(ZONA, GRUPO_TIPO) %>%
   summarise(
-    #suma_positivos = sum(CAMBIO_PRESION[CAMBIO_PRESION > 0], na.rm = TRUE),
-    #suma_negativos = abs(sum(CAMBIO_PRESION[CAMBIO_PRESION < 0], na.rm = TRUE)),
     # Contar la cantidad de valores positivos
-    num_positivos = sum(CAMBIO_PRESION > 0, na.rm = TRUE),
+    num_positivos = sum(CAMBIO_PRESION > 0, na.rm = TRUE), #OTRA OPCIÓN: suma_positivos = sum(CAMBIO_PRESION[CAMBIO_PRESION > 0], na.rm = TRUE),
     # Contar la cantidad de valores negativos
-    num_negativos = sum(CAMBIO_PRESION < 0, na.rm = TRUE),
+    num_negativos = sum(CAMBIO_PRESION < 0, na.rm = TRUE),  #OTRA OPCIÓN: suma_negativos = abs(sum(CAMBIO_PRESION[CAMBIO_PRESION < 0], na.rm = TRUE)),
     total_puntos = n()  # Número total de puntos
   ) %>%
-  # Calcular neutros
-  mutate(sin_cambios = total_puntos - num_positivos - abs(num_negativos)) %>% 
-  # Transformar a formato largo para apilamiento
-  pivot_longer(cols = c(num_positivos, num_negativos,sin_cambios),
+  mutate(sin_cambios = total_puntos - num_positivos - abs(num_negativos)) %>%   # Calcular ceros
+  pivot_longer(cols = c(num_positivos, num_negativos,sin_cambios),  # Transformar a formato largo para apilamiento
                names_to = "Categoria",
                values_to = "Valor") %>%
-  # Calcular la proporción sobre el total
-  mutate(Proporción = Valor / total_puntos) %>%
-  # Definir el orden de las categorías
-  mutate(Categoria = factor(Categoria, levels = c("num_positivos", "num_negativos","sin_cambios")))
+  mutate(Proporcion = Valor / total_puntos) %>%  # Calcular la proporción sobre el total
+  mutate(Categoria = factor(Categoria, levels = c("num_positivos", "num_negativos","sin_cambios")))  # Definir el orden de las categorías
+
+################################################################################
 
 # Gráfico apilado
 ggplot(suma_presion_cost_int_3, aes(x = interaction(ZONA, GRUPO_TIPO), y = Proporción, fill = Categoria)) +
@@ -501,7 +605,7 @@ ggplot(suma_presion_cost_int_3, aes(x = interaction(ZONA, GRUPO_TIPO), y = Propo
                               "Humedal.Costeros" = "Humedal-costeros", 
                               "Humedal.Interiores" = "Humedal-interiores")) +  # Cambiar etiquetas del eje X
   scale_fill_manual(values = c("num_positivos" = "#04bcc4", "num_negativos" = "#fc746c","sin_cambios" = "#D3D3D3"),  # Colores en el orden deseado
-                      labels=c("Cambios positivos", "Cambios negativos","Sin cambios")) +
+                    labels=c("Cambios positivos", "Cambios negativos","Sin cambios")) +
   theme(plot.title = element_text(hjust = 0.5, size = 13),  # Centrar y reducir el tamaño del título
         panel.background = element_rect(fill = "white", color = NA),  # Fondo blanco
         panel.grid.major = element_line(color = "gray90"),  # Líneas de cuadrícula principales en gris claro
@@ -509,9 +613,8 @@ ggplot(suma_presion_cost_int_3, aes(x = interaction(ZONA, GRUPO_TIPO), y = Propo
         axis.text.x = element_text(size = 12),
         plot.title.position = "panel",
         legend.text = element_text(size = 10),
-        legend.title = element_text(size = 12,face="bold")
-  )# Centrar y reducir el tamaño del título
-
+        legend.title = element_text(size = 12,face="bold") # Centrar y reducir el tamaño del título
+  )
 
 
 
@@ -529,32 +632,44 @@ ggplot(suma_presion_cost_int_3, aes(x = interaction(ZONA, GRUPO_TIPO), y = Propo
 #Preg 1: cambios son similares/diferentes interior-costa y protegido-no protegido: graf barras <- % cambio y buffer-humedal + modelo mixto
 datos$CAMBIO <- as.numeric(as.factor(datos$CAMBIO)) - 1  # Convertir a 0 y 1 si es necesario
 datos$GRUPO_TIPO <- as.factor(datos$GRUPO_TIPO)
-modelo_glm <- glm(CAMBIO ~ GRUPO_TIPO, family=binomial,data = datos)
-Anova(modelo_glm)
-summary(modelo_glm)
-library(multcomp) 
-Tukey<-glht(modelo_glm, mcp(GRUPO_TIPO="Tukey"))
-summary(Tukey)
+datos$ZONA <- as.factor(datos$ZONA)
+# datos$CAMBIO_PRESION <- as.factor(datos$CAMBIO_PRESION)
+
+modelo_glm_camb_cost_hb <- glm(CAMBIO ~ GRUPO_TIPO * ZONA, contrasts=list(GRUPO_TIPO=contr.sum, ZONA=contr.sum),family=binomial, data = datos)
+Anova(modelo_glm_camb_cost_hb)
+summary(modelo_glm_camb_cost_hb)
+# Interacción significativa: de interior x humedal.
+
+# Obtener las medias marginales estimadas y comparaciones
+emm1 <- emmeans(modelo_glm_camb_cost_hb, ~ GRUPO_TIPO * ZONA)
+
+# Aplicar comparación de letras de significancia
+letras_significancia1 <- cld(emm1, Letters = letters, adjust = "bonferroni")
+letras_significancia1
 
 
-#Se puede ver como hay menor presencia de HIC en el buffer
+
+
 CAMBIOxcost_int_1 <- table(datos$CAMBIO,datos$GRUPO_TIPO)
-# Convertir los valores de HICxHB en proporciones
+# Convertir los valores en proporciones
 CAMBIOxcost_int <- prop.table(CAMBIOxcost_int_1, margin = 2)  # Margen 2 asegura que sumen 1 por columna
 rownames(CAMBIOxcost_int)<- c("Sin cambios", "Con cambios")
+
 barplot(CAMBIOxcost_int,
         ylab = "Puntos de análisis (nº)",
         main = "Presencia de HIC en función de la situación con respecto al humedal",
         cex.main=0.9,
         col = c("mistyrose3", "palegreen3"),  # Colores para las barras
-        ylim = c(0, max(HICxENP) * 1.2),  # Ajustar el límite del eje Y para dar espacio a la leyenda
+        ylim = c(0, max(CAMBIOxcost_int) * 1.2),  # Ajustar el límite del eje Y para dar espacio a la leyenda
         legend.text = c("Sin cambios", "Con cambios"),
         args.legend = list(x = "bottom",  # Ubicar la leyenda
                            horiz = TRUE,   # Poner la leyenda en horizontal
                            inset = c(0, -0.35),  # Ajustar la posición de la leyenda dentro del gráfico
                            cex = 0.9))     # Ajustar el tamaño del texto de la leyenda
 
-# CONTINUAR CON ANALISIS Y GRÁFICOS
+
+
+  # CONTINUAR CON ANALISIS Y GRÁFICOS
 
 ################################################################################
 # GRÁFICOS PLANTILLA
