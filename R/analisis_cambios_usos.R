@@ -7,6 +7,8 @@ library(car)
 library(multcomp) #glht() post-hoc y letras de significancia
 library(emmeans) #letras de significancia
 library(lme4) #glmer()
+library(sjstats) #asunciones glmer
+library(DHARMa) #asunciones glmer
 
 
 # Leer los archivos
@@ -716,6 +718,18 @@ barplot(CAMBIOxcost_int,
 
 
   # CONTINUAR CON ANALISIS Y GRÁFICOS
+
+modelo_glmer_final 
+modelo_glmer_final<- glmer(CAMBIO~ENP+GRUPO_TIPO+ENP*ZONA+GRUPO_TIPO*ZONA +(1|COD_IHA),family=binomial, datos)
+summary (modelo_glmer_final)
+#Asunciones: homocedasticidad, redundancia y sobredispersión para Poisson y binomial de proporiones ########
+performance::check_overdispersion(modelo_glmer_final)
+sim_fmp <- simulateResiduals(modelo_glmer_final, refit=F)
+testOverdispersion(sim_fmp)
+plot(sim_fmp) 
+
+
+
 
 ################################################################################
 # GRÁFICOS PLANTILLA
