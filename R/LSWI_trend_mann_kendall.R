@@ -3,6 +3,9 @@
 #library
 library(funtimes)
 library(Kendall)
+library(emmeans) # post-hoc y letras de significancia
+library(multcompView) # post-hoc y letras de significancia
+
 
 
 # Data
@@ -534,17 +537,25 @@ ez_results
 # No significativo: hydro_periods 0.5, location 0.7, year 0.4, environmental_protection 0.2,
 # protection_yes_no 0.5, conservation 0.06, sup_ha 0.4, perim_m 0.3, COD_IHA 0.3
 
+# ASUNCIONES
+modelo_lswi_HB <- lmer(lswi ~ wetland_or_buffer + (1 | wetland_name) + (1 | year), data = datos)  # A este se le comprueba todas las asunciones menos la de esfericidad
+
+lillie.test(residuals(modelo_lswi_HB)) 			#NORMALIDAD LILLIEFORS
+leveneTest(lswi ~ wetland_or_buffer,data=datos, center="median") 	#HOMOCEDASTICIDAD solo para variables categóricas
+
+# PERIODS
 ez_results.p <- ezANOVA(
   data = datos.p,                                # El dataframe con los datos
-  dv = lswi_periods,                             # La variable dependiente (lo que queremos analizar)
+  dv =  ndvi_periods,                             # La variable dependiente (lo que queremos analizar)
   wid = wetland_name,                            # réplica o factor aleatorio entre réplicas (en este caso los humedales)
   within_full = .(year_periods),                 # variable interna dentro del diseño que se debe al tiempo + _full porque los valores no han sido condensados en una única cifra
-  between=protection_yes_no + wetland_or_buffer, # entre qué queremos comparar: factor
+  between= wetland_or_buffer, # entre qué queremos comparar: factor
   detailed = TRUE                                # Para obtener todos los resultados detallados
 )
 ez_results.p
 #NDVI periodos: significativo: wetland_or_buffer
 #no significativo: protection_yes_no, hydro_periods, location, environmental_protection, conservation 0.059, sup_ha, perim_m,COD_IHA
+
 
 ez_results.p <- ezANOVA(
   data = datos.p,                                # El dataframe con los datos
