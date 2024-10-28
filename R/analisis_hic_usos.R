@@ -204,11 +204,18 @@ frecuencia_usos_HUM <- datos %>% #OJO, que lo he cambiado: datos_cambios -> dato
 View(as.data.frame(frecuencia_usos_HUM))
 write.table(frecuencia_usos_HUM, file="frecuencia_usos_HUM.txt", sep="\t", row.names=TRUE) 
 
-#########
-#########
-#########
-#########
-#########
+################################################################################
+                          # MODELO GENERALIZADO MIXTO
+################################################################################
+
+modelo_glmer <- glmer(PRESENCIA_HIC ~ ENP + GRUPO_TIPO + ENP * ZONA + GRUPO_TIPO * ZONA +(1|COD_IHA),family=binomial, datos)
+Anova(modelo_glmer)
+
+# Filtrar el subconjunto donde PRESENCIA_ZONA_NAT es "1"
+subset_ZNAT <- subset(datos, PRESENCIA_ZONA_NAT == "1")
+modelo_glm8 <- glm(TIPO_DE_CAMBIO ~ ENP + GRUPO_TIPO + ENP * ZONA + GRUPO_TIPO * ZONA +(1|COD_IHA), data = subset_ZNAT)
+################################################################################
+
 
 # Tukey
 datos2<-datos[-5]
