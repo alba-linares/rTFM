@@ -183,3 +183,10 @@ MODELOS:
 	Multivariante con tres variables respuesta 0 - y + en % (estandarizar)
 
 PROPIEDAD POR ANÁLISIS MULTIVARIANTE, QUE DEPENDE DEL HUMEDAL
+
+
+28/10/2024:
+Continuar con "Zonas naturales -> HIC y Zonas naturales -> noHIC + binomial; Figura de protección ¿protege? Partir de las que son zonas naturales" en analisis_hic_usos en
+################################################################################
+                          # MODELO GENERALIZADO MIXTO
+################################################################################
