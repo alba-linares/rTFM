@@ -8,6 +8,8 @@
 library(readxl)
 library(car) #Anova()
 library(multcomp) # Tukey
+library(dplyr)
+library(lme4)
 
 # Leer los archivos
 setwd("D:/Escritorio/TFM/rTFM")
@@ -174,7 +176,7 @@ barplot(HICxHB,
         main = "Presencia de HIC en función de la situación con respecto al humedal",
         cex.main=0.9,
         col = c("mistyrose3", "palegreen3"),  # Colores para las barras
-        ylim = c(0, max(HICxENP) * 1.2),  # Ajustar el límite del eje Y para dar espacio a la leyenda
+        ylim = c(0, max(HICxHB) * 1.2),  # Ajustar el límite del eje Y para dar espacio a la leyenda
         legend.text = c("Ausencia HIC", "Presencia HIC"),
         args.legend = list(x = "bottom",  # Ubicar la leyenda
                            horiz = TRUE,   # Poner la leyenda en horizontal
@@ -192,7 +194,7 @@ df_cambio_usos_general<-as.data.frame(cambio_usos_general)
 modelo_glm7 <- glm(PRESENCIA_HIC~MUCVA_C_GE:SIOSE_C_GE, family = binomial, data=datos_cambios)
 summary(modelo_glm7)
 
-library(dplyr)
+
 frecuencia_cambio_usos <- datos_cambios %>%
   group_by(MUCVA_C_GE, SIOSE_C_GE) %>%
   count()
@@ -208,12 +210,64 @@ write.table(frecuencia_usos_HUM, file="frecuencia_usos_HUM.txt", sep="\t", row.n
                           # MODELO GENERALIZADO MIXTO
 ################################################################################
 
-modelo_glmer <- glmer(PRESENCIA_HIC ~ ENP + GRUPO_TIPO + ENP * ZONA + GRUPO_TIPO * ZONA +(1|COD_IHA),family=binomial, datos)
+modelo_glmer <- glmer(PRESENCIA_HIC ~ ENP + GRUPO_TIPO + ENP * ZONA + GRUPO_TIPO * ZONA + (1|COD_IHA), family = binomial, datos)
 Anova(modelo_glmer)
 
 # Filtrar el subconjunto donde PRESENCIA_ZONA_NAT es "1"
 subset_ZNAT <- subset(datos, PRESENCIA_ZONA_NAT == "1")
-modelo_glm8 <- glm(TIPO_DE_CAMBIO ~ ENP + GRUPO_TIPO + ENP * ZONA + GRUPO_TIPO * ZONA +(1|COD_IHA), data = subset_ZNAT)
+modelo_glmer2 <- glmer(PRESENCIA_ZONA_NAT ~ PRESENCIA_HIC + (1|COD_IHA), family = binomial,
+                       data = datos)
+Anova(modelo_glmer2)
+summary(modelo_glmer2)
+
+modelo_glmer3 <- glmer(PRESENCIA_HIC ~ SIOSE_T_GE  + (1 | COD_IHA), family = binomial,
+                       data = subset_ZNAT)
+Anova(modelo_glmer3)
+summary(modelo_glmer3)
+
+
+
+# GRÁFICO
+# Calcular el máximo de las proporciones entre ambos gráficos para que ambos lleguen a 1
+max_ylim <- max(c(ZN_HICxENP_Humedal, ZN_HICxENP_Buffer), 1)  # Ajuste del límite con un pequeño margen
+
+# Configurar la ventana gráfica para 2 gráficos lado a lado
+par(mfrow = c(1, 2))
+
+# Gráfico para la zona Buffer
+barplot(ZN_HICxENP_Buffer,
+        ylab = "Puntos de análisis (proporción)",
+        main = "Presencia de HIC en zonas naturales
+        según protección (Buffer)",
+        col = c("mistyrose3", "palegreen3"),
+        ylim = c(0, max_ylim),
+        legend.text = c("Ausencia HIC", "Presencia HIC"),
+        args.legend = list(x = "bottom", horiz = TRUE, inset = c(0, -0.40), cex = 0.8))
+
+# Restaurar la configuración gráfica a un solo gráfico
+par(mfrow = c(1, 1))
+
+
+################################################################################
+# Crear el gráfico de barras apilado en números absolutos
+barplot(ZN_HICxSIOSE_abs,
+        ylab = "Puntos de análisis (nº)",
+        main = "Presencia de HIC según usos del suelo actuales (SIOSE)
+en zonas naturales en el año 1984",
+        col = c("mistyrose3", "palegreen3"),  # Colores para Ausencia y Presencia de HIC
+        ylim = c(0, max(ZN_HICxSIOSE_abs) * 1.2))  # Extender límite Y para evitar solapamiento
+
+# Ajustar la leyenda fuera del gráfico y reducir su tamaño
+legend("top",                    # Ubicación de la leyenda
+       inset = c(0, 0),      # Mover la leyenda hacia abajo, fuera del gráfico
+       legend = c("Ausencia HIC", "Presencia HIC"),
+       fill = c("mistyrose3", "palegreen3"),  # Colores de la leyenda
+       horiz = F,              # Leyenda en formato horizontal
+       bty = "o",                 # Sin borde alrededor de la leyenda
+       cex = 0.8)                 # Reducir el tamaño del texto en la leyenda
+
+
+
 ################################################################################
 
 
