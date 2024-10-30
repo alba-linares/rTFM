@@ -145,6 +145,8 @@ modelo_glm4 <- glm(PRESENCIA_HIC~datos$MUCVA_C_ES+SIOSE_C_ES, family = binomial,
 summary(modelo_glm4)
 
 #¿Los tipos de usos del suelo (específicos) 1984/2020 repercuten en si hay HIC en 2020 o no? ¿Cuáles repercuten?
+datos$MUCVA_C_ES <- as.factor(datos$MUCVA_C_ES)
+datos$SIOSE_C_ES <- as.factor(datos$SIOSE_C_ES)
 modelo_glm5 <- glm(PRESENCIA_HIC~datos$MUCVA_C_ES, family = binomial, data=datos)
 summary(modelo_glm5)
 modelo_glm5_2 <- glm(PRESENCIA_HIC~datos$SIOSE_C_ES, family = binomial, data=datos)
