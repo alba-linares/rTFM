@@ -190,3 +190,6 @@ Continuar con "Zonas naturales -> HIC y Zonas naturales -> noHIC + binomial; Fig
 ################################################################################
                           # MODELO GENERALIZADO MIXTO
 ################################################################################
+
+30/10/2024:
+Lo que queremos hacer es comparar lo que se ha perdido de hábitat. Los que han cambiado (1_0) ¿qué usos son ahora?
