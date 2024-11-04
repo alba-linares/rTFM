@@ -1,0 +1,41 @@
+-- Primer elemento
+CASE 
+  WHEN "hic_num_t" >= 1 THEN regexp_replace("hic_lab_or", ',.*', '') 
+  ELSE NULL 
+END
+
+
+-- Segundo elemento
+CASE 
+  WHEN "hic_num_t" >= 2 THEN regexp_replace(regexp_replace("hic_lab_or", '^[^,]+,', ''), ',.*', '') 
+  ELSE NULL 
+END
+
+
+-- Tercer elemento
+CASE 
+  WHEN "hic_num_t" >= 3 THEN regexp_replace(regexp_replace("hic_lab_or", '^[^,]+,[^,]+,', ''), ',.*', '') 
+  ELSE NULL 
+END
+
+
+-- Cuarto elemento
+CASE 
+  WHEN "hic_num_t" >= 4 THEN regexp_replace(regexp_replace("hic_lab_or", '^[^,]+,[^,]+,[^,]+,', ''), ',.*', '') 
+  ELSE NULL 
+END
+
+
+-- Quinto elemento
+CASE 
+  WHEN "hic_num_t" >= 5 THEN regexp_replace(regexp_replace("hic_lab_or", '^[^,]+,[^,]+,[^,]+,[^,]+,', ''), ',.*', '') 
+  ELSE NULL 
+END
+
+
+-- Sexto elemento
+CASE 
+  WHEN "hic_num_t" >= 6 THEN regexp_replace(regexp_replace("hic_lab_or", '^[^,]+,[^,]+,[^,]+,[^,]+,[^,]+,', ''), ',.*', '') 
+  ELSE NULL 
+END
+
