@@ -1,0 +1,3 @@
+# Ignorar archivos de datos de R y el historial
+.RData
+.Rhistory
