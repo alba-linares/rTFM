@@ -198,3 +198,8 @@ Lo que queremos hacer es comparar lo que se ha perdido de hábitat. Los que han 
 La capa de hábitats es de Vege10, ergo, del 2010, que lo he estado buscando varios días para incluirlo en la memoria. Lo he comparado con los hábitats de HIC_publicacion_2023_12 y puede dar resultados muy distintos, así que tengo que rehacer los análisis de HIC
 
 Mencionar que no se tienen en cuenta los HIC marinos
+
+Añadir detalles de los humedales en la memoria (hidroperiodo, por ejemplo, puede ser útil para la discusión)
+Sería interesante hacer el gráfico de protegido/no protegido f(PRESENCIA_HIC) solo con zona humedal y no buffer
+
+Los graficos de presencia de HIC quizás debería ser sobre tipo de cambio 1_0 o ese debería ser el centro del análisis
