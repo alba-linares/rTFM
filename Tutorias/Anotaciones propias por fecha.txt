@@ -1,12 +1,12 @@
 19-09-2024
-Rehacer NDWI zone01h y zone02h por un error (Comprobado, estaba bien)
+[Resuelto] Rehacer NDWI zone01h y zone02h por un error (Comprobado, estaba bien)
 
 Media y mediana de LSWI en humedal: 0.049186385 y 0.047407782
 Media y mediana de NDWI en humedal: -0.103248902 y -0.121976306
 ¿Hay algo mal en la fórmula? ¿Por qué sale en negativo?
 
 20-09-2024
-Quiero hacer gitignore a .Rhistory
+[Done] Quiero hacer gitignore a .Rhistory
 
 
 
@@ -36,14 +36,14 @@ for (i in 1:length(r_list)) {
 24-09-2024
 PUNTOS HIC: Quizás haya que tener en cuenta si están en zona marina o no
 
-Me he quedado a medias poniendo el nombre del humedal que coincide con MUCVA_zonas naturales, porque hay poligonos compartidos entre varios humedales y no sé cortarlos
+[Resuelto] Me he quedado a medias poniendo el nombre del humedal que coincide con MUCVA_zonas naturales, porque hay poligonos compartidos entre varios humedales y no sé cortarlos
 
 27-09-2024
-Sigo con el calculo del area de los usos del suelo, ahora tengo que analizarlo en R, ¿cómo lo hago?
-También tengo que comparar los cambios de usos del suelo por buffer/humedal
+[Done] Sigo con el calculo del area de los usos del suelo, ahora tengo que analizarlo en R, ¿cómo lo hago?
+[Done] También tengo que comparar los cambios de usos del suelo por buffer/humedal
 
 01/10/2024
-Tengo que enseñarle a Javi la grafica de LSWI vs NDWI, que ya está terminada
+Tengo que enseñarle a Javi la grafica de LSWI vs NDWI, que ya está terminada******************************************************************************************************
 Tengo que avanzar en la memoria (metodología y resultados)
 [Done] Tengo que analizar los datos de áreas ¿Cómo?
 [Falta comentarlo en la memoria, incluyendo costeros/de interior con el cluster:] Puede ser interesante estudiar la diferencia de áreas de usos del suelo por costero/interior y humedal/buffer entre 1984 y 2020.
@@ -56,7 +56,7 @@ Libro: Análisis de datos ecológicos en R Luis Cayuela y Marcelino de la Cruz
 [Done] Estaría bien hacer el análisis de las áreas de los usos POR HUMEDAL/BUFFER por separado
 
 03/10/2024
-¿Me quedo con el análisis cluster de los gráficos de áreas o es mejor conservar el mismo orden para comparar mejor?
+[Resuelto: mismo orden] ¿Me quedo con el análisis cluster de los gráficos de áreas o es mejor conservar el mismo orden para comparar mejor?
 Comentarios de Eva: 
 	- [Done] hacer los gráficos según % de cambio, porque hay que estandarizar. Hay humedales MUY grandes y MUY pequeños y no se pueden comparar por unidades de área, sino %.
 	- [Done] quitar cluster_cols para que sea más fácilmente comparable. Los cluster que más interesan son los que hay entre humedales (cluster_rows)
@@ -193,3 +193,6 @@ Continuar con "Zonas naturales -> HIC y Zonas naturales -> noHIC + binomial; Fig
 
 30/10/2024:
 Lo que queremos hacer es comparar lo que se ha perdido de hábitat. Los que han cambiado (1_0) ¿qué usos son ahora?
+
+04/11/2024:
+La capa de hábitats es de Vege10, ergo, del 2010, que lo he estado buscando varios días para incluirlo en la memoria. Lo he comparado con los hábitats de HIC_publicacion_2023_12 y puede dar resultados muy distintos, así que tengo que rehacer los análisis de HIC
