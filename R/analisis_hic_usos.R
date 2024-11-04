@@ -40,17 +40,17 @@ datos$MUCVA_ZONAS_NAT_T_ESPECIFICAS<-unlist(datos$MUCVA_ZONAS_NAT_T_ESPECIFICAS)
 
 # Modelo lineal generalizado binomial ##########################################
 #¿Que esté protegido y su localización con respecto a la costa repercuten en si hay HIC en 2020 o no?
-modelo_glm <- glm(PRESENCIA_HIC~FIGURA, family = binomial, data=datos)
-Anova(modelo_glm)
-summary(modelo_glm) #ENP pendiente negativa
-# Sale diferencia significativa (***) en función de ENP
-table(datos$PRESENCIA_HIC,datos$ENP)
-barplot(table(datos$PRESENCIA_HIC,datos$FIGURA),
-        las=2,
-        legend.text = unique(c("Ausencia HIC","Presencia HIC")),
-        args.legend = list(x = "top"),
-        ylab="Puntos de análisis (nº)",
-        main = "Presencia de HIC en función de la figura de protección")
+# modelo_glm <- glm(PRESENCIA_HIC~FIGURA, family = binomial, data=datos)
+# Anova(modelo_glm)
+# summary(modelo_glm) #ENP pendiente negativa
+# # Sale diferencia significativa (***) en función de ENP
+# table(datos$PRESENCIA_HIC,datos$ENP)
+# barplot(table(datos$PRESENCIA_HIC,datos$FIGURA),
+#         las=2,
+#         legend.text = unique(c("Ausencia HIC","Presencia HIC")),
+#         args.legend = list(x = "top"),
+#         ylab="Puntos de análisis (nº)",
+#         main = "Presencia de HIC en función de la figura de protección")
 
 
 #Se puede ver como hay menor presencia de HIC en el buffer
@@ -63,7 +63,7 @@ barplot(HICxENP,
         ylab = "Puntos de análisis (nº)",
         main = "Presencia de HIC en función de la figura de protección",
         col = c("mistyrose3", "palegreen3"),  # Colores para las barras
-        ylim = c(0, max(HICxENP) * 1.2),  # Ajustar el límite del eje Y para dar espacio a la leyenda
+        ylim = c(0, 1),  # Ajustar el límite del eje Y para dar espacio a la leyenda
         legend.text = c("Ausencia HIC", "Presencia HIC"),  # Añadir la leyenda dentro de barplot()
         args.legend = list(x = "bottom",  # Ubicar la leyenda
                            horiz = TRUE,   # Poner la leyenda en horizontal
@@ -84,12 +84,12 @@ barplot(HICxENP,
 
 
 
-modelo_glm <- glm(PRESENCIA_ZONA_NAT~FIGURA, family = binomial, data=datos)
-Anova(modelo_glm)
-summary(modelo_glm) #
-
-modelo_lm <- lm(TIPO_DE_CAMBIO ~ ENP, data=datos)
-summary(modelo_lm) #
+# modelo_glm <- glm(PRESENCIA_ZONA_NAT~FIGURA, family = binomial, data=datos)
+# Anova(modelo_glm)
+# summary(modelo_glm) #
+# 
+# modelo_lm <- lm(TIPO_DE_CAMBIO ~ ENP, data=datos)
+# summary(modelo_lm) #
 
 ################################################################################
 #library(dplyr)
@@ -178,14 +178,14 @@ barplot(HICxHB,
         main = "Presencia de HIC en función de la situación con respecto al humedal",
         cex.main=0.9,
         col = c("mistyrose3", "palegreen3"),  # Colores para las barras
-        ylim = c(0, max(HICxHB) * 1.2),  # Ajustar el límite del eje Y para dar espacio a la leyenda
+        ylim = c(0, 1),  # Ajustar el límite del eje Y para dar espacio a la leyenda
         legend.text = c("Ausencia HIC", "Presencia HIC"),
         args.legend = list(x = "bottom",  # Ubicar la leyenda
                            horiz = TRUE,   # Poner la leyenda en horizontal
                            inset = c(0, -0.35),  # Ajustar la posición de la leyenda dentro del gráfico
                            cex = 0.9))     # Ajustar el tamaño del texto de la leyenda
 
-#De los que han cambiado, ¿qué hay ahora?:
+# De los que han cambiado, ¿qué hay ahora?:
 datos_cambios <- subset(datos, datos$COMPARACION=="DISTINTO")
 cambio_usos<-table(datos_cambios$SIOSE_T_ES)
 as.data.frame(cambio_usos)
@@ -228,6 +228,12 @@ Anova(modelo_glmer3)
 summary(modelo_glmer3)
 
 
+# Lo que queremos hacer es comparar lo que se ha perdido de hábitat. Los que han cambiado (1_0) ¿qué usos son ahora?
+subset_ZNAT_noHIC_noMAR <- subset(datos, PRESENCIA_ZONA_NAT == "1" & PRESENCIA_HIC == "0" #& SIOSE_T_ES != "Mares y oceanos"
+                                  )
+table(subset_ZNAT_noHIC_noMAR$SIOSE_T_ES)
+
+
 
 # GRÁFICO
 # Calcular el máximo de las proporciones entre ambos gráficos para que ambos lleguen a 1
@@ -252,6 +258,7 @@ par(mfrow = c(1, 1))
 
 ################################################################################
 # Crear el gráfico de barras apilado en números absolutos
+ZN_HICxSIOSE_abs <- table(subset_ZNAT$PRESENCIA_HIC, subset_ZNAT$SIOSE_T_GE)
 barplot(ZN_HICxSIOSE_abs,
         ylab = "Puntos de análisis (nº)",
         main = "Presencia de HIC según usos del suelo actuales (SIOSE)
