@@ -196,3 +196,5 @@ Lo que queremos hacer es comparar lo que se ha perdido de hábitat. Los que han 
 
 04/11/2024:
 La capa de hábitats es de Vege10, ergo, del 2010, que lo he estado buscando varios días para incluirlo en la memoria. Lo he comparado con los hábitats de HIC_publicacion_2023_12 y puede dar resultados muy distintos, así que tengo que rehacer los análisis de HIC
+
+Mencionar que no se tienen en cuenta los HIC marinos
