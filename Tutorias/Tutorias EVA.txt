@@ -1,0 +1,67 @@
+Desde veg natural y zonas humedas a cambios a otros usos
+Asignar los 4 codigos de HIC
+ENP no incluye RN2000
+
+ENP
+CAMBIO
+TIPO CAMBIO (RESTA)
+4 COLUMNAS HIC
+¿HAY HÁBITAT ACTUALMENTE? O/1
+
+Ver cuántos puntos se han perdido (desde fecha cartografía HIC hasta SIOSE2020)
+Los que caen en Urbano e infraestructuras se han perdido definitivamente
+Es un dato directo
+
+24-09-2024_______________________________________________________________________
+¿Qué hábitats se han perdido? ¿Cuáles hay? pie() de los que están y los que se han perdido, por separado
+
+Enfocarme en HIC_noNATURAL, saber qué hábitats son
+
+
+25-09-2024_______________________________________________________________________
+En qué condiciones se han perdido hábitats
+Dónde se han perdido más hábitats (costa-interior, ENP-noENP e interacción)
+Variable respuesta: Presencia HIC (0/1), por ejemplo.
+
+26-09-2024_______________________________________________________________________
+analizar causas... Modelo con causas = USOS ACTUALES
+matriz de doble entrada y poner en negrita lo significativo. Poner colores por categoria general (zonas humedas azules, etc.)
+De los que han cambiado, qué hay ahora
+hacerla con categorías generales de los usos del suelo
+
+
+07-11-2024_______________________________________________________________________
+Metodología en pasado
+No repetir
+Primero asignar puntos. nº total puntos
+Explicar pasarelas, distintas fuentes, no usan mismo, categorías no se mantienen, citar tabla anexo en pasarela
+Reclasifica uso general, asigna un valor
+Tabla
+
+Códigos de usos generales y códigos de presión asociados a los distintos usos del suelo, donde el mayor número (5) es máxima presión y el menor número (1) es mínima presión. Se han escogido la mayoría de categorías de Urbano e infraestructuras como valor máximo porque los cambios de uso son irreversibles a efectos prácticos, a diferencia de los usos agrarios en general. Se ha escogido el valor de invernaderos como valor máximo debido a la presión que ejerce sobre el medio y, en especial, sobre los humedales (eutrofización, cambio en el nivel freático, etc.) (buscar bibliografía al respecto).
+Reducir texto, info justa para que se entienda
+
+Anexo virtual para el enlace de google collab
+
+Tarea 2.1 tarea a 3
+
+Puntos de analisis a tarea 1
+
+Cambiar orden, primero tarea LSWI
+
+Explicar análisis estadísticos: los cambios en la presión. 1º obtención datos. 2º análisis de los datos
+Se aplicaron este tipo de modelos, con este tipo de paquete estadísticos...
+
+Quitar la palabra tarea. 1, 2, 2.1, 3...
+
+Primero texto, luego la tabla o la gráfica
+Explicar que se hacen tablas de contingencia, para toda la zona de estudio, para humedal, para buffer
+
+Nomenclatura y aclarar.
+Unir tablas de contingencia
+
+Falta tablas ANOVA
+
+Cambios general
+Factores
+Presión como secciones independientes
