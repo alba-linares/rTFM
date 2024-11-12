@@ -591,6 +591,47 @@ ggplot(datos.p, aes(x = wetland_or_buffer, y = ndvi_periods, fill = year_periods
   scale_fill_manual(values = c("1999_2010" = "#DEB887", "2011_2021" = "#87CEFF")) +
   facet_wrap(~ year_periods)
 
+################################################################################
+            # GRÁFICO DE NDVI, NDWI, LSWI PARA HUMEDAL/BUFFER #
+################################################################################
+
+library(tidyr)  # Para reorganizar los datos
+library(readxl)
+library(ggplot2)
+
+datos_comp <-read_excel("Excel/LSWI_zones_hum_buf.xlsx", sheet=4)
+# Reorganizar los datos en formato 'long' para graficar fácilmente los índices
+data_long <- pivot_longer(datos_comp, cols = c(LSWI, NDWI, NDVI), 
+                          names_to = "index", values_to = "value")
+
+# Crear el gráfico con ggplot2
+ggplot(data_long, aes(x = year, y = value, color = index, group = index)) +
+  geom_line() +
+  facet_wrap(~ wetland_or_buffer, nrow = 2) +  # Dividir los gráficos por 'wetland_or_buffer'
+  labs(
+    title = "Evolución de los índices LSWI, NDWI y NDVI (1999-2021)",
+    x = "Año",
+    y = "Índice",
+    color = "Índice"
+  ) +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+# Crear el gráfico con líneas diferenciadas por color de zona y facetas para humedal/buffer
+ggplot(data_long, aes(x = year, y = value, color = factor(zone), group = zone)) +
+  geom_line() +  # No usar `linetype` en este caso
+  facet_wrap(~ wetland_or_buffer, nrow = 2) +  # Dividir gráficos en humedal y buffer
+  labs(
+    title = "Evolución de los índices LSWI, NDWI y NDVI por zona (1999-2021)",
+    x = "Año",
+    y = "Índice",
+    color = "Zona"
+  ) +
+  scale_color_discrete(name = "Zona") +  # Asegurarse de que la leyenda muestre la zona
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+
 
 
 
@@ -607,8 +648,8 @@ library(car)
 
 shapiro.test(residuals(modeloAMR)) 			#NORMALIDAD
 lillie.test(residuals(modeloAMR)) 			#NORMALIDAD LILLIEFORS
-bptest(modeloAMR)		            			#HOMOCEDASTICIDAD
-leveneTest(lswi_periods~wetland_or_buffer, data=datos.p, center="median") 	#HOMOCEDASTICIDAD solo categóricas
+modelo<-lm(lswi ~ wetland_or_buffer + ndvi + protection_yes_no, data = datos)
+bptest(modelo)		            			#HOMOCEDASTICIDAD
 resettest(modeloAMR)	          			#LINEALIDAD
 outlierTest(modeloAMR)         				#OUTLIER
 vif(modeloAMR)                 				#REDUNDANCIA
