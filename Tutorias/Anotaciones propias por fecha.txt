@@ -203,3 +203,7 @@ Añadir detalles de los humedales en la memoria (hidroperiodo, por ejemplo, pued
 Sería interesante hacer el gráfico de protegido/no protegido f(PRESENCIA_HIC) solo con zona humedal y no buffer
 
 Los graficos de presencia de HIC quizás debería ser sobre tipo de cambio 1_0 o ese debería ser el centro del análisis
+
+12/11/2024:
+Incluir presión como subapartado de los cambios de usos del suelo, ¿no? Consultar
+Hay que consultar la bibliografia descargada para hacer la introducción y discusión

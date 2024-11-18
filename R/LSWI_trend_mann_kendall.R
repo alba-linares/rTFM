@@ -459,22 +459,12 @@ ggplot(datos, aes(x = year, y = lswi, color = wetland_or_buffer)) +
     #         aes(x = Inf, y = Inf, label = paste("R² adj: ", round(adj_r2, 3))),
     #        hjust = 1.1, vjust = 1.1, inherit.aes = FALSE, size = 3)
 
-  
-
-
 # Explicación del código: ######################################################
 #aes(x = year, y = lswi, color = wetland_name): Establece el año en el eje x y el LSWI en el eje y, y colorea las líneas según el nombre del humedal.
 #geom_line(): Dibuja las líneas de LSWI a lo largo del tiempo.
 #geom_smooth(method = "lm", se = FALSE): Añade una línea de tendencia (regresión lineal) para cada humedal sin mostrar el intervalo de confianza (al usar se = FALSE).
 #facet_wrap(~ wetland_name, scales = "free_y"): Crea un gráfico separado para cada humedal. scales = "free_y" permite que cada gráfico tenga su propio rango en el eje y, adaptado a los valores de LSWI de cada humedal.
 #theme_minimal(): Aplica un tema minimalista al gráfico para mejorar la claridad visual.
-
-
-
-
-
-
-
 
 
 
@@ -614,6 +604,7 @@ ggplot(data_long, aes(x = year, y = value, color = index, group = index)) +
     y = "Índice",
     color = "Índice"
   ) +
+  geom_smooth() +
   theme_minimal() +
   theme(axis.text.x = element_text(angle = 45, hjust = 1))
 
@@ -630,6 +621,47 @@ ggplot(data_long, aes(x = year, y = value, color = factor(zone), group = zone)) 
   scale_color_discrete(name = "Zona") +  # Asegurarse de que la leyenda muestre la zona
   theme_minimal() +
   theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+
+
+# Con promedios y desviación estándar: #####################################
+datos_comp <-read_excel("Excel/LSWI_zones_hum_buf.xlsx", sheet=4)
+datos_comp2<-datos_comp[-5] #sin NDWI
+# Reorganizar los datos en formato 'long' para graficar fácilmente los índices
+data_long2 <- pivot_longer(datos_comp2, cols = c(LSWI, NDVI), 
+                          names_to = "index", values_to = "value")
+
+data_sum <- data_long2 %>%
+  group_by(wetland_or_buffer, zone, index) %>%
+  summarize(
+    mean_value = mean(value, na.rm = TRUE),
+    sd_value = sd(value, na.rm = TRUE)
+  )
+
+# Gráfico de líneas con intervalos de desviación estándar
+ggplot(data_sum, aes(x = factor(zone), y = mean_value, group = index, color = index)) +
+  geom_line(linewidth = 1) +  # Línea para las medias
+  geom_ribbon(
+    aes(ymin = mean_value - sd_value, ymax = mean_value + sd_value, fill = index),
+    alpha = 0.2,  # Color gris para el área
+    color = NA
+  ) +
+  facet_wrap(~ wetland_or_buffer, scales = "free_y") +  # Divide por wetland_or_buffer
+  labs(
+    x = "Zona",
+    y = "Media de los índices",
+    title = "Valor de los índices por humedal y situación con respecto a este",
+    fill = "Índice",
+    color = "Índice"
+  ) +
+  scale_color_manual(values = c("LSWI" = "black", "NDWI" = "#D55E00", "NDVI" = "#009E73")) +  # Colores de las líneas
+  scale_fill_manual(values = c("LSWI" = "black", "NDWI" = "#D55E00", "NDVI" = "#009E73")) +  # Colores del relleno
+  coord_cartesian(ylim = c(-0.1, 0.2)) +
+  theme_minimal()
+
+
+
+
 
 
 
